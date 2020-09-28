@@ -3,10 +3,17 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from datetime import date
+from fpdf import FPDF
+pdf = FPDF()
+pdf.add_page()
+pdf.set_font('Arial', 'B', 16)
+pdf.cell(40, 10, 'Hello World!')
+pdf.output('C:\Users\Milo\Desktop\\tuto1.pdf', 'F')
+
 
 from tkcalendar import DateEntry
 
-
+"""
 window = Tk()
 window.title("Welcome to TutorialsPoint")
 window.geometry('400x400')
@@ -25,7 +32,7 @@ def click_into_calendar(event):
     cal.format_date = "%d/%m/%Y"
     cal.pack(padx=10, pady=10)
 
-def clicked():
+def confirm_click():
     print("cc")
 
 
@@ -43,38 +50,13 @@ c1 = Entry(window).grid(row=2, column=1)
 
 d1 = DateEntry(window, locale='fr_FR', date_pattern='dd/mm/y', width=12, background='grey',
                foreground='white', borderwidth=2)
-# d1.insert(0, date.today().strftime("%d/%m/%Y"))
-# d1.bind("<1>", click_into_calendar)
 d1.grid(row=3, column=1)
 
 
 
-
-
-# btn = ttk.Button(window, text="Submit", command=clicked).grid(row=4, column=1)
+btn = ttk.Button(window, text="Submit", command=confirm_click).grid(row=4, column=1)
 
 
 window.mainloop()
-"""
-
-
-
-def calendar():
-    top = tk.Toplevel(root)
-
-    ttk.Label(top, text='Choose date').pack(padx=10, pady=10)
-
-    cal = DateEntry(top, width=12, background='darkblue',
-                    foreground='white', borderwidth=2)
-    cal.pack(padx=10, pady=10)
-
-
-root = tk.Tk()
-s = ttk.Style(root)
-s.theme_use('clam')
-
-ttk.Button(root, text='DateEntry', command=calendar).pack(padx=10, pady=10)
-
-root.mainloop()
 
 """
