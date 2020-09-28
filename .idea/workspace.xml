@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="" />
+    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,23 +31,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.PYTHON_MODULE" value="Python 3.8 (Association-S3)" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/venv" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Run config" type="PythonConfigurationType" factoryName="Python">
       <module name="Association-S3" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -52,9 +45,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Lara\Desktop\repos\Association-S3\venv\Scripts\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -78,6 +71,7 @@
       <updated>1600892278406</updated>
       <workItem from="1600892280583" duration="264000" />
       <workItem from="1600892554261" duration="764000" />
+      <workItem from="1601294686554" duration="467000" />
     </task>
     <servers />
   </component>
@@ -85,34 +79,40 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="440" y="94" key="#Project_Structure" timestamp="1600892702996">
+    <state x="440" y="94" key="#Project_Structure" timestamp="1601294969396">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="94" key="#Project_Structure/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1600892702996" />
+    <state x="440" y="94" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1601294969396" />
     <state x="414" y="175" width="1092" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600893280747">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1600893280747" />
-    <state x="761" y="345" key="FileChooserDialogImpl" timestamp="1600893007194">
+    <state x="761" y="345" key="FileChooserDialogImpl" timestamp="1601294799471">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="761" y="345" key="FileChooserDialogImpl/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1600893007194" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1600893326163">
+    <state x="761" y="345" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1601294799471" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1601295088051">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1600893326163" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1600893326163">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601295088051" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1601295088051">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1600893326163" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1600893326163">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601295088051" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1601295088050">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1600893326163" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1600893326163">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601295088050" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1601295088051">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1600893326163" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601295088051" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1600893029440">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -121,9 +121,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="342" y="140" key="new project wizard/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1600892693159" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1601295012619">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601295012619" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Association_S3$main.coverage" NAME="main Coverage Results" MODIFIED="1600893098059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
-    <SUITE FILE_PATH="coverage/Association_S3$Run_config.coverage" NAME="Run config Coverage Results" MODIFIED="1600893317527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Association_S3$Run_config.coverage" NAME="Run config Coverage Results" MODIFIED="1601295088041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
