@@ -18,7 +18,7 @@ class Application(tk.Frame):
         self.quit.pack(side="bottom")
 
     def say_hi(self):
-        print("hi there, everyone!")
+        print("Milo tests")
 
 root = tk.Tk()
 app = Application(master=root)
