@@ -26,6 +26,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Milo.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/EventHandler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/OrderFormGUI.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/locals.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/main.py" afterDir="false" />
     </list>
@@ -52,16 +57,17 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/venv/Lib/site-packages/personnal_utils/utils.py" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.PYTHON_MODULE" value="Python 3.8 (Association-S3)" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/venv" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../fr.dic" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.grazie" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -70,6 +76,17 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Run config" type="PythonConfigurationType" factoryName="Python">
       <module name="Association-S3" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -105,6 +122,12 @@
       <workItem from="1600892554261" duration="764000" />
       <workItem from="1601294686554" duration="2486000" />
       <workItem from="1601297235510" duration="5952000" />
+      <workItem from="1601397773936" duration="33000" />
+      <workItem from="1601397819545" duration="130000" />
+      <workItem from="1601749355037" duration="52000" />
+      <workItem from="1601749421314" duration="2319000" />
+      <workItem from="1601752196665" duration="113000" />
+      <workItem from="1601752322946" duration="12153000" />
     </task>
     <servers />
   </component>
@@ -149,39 +172,65 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="784" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1600893280747" />
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1601760170933">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601760170933" />
     <state x="707" y="365" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1601299504390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="365" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1601299504390" />
-    <state x="761" y="345" key="FileChooserDialogImpl" timestamp="1601294799471">
+    <state x="761" y="345" key="FileChooserDialogImpl" timestamp="1601752075022">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="761" y="345" key="FileChooserDialogImpl/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1600893007194" />
+    <state x="761" y="345" key="FileChooserDialogImpl/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601752075022" />
     <state x="761" y="345" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1601294799471" />
-    <state width="938" height="282" key="GridCell.Tab.0.bottom" timestamp="1601309951627">
+    <state width="938" height="275" key="GridCell.Tab.0.bottom" timestamp="1601764515038">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="938" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1601309951627" />
+    <state width="938" height="275" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601764515038" />
     <state width="938" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601302632573" />
-    <state width="938" height="282" key="GridCell.Tab.0.center" timestamp="1601309951627">
+    <state width="938" height="275" key="GridCell.Tab.0.center" timestamp="1601764515038">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="938" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1601309951627" />
+    <state width="938" height="275" key="GridCell.Tab.0.center/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601764515038" />
     <state width="938" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601302632572" />
-    <state width="938" height="282" key="GridCell.Tab.0.left" timestamp="1601309951627">
+    <state width="938" height="275" key="GridCell.Tab.0.left" timestamp="1601764515038">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="938" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1601309951627" />
+    <state width="938" height="275" key="GridCell.Tab.0.left/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601764515038" />
     <state width="938" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601302632572" />
-    <state width="938" height="282" key="GridCell.Tab.0.right" timestamp="1601309951627">
+    <state width="938" height="275" key="GridCell.Tab.0.right" timestamp="1601764515038">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="938" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1601309951627" />
+    <state width="938" height="275" key="GridCell.Tab.0.right/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601764515038" />
     <state width="938" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601302632573" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1601297563620">
+    <state width="938" height="340" key="GridCell.Tab.1.bottom" timestamp="1601761534051">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1600893029440" />
+    <state width="938" height="340" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601761534051" />
+    <state width="938" height="340" key="GridCell.Tab.1.center" timestamp="1601761534051">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="340" key="GridCell.Tab.1.center/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601761534051" />
+    <state width="938" height="340" key="GridCell.Tab.1.left" timestamp="1601761534051">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="340" key="GridCell.Tab.1.left/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601761534051" />
+    <state width="938" height="340" key="GridCell.Tab.1.right" timestamp="1601761534051">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="938" height="340" key="GridCell.Tab.1.right/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601761534051" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1601752305288">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1601397924402" />
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601752305288" />
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601297563620" />
     <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601297397637">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -206,6 +255,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Association_S3$main.coverage" NAME="main Coverage Results" MODIFIED="1600893098059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
-    <SUITE FILE_PATH="coverage/Association_S3$Run_config.coverage" NAME="Run config Coverage Results" MODIFIED="1601302632567" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Association_S3$Run_config.coverage" NAME="Run config Coverage Results" MODIFIED="1601764515033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
