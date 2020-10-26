@@ -1,3 +1,4 @@
+
 from locals import *
 from EventHandler import *
 
@@ -7,6 +8,19 @@ class GUIManager:
     associationAdress = "45 rue d'Ulm"
     associationTown = "75230 Paris Cedex 5"
     associationSiret = "393 902 721 00017"
+
+    fileName = 'C:\\Users\\Milo\\Desktop\\MyDoc.pdf'
+    documentTitle = 'Document title!'
+    title = 'Tasmanian devil'
+    subTitle = 'The largest carnivorous marsupial'
+
+    textLines = [
+        'The Tasmanian devil (Sarcophilus harrisii) is',
+        'a carnivorous marsupial of the family',
+        'Dasyuridae.'
+    ]
+
+
 
     def __init__(self):
         self.fields = []
@@ -47,21 +61,36 @@ class GUIManager:
         self.window.mainloop()
 
     def generatePDF(self):
-        pdf = FPDF()
+        doc = SimpleInvoice(GUIManager.fileName)
+        doc.invoice_info = InvoiceInfo(1023, datetime.now(), datetime.now())  # Invoice info, optional
 
-        pdf.add_page()
+        # Service Provider Info, optional
+        doc.service_provider_info = ServiceProviderInfo(
+            name='PyInvoice',
+            street='My Street',
+            city='My City',
+            state='My State',
+            country='My Country',
+            post_code='222222',
+            vat_tax_number='Vat/Tax number'
+        )
 
-        pdf.image('C:\\Users\\Milo\\Desktop\\logo.png', 10, 10, 54.2, 35.2, "png")
-        pdf.set_font('Arial', 'B', 22)
+        # Client info, optional
+        doc.client_info = ClientInfo(email='client@example.com')
 
-        pdf.cell(75, 30, "", 0, 0, 'M')  # Spacing
+        # Add Item
+        doc.add_item(Item('Item', 'Item desc', 1, '1.1'))
+        doc.add_item(Item('Item', 'Item desc', 2, '2.2'))
+        doc.add_item(Item('Item', 'Item desc', 3, '3.3'))
 
-        pdf.cell(0, 30, "Bon de commande N°" + self.fields[0].get(), 0, 1, 'L')
-        pdf.set_font('Arial', 'B', 10)
+        # Tax rate, optional
+        doc.set_item_tax_rate(20)  # 20%
 
-        pdf.ln(20)
+        # Transactions detail, optional
+        doc.add_transaction(Transaction('Paypal', 111, datetime.now(), 1))
+        doc.add_transaction(Transaction('Stripe', 222, date.today(), 2))
 
-        pdf.multi_cell(((pdf.w - (pdf.r_margin + pdf.l_margin)) / 2)+35, 10, "\n  " + self.associationName + "\n  " + self.associationAdress + "\n  " + self.associationTown + "\n  Siret : " + self.associationSiret + "\n", 1, 'L', 0)
-        pdf.multi_cell(((pdf.w - (pdf.r_margin + pdf.l_margin)) / 2)-35, 30, "  A :        " + self.fields[1].get() + "\n  Adresse :     " + self.fields[2].get(), 1, 'L', 0, 0)
+        # Optional
+        doc.set_bottom_tip("Email: example@example.com<br />Don't hesitate to contact us for any questions.")
 
-        pdf.output('C:\\Users\\Milo\\Desktop\\tuto1.pdf', 'F')
+        doc.finish()
