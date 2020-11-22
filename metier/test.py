@@ -1,8 +1,8 @@
 from metier import Adherent
 from metier import Laboratoire
-from metier import StockageAdhérentCsv
+from modèle import StockageAdherentCsv
 
-stock = StockageAdhérentCsv.StockageAdherentCsv()
+stock = StockageAdherentCsv.StockageAdherentCsv()
 stock.initialiserfichier()
 
 
