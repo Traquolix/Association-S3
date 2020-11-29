@@ -1,5 +1,8 @@
-from vue.Interface import Interface
+from vue.Fenetre import Fenetre
 
-application = Interface()
-application.demarrerAppli()
+app = Fenetre()
+app.demarrerApplication()
+
+
+
 
