@@ -4,14 +4,17 @@ import csv
 class StockageAdherentCsv:
 
     def __init__(self):
-        self.fichierAdherent = "../data/adherents.csv"
+        self.fichierAdherent = "data/adherents.csv"
 
     def lirefichier(self):
         adherents = []
         with open(self.fichierAdherent, newline='') as csvfile:
             csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            cpt = 0
             for row in csvreader:
-                adherents.append(row)
+                if cpt != 0:
+                    adherents.append(row)
+                cpt = cpt + 1
         return adherents
 
     def contientAdherents(self,adherent):

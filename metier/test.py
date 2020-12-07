@@ -1,6 +1,6 @@
 from metier import Adherent
 from metier import Laboratoire
-from modèle import StockageAdherentCsv
+from data import StockageAdherentCsv
 
 stock = StockageAdherentCsv.StockageAdherentCsv()
 stock.initialiserfichier()
@@ -18,3 +18,8 @@ for row in adherents:
 stock.ecrirefichier(a)
 
 print(stock.contientAdherents(a))
+
+adherents = stock.lirefichier()
+
+for row in adherents:
+    print(row)

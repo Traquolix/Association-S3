@@ -1,5 +1,5 @@
 from metier.Adherent import Adherent
-from modèle.StockageAdherentCsv import StockageAdherentCsv
+from data.StockageAdherentCsv import StockageAdherentCsv
 
 
 class GestionAdherents:

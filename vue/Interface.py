@@ -51,7 +51,8 @@ class StartPage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         # label of frame Layout 2
-        label = ttk.Label(self, text="Startpage", font=LARGEFONT)
+        photo = tk.PhotoImage(file='Apple.png')
+        label = ttk.Label(self, text="Startpage", font=LARGEFONT, image=photo)
 
         # putting the grid in its place by using
         # grid
