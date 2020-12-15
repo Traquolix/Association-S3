@@ -1,9 +1,12 @@
+from metier.Laboratoire import Laboratoire
+
+
 class Adherent:
 
-    def __init__(self, nom, prenom):
-        self.nom = nom
+    def __init__(self, prenom, nom, labo):
         self.prenom = prenom
-        self.labo = None
+        self.nom = nom
+        self.labo = labo
 
     def setLaboratoire(self, labo):
         self.labo = labo

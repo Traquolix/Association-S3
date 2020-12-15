@@ -40,16 +40,16 @@ class Fenetre:
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)  """
 
-        #self.controllerAdherent = ControleurAdherents()
-
         self.frames = {}
+
+        self.ctrlAdherent = ControleurAdherents(self)
 
         for F in (Accueil, VueAdherents, VueFacture):
 
-            #if F == Accueil :
-             #   frame = F(self.container, )
-            #else :
-            frame = F(self.container, self)
+            if F == VueAdherents:
+                frame = F(self.container, ctrlFenetre=self, ctrlAdherent=self.ctrlAdherent)
+            else:
+                frame = F(self.container, self)
 
             self.frames[F] = frame
 
@@ -57,9 +57,17 @@ class Fenetre:
 
         self.show_frame(Accueil)
 
+        self.ctrlAdherent.setVue(self.get_frame_VueAdherent())
+
     def show_frame(self, cont):
         frame = self.frames[cont]
         frame.tkraise()
+
+    def get_frame_Accueil(self):
+        return self.frames[Accueil]
+
+    def get_frame_VueAdherent(self):
+        return self.frames[VueAdherents]
 
     def demarrerApplication(self):
         self.container.mainloop()
@@ -134,7 +142,7 @@ class Accueil(tk.Frame):
 
 class VueAdherents(tk.Frame):
 
-    def __init__(self, parent, controleur):
+    def __init__(self, parent, ctrlFenetre, ctrlAdherent):
         tk.Frame.__init__(self, parent)
         self.config(bg="skyblue")
         self.columnconfigure(0, weight=1)
@@ -143,6 +151,8 @@ class VueAdherents(tk.Frame):
         self.rowconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
         self.rowconfigure(2, weight=1)
+
+        self.ctrlAdherent = ctrlAdherent
 
         top_bar = tk.Frame(self)
         top_bar.config(bg="skyblue")
@@ -163,7 +173,7 @@ class VueAdherents(tk.Frame):
         conteneur_bouton_accueil.grid(row=0, column=0, sticky="nsew")
 
         logo_btn_accueil = tk.PhotoImage(file='vue/accueil.png')
-        accueil = ttk.Button(conteneur_bouton_accueil, text="accueil", image=logo_btn_accueil, style='my.TButton', compound="left", command=lambda: controleur.show_frame(Accueil))
+        accueil = ttk.Button(conteneur_bouton_accueil, text="accueil", image=logo_btn_accueil, style='my.TButton', compound="left", command=lambda: ctrlFenetre.show_frame(Accueil))
         accueil.photo = logo_btn_accueil
         accueil.place(relx=0.5, rely=0.5, anchor=CENTER)
 
@@ -194,8 +204,10 @@ class VueAdherents(tk.Frame):
         lnom = Label(conteneur_nom, text="nom :")
         lnom.config(bg='skyblue')
         lnom.grid(row=0, column=0, padx=(0, 15))
-        nom = Entry(conteneur_nom, textvariable="nom", width=20)
-        nom.grid(row=0, column=1)
+        self.str_nom = tk.StringVar()
+        self.str_nom.set("")
+        self.nom = Entry(conteneur_nom, textvariable=self.str_nom, width=20)
+        self.nom.grid(row=0, column=1)
 
         conteneur_prenom = Frame(formulaire)
         conteneur_prenom.config(bg='skyblue')
@@ -207,8 +219,10 @@ class VueAdherents(tk.Frame):
         lprenom = Label(conteneur_prenom, text="prénom :")
         lprenom.config(bg='skyblue')
         lprenom.grid(row=0, column=0, padx=(0, 15))
-        prenom = Entry(conteneur_prenom, textvariable="prénom", width=20)
-        prenom.grid(row=0, column=1)
+        self.str_prenom = tk.StringVar()
+        self.str_prenom.set("")
+        self.prenom = Entry(conteneur_prenom, textvariable=self.str_prenom, width=20)
+        self.prenom.grid(row=0, column=1)
 
         conteneur_labo = Frame(formulaire)
         conteneur_labo.config(bg='skyblue')
@@ -220,10 +234,12 @@ class VueAdherents(tk.Frame):
         llabo = Label(conteneur_labo, text="laboratoire :")
         llabo.config(bg='skyblue')
         llabo.grid(row=0, column=0, padx=(0, 15))
-        labo = Entry(conteneur_labo, textvariable="labo", width=20)
-        labo.grid(row=0, column=1)
+        self.str_labo = tk.StringVar()
+        self.str_labo.set("")
+        self.labo = Entry(conteneur_labo, textvariable=self.str_labo, width=20)
+        self.labo.grid(row=0, column=1)
 
-        ajouter = ttk.Button(formulaire, text="ajouter adhérent", style='my.TButton')
+        ajouter = ttk.Button(formulaire, text="ajouter adhérent", style='my.TButton', command=lambda: ctrlAdherent.ajouterAdherent())
         ajouter.grid(row=3, column=0)
 
         mid_frame = Frame(self)
@@ -237,17 +253,39 @@ class VueAdherents(tk.Frame):
         self.initialiserListe()
         self.adherents.grid(row=0, column=0)
 
-        supprimer = ttk.Button(mid_frame, text="supprimer adhérent", style='my.TButton')
+        supprimer = ttk.Button(mid_frame, text="supprimer adhérent", style='my.TButton', command=lambda: ctrlAdherent.supprimerAdherent())
         supprimer.grid(row=1, column=0)
 
     def initialiserListe(self):
-        adh = StockageAdherentCsv.StockageAdherentCsv()
-        a = adh.lirefichier()
-        cpt=1
-        for adhe in a :
-            self.adherents.insert(cpt,adhe)
+        self.adherents.delete(0, END)
+        liste = self.ctrlAdherent.refreshList()
+        cpt = 1
+        for ad in liste:
+            self.adherents.insert(cpt, ad)
+        self.adherents.select_set(0)
 
-        """
+    def getPrenom(self):
+        return self.prenom.get()
+
+    def getNom(self):
+        return self.nom.get()
+
+    def getLabo(self):
+        return self.labo.get()
+
+    def viderChamps(self):
+        self.str_prenom.set("")
+        self.str_nom.set("")
+        self.str_labo.set("")
+
+    def listBoxEstVide(self):
+        return self.adherents.size() == 0
+
+    def getSelectedAdherent(self):
+        return self.adherents.get(self.adherents.curselection())
+
+
+"""
       
 
 
@@ -274,7 +312,7 @@ class VueAdherents(tk.Frame):
 
 
 class VueFacture(tk.Frame):
-    def __init__(self, parent, controleur):
+    def __init__(self, parent, ctrl_fenetre):
         tk.Frame.__init__(self, parent)
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=1)
@@ -290,3 +328,66 @@ class VueFacture(tk.Frame):
         top_bar.columnconfigure(1, weight=1)
         top_bar.columnconfigure(2, weight=1)
         top_bar.grid(row=0, column=0, columnspan=3, sticky="nsew")
+
+        titre = tk.Label(self, text="Generation Facture")
+        titre.config(font=("Courier", 20), bg="skyblue")
+        titre.grid(row=0, column=1, sticky='nsew')
+
+        conteneur_bouton_accueil = tk.Frame(self)
+        conteneur_bouton_accueil.config(bg="skyblue")
+        conteneur_bouton_accueil.rowconfigure(0, weight=1)
+        conteneur_bouton_accueil.columnconfigure(0, weight=1)
+        conteneur_bouton_accueil.grid(row=0, column=0, sticky="nsew")
+
+        logo_btn_accueil = tk.PhotoImage(file='vue/accueil.png')
+        accueil = ttk.Button(conteneur_bouton_accueil, text="accueil", image=logo_btn_accueil, style='my.TButton',
+                             compound="left", command=lambda: ctrl_fenetre.show_frame(Accueil))
+        accueil.photo = logo_btn_accueil
+        accueil.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+        left_frame = Frame(self)
+        left_frame.config(bg='skyblue')
+        left_frame.columnconfigure(0, weight=1)
+        left_frame.rowconfigure(0, weight=1)
+        left_frame.rowconfigure(1, weight=1)
+        left_frame.rowconfigure(2, weight=1)
+        left_frame.grid(row=1, column=0, sticky="nsew")
+
+        formulaire = Frame(left_frame)
+        formulaire.config(bg='skyblue')
+        formulaire.columnconfigure(0, weight=1)
+        formulaire.rowconfigure(0, weight=1)
+        formulaire.rowconfigure(1, weight=1)
+        formulaire.rowconfigure(2, weight=1)
+        formulaire.rowconfigure(3, weight=1)
+        formulaire.grid(row=1, column=1, sticky="nsew")
+
+        conteneur_num = Frame(formulaire)
+        conteneur_num.config(bg='skyblue')
+        conteneur_num.columnconfigure(0, weight=1)
+        conteneur_num.columnconfigure(1, weight=1)
+        conteneur_num.rowconfigure(0, weight=1)
+        conteneur_num.grid(row=0, column=0, sticky="nsew")
+
+        lnum = Label(conteneur_num, text="numéro de facture :")
+        lnum.config(bg='skyblue')
+        lnum.grid(row=0, column=0, padx=(0, 15))
+        self.str_num = tk.StringVar()
+        self.str_num.set("")
+        self.num = Entry(conteneur_num, textvariable=self.str_num, width=20)
+        self.num.grid(row=0, column=1)
+
+        conteneur_montant = Frame(formulaire)
+        conteneur_montant.config(bg='skyblue')
+        conteneur_montant.columnconfigure(0, weight=1)
+        conteneur_montant.columnconfigure(1, weight=1)
+        conteneur_montant.rowconfigure(0, weight=1)
+        conteneur_montant.grid(row=1, column=0, sticky="nsew")
+
+        lmontant = Label(conteneur_montant, text="montant :")
+        lmontant.config(bg='skyblue')
+        lmontant.grid(row=0, column=0, padx=(0, 15))
+        self.str_montant = tk.StringVar()
+        self.str_montant.set("")
+        self.num = Entry(conteneur_montant, textvariable=self.str_num, width=20)
+        self.num.grid(row=0, column=1)
