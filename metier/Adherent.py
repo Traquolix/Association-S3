@@ -11,6 +11,9 @@ class Adherent:
     def setLaboratoire(self, labo):
         self.labo = labo
 
+    def getLaboratoire(self):
+        return self.labo
+
     def getNom(self):
         return self.nom
 

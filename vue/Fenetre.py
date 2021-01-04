@@ -234,9 +234,8 @@ class VueAdherents(tk.Frame):
         llabo = Label(conteneur_labo, text="laboratoire :")
         llabo.config(bg='skyblue')
         llabo.grid(row=0, column=0, padx=(0, 15))
-        self.str_labo = tk.StringVar()
-        self.str_labo.set("")
-        self.labo = Entry(conteneur_labo, textvariable=self.str_labo, width=20)
+        self.labo = tk.Listbox(conteneur_labo, width=10, height=2)
+        self.actualiser_liste_labo()
         self.labo.grid(row=0, column=1)
 
         ajouter = ttk.Button(formulaire, text="ajouter adhérent", style='my.TButton', command=lambda: ctrlAdherent.ajouterAdherent())
@@ -256,13 +255,41 @@ class VueAdherents(tk.Frame):
         supprimer = ttk.Button(mid_frame, text="supprimer adhérent", style='my.TButton', command=lambda: ctrlAdherent.supprimerAdherent())
         supprimer.grid(row=1, column=0)
 
+        bottom_bar = tk.Frame(self)
+        bottom_bar.config(bg="skyblue")
+        bottom_bar.rowconfigure(0, weight=1)
+        bottom_bar.columnconfigure(0, weight=1)
+        bottom_bar.columnconfigure(1, weight=1)
+        bottom_bar.columnconfigure(2, weight=1)
+        bottom_bar.grid(row=2, column=0, columnspan=3, sticky="nsew")
+
+        conteneur_gerer_labo = tk.Frame(bottom_bar)
+        conteneur_gerer_labo.config(bg="skyblue")
+        conteneur_gerer_labo.rowconfigure(0, weight=1)
+        conteneur_gerer_labo.columnconfigure(0, weight=1)
+        conteneur_gerer_labo.grid(row=0, column=0, columnspan=1, sticky="nsew")
+        gerer_labo = ttk.Button(conteneur_gerer_labo, text="gérer laboratoires", style='my.TButton', command=lambda : self.fenetre_labo(parent))
+        gerer_labo.grid(row=0, column=0)
+
+    def fenetre_labo(self, parent):
+        top = Toplevel(parent)
+        top.mainloop()
+
     def initialiserListe(self):
         self.adherents.delete(0, END)
-        liste = self.ctrlAdherent.refreshList()
+        liste = self.ctrlAdherent.actualiser_liste_adherents()
         cpt = 1
         for ad in liste:
             self.adherents.insert(cpt, ad)
         self.adherents.select_set(0)
+
+    def actualiser_liste_labo(self):
+        self.labo.delete(0, END)
+        liste = self.ctrlAdherent.actualiser_liste_laboratoire()
+        cpt = 1
+        for ad in liste:
+            self.labo.insert(cpt, ad)
+        self.labo.select_set(0)
 
     def getPrenom(self):
         return self.prenom.get()
@@ -271,12 +298,12 @@ class VueAdherents(tk.Frame):
         return self.nom.get()
 
     def getLabo(self):
-        return self.labo.get()
+        return self.labo.get(self.labo.curselection())
 
     def viderChamps(self):
         self.str_prenom.set("")
         self.str_nom.set("")
-        self.str_labo.set("")
+        self.labo.select_set(0)
 
     def listBoxEstVide(self):
         return self.adherents.size() == 0
@@ -353,31 +380,31 @@ class VueFacture(tk.Frame):
         left_frame.rowconfigure(2, weight=1)
         left_frame.grid(row=1, column=0, sticky="nsew")
 
-        formulaire = Frame(left_frame)
-        formulaire.config(bg='skyblue')
-        formulaire.columnconfigure(0, weight=1)
-        formulaire.rowconfigure(0, weight=1)
-        formulaire.rowconfigure(1, weight=1)
-        formulaire.rowconfigure(2, weight=1)
-        formulaire.rowconfigure(3, weight=1)
-        formulaire.grid(row=1, column=1, sticky="nsew")
+        formulaire_gauche = Frame(left_frame)
+        formulaire_gauche.config(bg='skyblue')
+        formulaire_gauche.columnconfigure(0, weight=1)
+        formulaire_gauche.rowconfigure(0, weight=1)
+        formulaire_gauche.rowconfigure(1, weight=1)
+        formulaire_gauche.rowconfigure(2, weight=1)
+        formulaire_gauche.rowconfigure(3, weight=1)
+        formulaire_gauche.grid(row=1, column=1, sticky="nsew")
 
-        conteneur_num = Frame(formulaire)
-        conteneur_num.config(bg='skyblue')
-        conteneur_num.columnconfigure(0, weight=1)
-        conteneur_num.columnconfigure(1, weight=1)
-        conteneur_num.rowconfigure(0, weight=1)
-        conteneur_num.grid(row=0, column=0, sticky="nsew")
+        conteneur_numf = Frame(formulaire_gauche)
+        conteneur_numf.config(bg='skyblue')
+        conteneur_numf.columnconfigure(0, weight=1)
+        conteneur_numf.columnconfigure(1, weight=1)
+        conteneur_numf.rowconfigure(0, weight=1)
+        conteneur_numf.grid(row=0, column=0, sticky="nsew")
 
-        lnum = Label(conteneur_num, text="numéro de facture :")
+        lnum = Label(conteneur_numf, text="numéro de facture :")
         lnum.config(bg='skyblue')
         lnum.grid(row=0, column=0, padx=(0, 15))
         self.str_num = tk.StringVar()
         self.str_num.set("")
-        self.num = Entry(conteneur_num, textvariable=self.str_num, width=20)
+        self.num = Entry(conteneur_numf, textvariable=self.str_num, width=20)
         self.num.grid(row=0, column=1)
 
-        conteneur_montant = Frame(formulaire)
+        conteneur_montant = Frame(formulaire_gauche)
         conteneur_montant.config(bg='skyblue')
         conteneur_montant.columnconfigure(0, weight=1)
         conteneur_montant.columnconfigure(1, weight=1)
@@ -391,3 +418,61 @@ class VueFacture(tk.Frame):
         self.str_montant.set("")
         self.num = Entry(conteneur_montant, textvariable=self.str_num, width=20)
         self.num.grid(row=0, column=1)
+
+        conteneur_numb = Frame(formulaire_gauche)
+        conteneur_numb.config(bg='skyblue')
+        conteneur_numb.columnconfigure(0, weight=1)
+        conteneur_numb.columnconfigure(1, weight=1)
+        conteneur_numb.rowconfigure(0, weight=1)
+        conteneur_numb.grid(row=2, column=0, sticky="nsew")
+
+        lnumb = Label(conteneur_numb, text="numéro bon de commande : ")
+        lnumb.config(bg='skyblue')
+        lnumb.grid(row=0, column=0, padx=(0, 15))
+        self.str_montant = tk.StringVar()
+        self.str_montant.set("")
+        self.num = Entry(conteneur_numb, textvariable=self.str_num, width=20)
+        self.num.grid(row=0, column=1)
+
+        mid_frame = Frame(self)
+        mid_frame.config(bg='skyblue')
+        mid_frame.columnconfigure(0, weight=1)
+        mid_frame.rowconfigure(0, weight=1)
+        mid_frame.rowconfigure(1, weight=1)
+        mid_frame.rowconfigure(2, weight=1)
+        mid_frame.grid(row=1, column=1, sticky="nsew")
+
+        formulaire_droit = Frame(mid_frame)
+        formulaire_droit.config(bg='skyblue')
+        formulaire_droit.columnconfigure(0, weight=1)
+        formulaire_droit.rowconfigure(0, weight=1)
+        formulaire_droit.rowconfigure(1, weight=1)
+        formulaire_droit.rowconfigure(2, weight=1)
+        formulaire_droit.rowconfigure(3, weight=1)
+        formulaire_droit.grid(row=1, column=3, sticky="nsew")
+
+        conteneur_nbadherents = Frame(formulaire_droit)
+        conteneur_nbadherents.config(bg='skyblue')
+        conteneur_nbadherents.columnconfigure(0, weight=1)
+        conteneur_nbadherents.columnconfigure(1, weight=1)
+        conteneur_nbadherents.rowconfigure(0, weight=1)
+        conteneur_nbadherents.grid(row=0, column=0, sticky="nsew")
+
+        lnbadh = Label(conteneur_nbadherents, text="nombre d'adhérent :")
+        lnbadh.config(bg='skyblue')
+        lnbadh.grid(row=0, column=0, padx=(0, 15))
+        self.nbadh = Spinbox(conteneur_nbadherents, from_=0, to=10)
+        self.nbadh.grid(row=0, column=1)
+
+        conteneur_adherents = Frame(formulaire_droit)
+        conteneur_adherents.config(bg='skyblue')
+        conteneur_adherents.columnconfigure(0, weight=1)
+        conteneur_adherents.columnconfigure(1, weight=1)
+        conteneur_adherents.rowconfigure(0, weight=1)
+        conteneur_adherents.grid(row=1, column=0, sticky="nsew")
+
+        lnbadh = Label(conteneur_nbadherents, text="nombre d'adhérent :")
+        lnbadh.config(bg='skyblue')
+        lnbadh.grid(row=0, column=0, padx=(0, 15))
+        self.nbadh = Spinbox(conteneur_nbadherents)
+        self.nbadh.grid(row=0, column=1)
