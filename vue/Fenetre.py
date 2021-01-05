@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
+from metier.Facture import Facture
+
 # Cette classe est la fenêtre de l'application qui permet de gérer les différentes pages
 from Controleurs.ControleurAdherents import ControleurAdherents
 from data import StockageAdherentCsv
@@ -130,7 +132,11 @@ class Accueil(tk.Frame):
         button1.place(relx=0.5, rely=0.5, anchor=CENTER)
 
         logoBtn2 = tk.PhotoImage(file='vue/facture.png')
+        """
         button2 = ttk.Button(mid_frame, text="générer facture", image=logoBtn2, style='my.TButton', compound="left", command=lambda: controleur.show_frame(VueFacture))
+        """
+        button2 = ttk.Button(mid_frame, text="générer facture", image=logoBtn2, style='my.TButton', compound="left",
+                             command=lambda: Facture.genererFacture('1','2','3', '4'))
         button2.photo = logoBtn2
         button2.place(relx=0.5, rely=0.5, anchor=CENTER)
 

@@ -1,0 +1,657 @@
+Index: vue/Fenetre.py
+===================================================================
+--- vue/Fenetre.py	(revision 99088110bfe3ed72be1ec205eaebea5e626ffe59)
++++ vue/Fenetre.py	(revision 99088110bfe3ed72be1ec205eaebea5e626ffe59)
+@@ -1,292 +0,0 @@
+-import tkinter as tk
+-from tkinter import *
+-from tkinter import ttk
+-
+-# Cette classe est la fenêtre de l'application qui permet de gérer les différentes pages
+-from Controleurs.ControleurAdherents import ControleurAdherents
+-from data import StockageAdherentCsv
+-
+-
+-class Fenetre:
+-
+-    def __init__(self):
+-
+-        self.container = Tk() # Création de la fenetre
+-        self.container.title('application gestion trésorerie')
+-        self.container.geometry("1000x500")
+-        self.container.grid_rowconfigure(0, weight=1)
+-        self.container.grid_columnconfigure(0, weight=1)
+-
+-        """ self.frames = {}
+-
+-        page_name = Accueil.__name__
+-        frame = Accueil(parent=self.container, controleur=self)
+-        self.frames[page_name] = frame
+-        frame.grid(row=0, column=0, sticky="nsew")
+-
+-        page_name = VueAdherents.__name__
+-        frame = VueAdherents(parent=self.container, controleur=self)
+-        self.frames[page_name] = frame
+-        frame.grid(row=0, column=0, sticky="nsew")
+-
+-        self.show_frame("Accueil") """
+-
+-        """tk.Tk.__init__(self, *args, **kwargs)
+-
+-        tk.Tk.wm_title(self, "Gestion trésorerie ATALA")
+-
+-        container = tk.Frame(self)
+-        container.pack(side="top", fill="both", expand=True)
+-        container.grid_rowconfigure(0, weight=1)
+-        container.grid_columnconfigure(0, weight=1)  """
+-
+-        #self.controllerAdherent = ControleurAdherents()
+-
+-        self.frames = {}
+-
+-        for F in (Accueil, VueAdherents, VueFacture):
+-
+-            #if F == Accueil :
+-             #   frame = F(self.container, )
+-            #else :
+-            frame = F(self.container, self)
+-
+-            self.frames[F] = frame
+-
+-            frame.grid(row=0, column=0, sticky="nsew")
+-
+-        self.show_frame(Accueil)
+-
+-    def show_frame(self, cont):
+-        frame = self.frames[cont]
+-        frame.tkraise()
+-
+-    def demarrerApplication(self):
+-        self.container.mainloop()
+-
+-
+-class Accueil(tk.Frame):
+-    def __init__(self, parent, controleur):
+-        tk.Frame.__init__(self, parent)
+-        self.columnconfigure(0, weight=1)
+-        self.columnconfigure(1, weight=1)
+-        self.columnconfigure(2, weight=1)
+-        self.rowconfigure(0, weight=1)
+-        self.rowconfigure(1, weight=1)
+-        self.rowconfigure(2, weight=1)
+-
+-        top_bar = tk.Frame(self, width=300, height=70)
+-        top_bar.config(bg="skyblue")
+-        top_bar.rowconfigure(0, weight=1)
+-        top_bar.columnconfigure(0, weight=1)
+-        top_bar.columnconfigure(1, weight=1)
+-        top_bar.columnconfigure(2, weight=1)
+-        top_bar.grid(row=0, column=0, columnspan=3, sticky="nsew")
+-
+-        logoImg = tk.PhotoImage(file='vue/atala_logo.png')
+-        logo = tk.Label(top_bar, image=logoImg)
+-        logo.config(bg="skyblue")
+-        logo.photo = logoImg
+-        logo.grid(row=0, column=0)
+-
+-        conteneurTitre = tk.Frame(top_bar)
+-        conteneurTitre.config(bg="skyblue")
+-        conteneurTitre.rowconfigure(0,weight=1)
+-        conteneurTitre.columnconfigure(0, weight=1)
+-        conteneurTitre.grid(row=0, column=1, columnspan=2, sticky="nsew")
+-
+-        titre = tk.Label(conteneurTitre, text="Opérations de gestion de \nla trésorerie d'ATALA")
+-        titre.config(font=("Courier", 20), bg="skyblue")
+-        titre.grid(row=0, column=0, sticky='w')
+-
+-        bottom_bar = tk.Frame(self, width=300, height=70)
+-        bottom_bar.config(bg="skyblue")
+-        bottom_bar.grid(row=2, column=0, columnspan=3, sticky="nsew")
+-
+-        left_frame = Frame(self, width=333, height=100)
+-        left_frame.config(bg='skyblue')
+-        left_frame.grid(row=1, column=0, sticky="nsew")
+-        mid_frame = Frame(self, width=333, height=100)
+-        mid_frame.config(bg='skyblue')
+-        mid_frame.grid(row=1, column=1, sticky="nsew")
+-        right_frame = Frame(self, width=333, height=100)
+-        right_frame.config(bg='skyblue')
+-        right_frame.grid(row=1, column=2, sticky="nsew")
+-
+-        s = ttk.Style()
+-        s.configure('my.TButton', font=('Courier', 12), borderwidth=0)
+-
+-        logoBtn1 = tk.PhotoImage(file='vue/adherents.png')
+-        button1 = ttk.Button(left_frame, text="gérer adhérents", image=logoBtn1, style='my.TButton', compound="left", command=lambda: controleur.show_frame(VueAdherents))
+-        button1.photo = logoBtn1
+-        button1.place(relx=0.5, rely=0.5, anchor=CENTER)
+-
+-        logoBtn2 = tk.PhotoImage(file='vue/facture.png')
+-        button2 = ttk.Button(mid_frame, text="générer facture", image=logoBtn2, style='my.TButton', compound="left", command=lambda: controleur.show_frame(VueFacture))
+-        button2.photo = logoBtn2
+-        button2.place(relx=0.5, rely=0.5, anchor=CENTER)
+-
+-        logoBtn3 = tk.PhotoImage(file='vue/boncommande.png')
+-        button3 = ttk.Button(right_frame, text="générer bon de \ncommande", image=logoBtn3, style='my.TButton', compound="left", command=lambda: controleur.show_frame(VueAdherents))
+-        button3.photo = logoBtn3
+-        button3.place(relx=0.5, rely=0.5, anchor=CENTER)
+-
+-
+-class VueAdherents(tk.Frame):
+-
+-    def __init__(self, parent, controleur):
+-        tk.Frame.__init__(self, parent)
+-        self.config(bg="skyblue")
+-        self.columnconfigure(0, weight=1)
+-        self.columnconfigure(1, weight=1)
+-        self.columnconfigure(2, weight=1)
+-        self.rowconfigure(0, weight=1)
+-        self.rowconfigure(1, weight=1)
+-        self.rowconfigure(2, weight=1)
+-
+-        top_bar = tk.Frame(self)
+-        top_bar.config(bg="skyblue")
+-        top_bar.rowconfigure(0, weight=1)
+-        top_bar.columnconfigure(0, weight=1)
+-        top_bar.columnconfigure(1, weight=1)
+-        top_bar.columnconfigure(2, weight=1)
+-        top_bar.grid(row=0, column=0, columnspan=3, sticky="nsew")
+-
+-        titre = tk.Label(self, text="Gestion des adhérents")
+-        titre.config(font=("Courier", 20), bg="skyblue")
+-        titre.grid(row=0, column=1, sticky='nsew')
+-
+-        conteneur_bouton_accueil = tk.Frame(self)
+-        conteneur_bouton_accueil.config(bg="skyblue")
+-        conteneur_bouton_accueil.rowconfigure(0, weight=1)
+-        conteneur_bouton_accueil.columnconfigure(0, weight=1)
+-        conteneur_bouton_accueil.grid(row=0, column=0, sticky="nsew")
+-
+-        logo_btn_accueil = tk.PhotoImage(file='vue/accueil.png')
+-        accueil = ttk.Button(conteneur_bouton_accueil, text="accueil", image=logo_btn_accueil, style='my.TButton', compound="left", command=lambda: controleur.show_frame(Accueil))
+-        accueil.photo = logo_btn_accueil
+-        accueil.place(relx=0.5, rely=0.5, anchor=CENTER)
+-
+-        left_frame = Frame(self)
+-        left_frame.config(bg='skyblue')
+-        left_frame.columnconfigure(0, weight=1)
+-        left_frame.rowconfigure(0, weight=1)
+-        left_frame.rowconfigure(1, weight=1)
+-        left_frame.rowconfigure(2, weight=1)
+-        left_frame.grid(row=1, column=0, sticky="nsew")
+-
+-        formulaire = Frame(left_frame)
+-        formulaire.config(bg='skyblue')
+-        formulaire.columnconfigure(0, weight=1)
+-        formulaire.rowconfigure(0, weight=1)
+-        formulaire.rowconfigure(1, weight=1)
+-        formulaire.rowconfigure(2, weight=1)
+-        formulaire.rowconfigure(3, weight=1)
+-        formulaire.grid(row=1, column=1, sticky="nsew")
+-
+-        conteneur_nom = Frame(formulaire)
+-        conteneur_nom.config(bg='skyblue')
+-        conteneur_nom.columnconfigure(0, weight=1)
+-        conteneur_nom.columnconfigure(1, weight=1)
+-        conteneur_nom.rowconfigure(0, weight=1)
+-        conteneur_nom.grid(row=0, column=0, sticky="nsew")
+-
+-        lnom = Label(conteneur_nom, text="nom :")
+-        lnom.config(bg='skyblue')
+-        lnom.grid(row=0, column=0, padx=(0, 15))
+-        nom = Entry(conteneur_nom, textvariable="nom", width=20)
+-        nom.grid(row=0, column=1)
+-
+-        conteneur_prenom = Frame(formulaire)
+-        conteneur_prenom.config(bg='skyblue')
+-        conteneur_prenom.columnconfigure(0, weight=1)
+-        conteneur_prenom.columnconfigure(1, weight=1)
+-        conteneur_prenom.rowconfigure(0, weight=1)
+-        conteneur_prenom.grid(row=1, column=0, sticky="nsew")
+-
+-        lprenom = Label(conteneur_prenom, text="prénom :")
+-        lprenom.config(bg='skyblue')
+-        lprenom.grid(row=0, column=0, padx=(0, 15))
+-        prenom = Entry(conteneur_prenom, textvariable="prénom", width=20)
+-        prenom.grid(row=0, column=1)
+-
+-        conteneur_labo = Frame(formulaire)
+-        conteneur_labo.config(bg='skyblue')
+-        conteneur_labo.columnconfigure(0, weight=1)
+-        conteneur_labo.columnconfigure(1, weight=1)
+-        conteneur_labo.rowconfigure(0, weight=1)
+-        conteneur_labo.grid(row=2, column=0, sticky="nsew")
+-
+-        llabo = Label(conteneur_labo, text="laboratoire :")
+-        llabo.config(bg='skyblue')
+-        llabo.grid(row=0, column=0, padx=(0, 15))
+-        labo = Entry(conteneur_labo, textvariable="labo", width=20)
+-        labo.grid(row=0, column=1)
+-
+-        ajouter = ttk.Button(formulaire, text="ajouter adhérent", style='my.TButton')
+-        ajouter.grid(row=3, column=0)
+-
+-        mid_frame = Frame(self)
+-        mid_frame.config(bg='skyblue')
+-        mid_frame.rowconfigure(0, weight=1)
+-        mid_frame.rowconfigure(1, weight=1)
+-        mid_frame.columnconfigure(0, weight=1)
+-        mid_frame.grid(row=1, column=1, sticky="nsew")
+-
+-        self.adherents = tk.Listbox(mid_frame, width=60)
+-        self.initialiserListe()
+-        self.adherents.grid(row=0, column=0)
+-
+-        supprimer = ttk.Button(mid_frame, text="supprimer adhérent", style='my.TButton')
+-        supprimer.grid(row=1, column=0)
+-
+-    def initialiserListe(self):
+-        adh = StockageAdherentCsv.StockageAdherentCsv()
+-        a = adh.lirefichier()
+-        cpt=1
+-        for adhe in a :
+-            self.adherents.insert(cpt,adhe)
+-
+-        """
+-      
+-
+-
+-        bottom_bar = tk.Frame(self, width=300, height=70)
+-        bottom_bar.config(bg="skyblue")
+-        bottom_bar.grid(row=2, column=0, columnspan=3, sticky="nsew")
+-
+-        left_frame = Frame(self, width=333, height=100)
+-        left_frame.config(bg='skyblue')
+-        left_frame.grid(row=1, column=0, sticky="nsew")
+-        mid_frame = Frame(self, width=333, height=100)
+-        mid_frame.config(bg='skyblue')
+-        mid_frame.grid(row=1, column=1, sticky="nsew")
+-        right_frame = Frame(self, width=333, height=100)
+-        right_frame.config(bg='skyblue')
+-        right_frame.grid(row=1, column=2, sticky="nsew")
+-
+-        label = tk.Label(self, text="page gestion des adhérents")
+-        label.pack(side="top", fill="x", pady=10)
+-
+-        button1 = ttk.Button(self, text="accueil", command=lambda: controleur.show_frame(Accueil))
+-      
+-        button1.pack()"""
+-
+-
+-class VueFacture(tk.Frame):
+-    def __init__(self, parent, controleur):
+-        tk.Frame.__init__(self, parent)
+-        self.columnconfigure(0, weight=1)
+-        self.columnconfigure(1, weight=1)
+-        self.columnconfigure(2, weight=1)
+-        self.rowconfigure(0, weight=1)
+-        self.rowconfigure(1, weight=1)
+-        self.rowconfigure(2, weight=1)
+-
+-        top_bar = tk.Frame(self, width=300, height=70)
+-        top_bar.config(bg="skyblue")
+-        top_bar.rowconfigure(0, weight=1)
+-        top_bar.columnconfigure(0, weight=1)
+-        top_bar.columnconfigure(1, weight=1)
+-        top_bar.columnconfigure(2, weight=1)
+-        top_bar.grid(row=0, column=0, columnspan=3, sticky="nsew")
+Index: Controleurs/ControleurAdherents.py
+===================================================================
+--- Controleurs/ControleurAdherents.py	(revision 99088110bfe3ed72be1ec205eaebea5e626ffe59)
++++ Controleurs/ControleurAdherents.py	(revision 99088110bfe3ed72be1ec205eaebea5e626ffe59)
+@@ -1,8 +0,0 @@
+-class ControleurAdherents:
+-
+-    def __init__(self,vue, adherentsCsv):
+-        self.vue = vue
+-        self.adherentsCsv = adherentsCsv
+-
+-    def refreshList(self):
+-        self.vue.initialiserVue()
+\ No newline at end of file
+Index: main/main.iml
+===================================================================
+--- main/main.iml	(revision 99088110bfe3ed72be1ec205eaebea5e626ffe59)
++++ main/main.iml	(revision 99088110bfe3ed72be1ec205eaebea5e626ffe59)
+@@ -1,9 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<module type="PYTHON_MODULE" version="4">
+-  <component name="NewModuleRootManager">
+-    <content url="file://$MODULE_DIR$">
+-      <excludeFolder url="file://$MODULE_DIR$/venv" />
+-    </content>
+-    <orderEntry type="sourceFolder" forTests="false" />
+-  </component>
+-</module>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"BranchesTreeState\">\r\n    <expand>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"GROUP_NODE:origin\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n    </expand>\r\n    <select>\r\n      <path>\r\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n        <item name=\"BRANCH:main\" type=\"e8cecc67:BranchNodeDescriptor\" />\r\n      </path>\r\n    </select>\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"575c952d-dec9-4e76-ad9c-2eb439cee3b4\" name=\"Default Changelist\" comment=\"ajout de l'interface\">\r\n      <change afterPath=\"$PROJECT_DIR$/Controleurs/ControleurAdherents.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/application.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/application.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/data/adherents.csv\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/data/adherents.csv\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/metier/test.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/metier/test.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/modèle/GestionAdherents.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/modèle/GestionAdherents.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/modèle/StockageAdherentCsv.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/data/StockageAdherentCsv.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/vue/Accueil.py\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/vue/Fenetre.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/vue/Fenetre.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/vue/Interface.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/vue/Interface.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/vue/VueAdherents.py\" beforeDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"JupyterTrust\" id=\"1bf12fc1-4af2-473f-92f7-731c4ca82de9\" />\r\n  <component name=\"ProjectId\" id=\"1hvWva97VznRJ06PDFDyJvfPISG\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"add_unversioned_files\" value=\"$PROJECT_DIR$/venv/Lib/site-packages/personnal_utils/utils.py\" />\r\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\r\n    <property name=\"jdk.selected.PYTHON_MODULE\" value=\"Python 3.8 (Association-S3)\" />\r\n    <property name=\"last_opened_file_path\" value=\"$USER_HOME$/fr.dic\" />\r\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\r\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\r\n    <property name=\"node.js.path.for.package.eslint\" value=\"project\" />\r\n    <property name=\"node.js.path.for.package.tslint\" value=\"project\" />\r\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\r\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\r\n    <property name=\"project.structure.last.edited\" value=\"Modules\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.15\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\r\n    <property name=\"run.code.analysis.last.selected.profile\" value=\"pProject Default\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"$PROJECT_DIR$/data\" />\r\n      <recent name=\"$PROJECT_DIR$/modèle\" />\r\n      <recent name=\"$PROJECT_DIR$\" />\r\n      <recent name=\"C:\\Users\\Milo\\Desktop\\repos\\Association-S3\\venv\\Lib\\site-packages\" />\r\n      <recent name=\"C:\\Users\\Milo\\Desktop\\repos\\Association-S3\\utils\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Python.application\">\r\n    <configuration default=\"true\" type=\"ArquillianJUnit\" factoryName=\"\" nameIsGenerated=\"true\">\r\n      <option name=\"arquillianRunConfiguration\">\r\n        <value>\r\n          <option name=\"containerStateName\" value=\"\" />\r\n        </value>\r\n      </option>\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Interface\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Association-S3\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/vue\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/vue/Interface.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Run config\" type=\"PythonConfigurationType\" factoryName=\"Python\">\r\n      <module name=\"Association-S3\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/main/main.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"application\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Association-S3\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/application.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"test (1)\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Association-S3\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/vue\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/vue/test.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"test\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Association-S3\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/metier\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/metier/test.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.application\" />\r\n        <item itemvalue=\"Python.test\" />\r\n        <item itemvalue=\"Python.Interface\" />\r\n        <item itemvalue=\"Python.test (1)\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"575c952d-dec9-4e76-ad9c-2eb439cee3b4\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1600892278406</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1600892278406</updated>\r\n      <workItem from=\"1600892280583\" duration=\"264000\" />\r\n      <workItem from=\"1600892554261\" duration=\"764000\" />\r\n      <workItem from=\"1601294686554\" duration=\"2486000\" />\r\n      <workItem from=\"1601297235510\" duration=\"5952000\" />\r\n      <workItem from=\"1601397773936\" duration=\"33000\" />\r\n      <workItem from=\"1601397819545\" duration=\"130000\" />\r\n      <workItem from=\"1601749355037\" duration=\"52000\" />\r\n      <workItem from=\"1601749421314\" duration=\"2319000\" />\r\n      <workItem from=\"1601752196665\" duration=\"113000\" />\r\n      <workItem from=\"1601752322946\" duration=\"12310000\" />\r\n      <workItem from=\"1603716857317\" duration=\"656000\" />\r\n      <workItem from=\"1603721592340\" duration=\"933000\" />\r\n      <workItem from=\"1605811936640\" duration=\"7592000\" />\r\n      <workItem from=\"1605981834559\" duration=\"2493000\" />\r\n      <workItem from=\"1606043865824\" duration=\"4029000\" />\r\n      <workItem from=\"1606067866972\" duration=\"9000\" />\r\n      <workItem from=\"1606237503381\" duration=\"8000\" />\r\n      <workItem from=\"1606600696453\" duration=\"5366000\" />\r\n      <workItem from=\"1606644430223\" duration=\"4282000\" />\r\n      <workItem from=\"1606649298684\" duration=\"1808000\" />\r\n      <workItem from=\"1606651547631\" duration=\"183000\" />\r\n      <workItem from=\"1606724648576\" duration=\"8876000\" />\r\n      <workItem from=\"1606734475134\" duration=\"75000\" />\r\n      <workItem from=\"1606844444580\" duration=\"9000\" />\r\n      <workItem from=\"1607250975252\" duration=\"22225000\" />\r\n      <workItem from=\"1607279071189\" duration=\"109000\" />\r\n      <workItem from=\"1607328918992\" duration=\"1735000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"test + mise en place du modèle MVC\">\r\n      <created>1606046027952</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606046027952</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"ajout des fichiers principaux à developper\">\r\n      <created>1606048393501</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606048393501</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"ajout de l'interface\">\r\n      <created>1606648688237</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1606648688237</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"4\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"main\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"test + mise en place du modèle MVC\" />\r\n    <MESSAGE value=\"ajout des fichiers principaux à developper\" />\r\n    <MESSAGE value=\"ajout de l'interface\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"ajout de l'interface\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/Association_S3$main.coverage\" NAME=\"main Coverage Results\" MODIFIED=\"1600893098059\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/main\" />\r\n    <SUITE FILE_PATH=\"coverage/Association_S3$test__1_.coverage\" NAME=\"test (1) Coverage Results\" MODIFIED=\"1607254242377\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/vue\" />\r\n    <SUITE FILE_PATH=\"coverage/Association_S3$application.coverage\" NAME=\"application Coverage Results\" MODIFIED=\"1607329899781\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n    <SUITE FILE_PATH=\"coverage/Association_S3$fenetre_interface.coverage\" NAME=\"fenetre_interface Coverage Results\" MODIFIED=\"1606044963991\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/vue\" />\r\n    <SUITE FILE_PATH=\"coverage/Association_S3$Interface.coverage\" NAME=\"Interface Coverage Results\" MODIFIED=\"1607255066384\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/vue\" />\r\n    <SUITE FILE_PATH=\"coverage/Association_S3$Run_config.coverage\" NAME=\"Run config Coverage Results\" MODIFIED=\"1603722176634\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"\" />\r\n    <SUITE FILE_PATH=\"coverage/Association_S3$test.coverage\" NAME=\"test Coverage Results\" MODIFIED=\"1607273657944\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/metier\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 99088110bfe3ed72be1ec205eaebea5e626ffe59)
++++ .idea/workspace.xml	(date 1609685321742)
+@@ -20,28 +20,25 @@
+       <path>
+         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+-        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
++        <item name="BRANCH:Milo" type="e8cecc67:BranchNodeDescriptor" />
+       </path>
+     </select>
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="ajout de l'interface">
+-      <change afterPath="$PROJECT_DIR$/Controleurs/ControleurAdherents.py" afterDir="false" />
++    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="ajout des fichiers principaux à developper">
++      <change beforePath="$PROJECT_DIR$/.idea/Association-S3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Association-S3.iml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/data/adherents.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/adherents.csv" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/metier/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/metier/test.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/modèle/GestionAdherents.py" beforeDir="false" afterPath="$PROJECT_DIR$/modèle/GestionAdherents.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/modèle/StockageAdherentCsv.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/StockageAdherentCsv.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/vue/Accueil.py" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/Controleurs/ControleurAdherents.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurAdherents.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/main/main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/main/main.iml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/vue/Fenetre.py" beforeDir="false" afterPath="$PROJECT_DIR$/vue/Fenetre.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/vue/Interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/vue/Interface.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/vue/VueAdherents.py" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="ComposerSettings">
++    <execution />
+   </component>
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+@@ -53,7 +50,7 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-  <component name="JupyterTrust" id="1bf12fc1-4af2-473f-92f7-731c4ca82de9" />
++  <component name="JupyterTrust" id="877c44b3-954f-4e92-9e21-2e416053a99b" />
+   <component name="ProjectId" id="1hvWva97VznRJ06PDFDyJvfPISG" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+@@ -66,7 +63,7 @@
+     <property name="add_unversioned_files" value="$PROJECT_DIR$/venv/Lib/site-packages/personnal_utils/utils.py" />
+     <property name="aspect.path.notification.shown" value="true" />
+     <property name="jdk.selected.PYTHON_MODULE" value="Python 3.8 (Association-S3)" />
+-    <property name="last_opened_file_path" value="$USER_HOME$/fr.dic" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+     <property name="node.js.detected.package.eslint" value="true" />
+     <property name="node.js.detected.package.tslint" value="true" />
+     <property name="node.js.path.for.package.eslint" value="project" />
+@@ -81,25 +78,14 @@
+   </component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+-      <recent name="$PROJECT_DIR$/data" />
+       <recent name="$PROJECT_DIR$/modèle" />
++      <recent name="$PROJECT_DIR$/data" />
+       <recent name="$PROJECT_DIR$" />
+       <recent name="C:\Users\Milo\Desktop\repos\Association-S3\venv\Lib\site-packages" />
+       <recent name="C:\Users\Milo\Desktop\repos\Association-S3\utils" />
+     </key>
+   </component>
+   <component name="RunManager" selected="Python.application">
+-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+-      <option name="arquillianRunConfiguration">
+-        <value>
+-          <option name="containerStateName" value="" />
+-        </value>
+-      </option>
+-      <option name="TEST_OBJECT" value="class" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+     <configuration name="Interface" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="Association-S3" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+@@ -158,28 +144,6 @@
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/application.py" />
+-      <option name="PARAMETERS" value="" />
+-      <option name="SHOW_COMMAND_LINE" value="false" />
+-      <option name="EMULATE_TERMINAL" value="false" />
+-      <option name="MODULE_MODE" value="false" />
+-      <option name="REDIRECT_INPUT" value="false" />
+-      <option name="INPUT_FILE" value="" />
+-      <method v="2" />
+-    </configuration>
+-    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+-      <module name="Association-S3" />
+-      <option name="INTERPRETER_OPTIONS" value="" />
+-      <option name="PARENT_ENVS" value="true" />
+-      <envs>
+-        <env name="PYTHONUNBUFFERED" value="1" />
+-      </envs>
+-      <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vue" />
+-      <option name="IS_MODULE_SDK" value="true" />
+-      <option name="ADD_CONTENT_ROOTS" value="true" />
+-      <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vue/test.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -213,9 +177,8 @@
+     <recent_temporary>
+       <list>
+         <item itemvalue="Python.application" />
+-        <item itemvalue="Python.test" />
+         <item itemvalue="Python.Interface" />
+-        <item itemvalue="Python.test (1)" />
++        <item itemvalue="Python.test" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -245,15 +208,10 @@
+       <workItem from="1606067866972" duration="9000" />
+       <workItem from="1606237503381" duration="8000" />
+       <workItem from="1606600696453" duration="5366000" />
+-      <workItem from="1606644430223" duration="4282000" />
+-      <workItem from="1606649298684" duration="1808000" />
+-      <workItem from="1606651547631" duration="183000" />
+-      <workItem from="1606724648576" duration="8876000" />
+-      <workItem from="1606734475134" duration="75000" />
+-      <workItem from="1606844444580" duration="9000" />
+-      <workItem from="1607250975252" duration="22225000" />
+-      <workItem from="1607279071189" duration="109000" />
+-      <workItem from="1607328918992" duration="1735000" />
++      <workItem from="1606644430223" duration="4244000" />
++      <workItem from="1607633228134" duration="5000" />
++      <workItem from="1607956627937" duration="649000" />
++      <workItem from="1609684187029" duration="1125000" />
+     </task>
+     <task id="LOCAL-00001" summary="test + mise en place du modèle MVC">
+       <created>1606046027952</created>
+@@ -269,14 +227,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1606048393501</updated>
+     </task>
+-    <task id="LOCAL-00003" summary="ajout de l'interface">
+-      <created>1606648688237</created>
+-      <option name="number" value="00003" />
+-      <option name="presentableId" value="LOCAL-00003" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1606648688237</updated>
+-    </task>
+-    <option name="localTasksCounter" value="4" />
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -293,7 +244,7 @@
+                   <entry key="branch">
+                     <value>
+                       <list>
+-                        <option value="main" />
++                        <option value="Milo" />
+                       </list>
+                     </value>
+                   </entry>
+@@ -309,20 +260,118 @@
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="test + mise en place du modèle MVC" />
+     <MESSAGE value="ajout des fichiers principaux à developper" />
+-    <MESSAGE value="ajout de l'interface" />
+-    <option name="LAST_COMMIT_MESSAGE" value="ajout de l'interface" />
++    <option name="LAST_COMMIT_MESSAGE" value="ajout des fichiers principaux à developper" />
++  </component>
++  <component name="WindowStateProjectService">
++    <state x="698" y="344" key="#Notifications" timestamp="1601301845225">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="698" y="344" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1601301845225" />
++    <state x="440" y="94" key="#Project_Structure" timestamp="1607434847452">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="440" y="94" key="#Project_Structure/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1607434847452" />
++    <state x="440" y="94" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1601294969396" />
++    <state x="387" y="186" width="582" height="390" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606601727612">
++      <screen x="0" y="0" width="1366" height="768" />
++    </state>
++    <state x="387" y="186" width="582" height="390" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.768@0.0.1366.768" timestamp="1606601727612" />
++    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1601760170933">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601760170933" />
++    <state x="416" y="133" width="524" height="496" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606603722525">
++      <screen x="0" y="0" width="1366" height="768" />
++    </state>
++    <state x="416" y="133" width="524" height="496" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.768@0.0.1366.768" timestamp="1606603722525" />
++    <state x="707" y="365" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1601299504390">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="707" y="365" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1601299504390" />
++    <state x="541" y="255" width="424" height="478" key="FileChooserDialogImpl" timestamp="1606044643126">
++      <screen x="0" y="0" width="1366" height="768" />
++    </state>
++    <state x="541" y="255" width="424" height="478" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1606044643126" />
++    <state x="761" y="345" key="FileChooserDialogImpl/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601752075022" />
++    <state x="761" y="345" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1601294799471" />
++    <state width="1877" height="139" key="GridCell.Tab.0.bottom" timestamp="1609684960921">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1320" height="186" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1606648324563" />
++    <state width="938" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1601309951627" />
++    <state width="1877" height="139" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609684960921" />
++    <state width="938" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601302632573" />
++    <state width="1877" height="139" key="GridCell.Tab.0.center" timestamp="1609684960921">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1320" height="186" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1606648324560" />
++    <state width="938" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1601309951627" />
++    <state width="1877" height="139" key="GridCell.Tab.0.center/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609684960921" />
++    <state width="938" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601302632572" />
++    <state width="1877" height="139" key="GridCell.Tab.0.left" timestamp="1609684960921">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1320" height="186" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1606648324558" />
++    <state width="938" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1601309951627" />
++    <state width="1877" height="139" key="GridCell.Tab.0.left/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609684960921" />
++    <state width="938" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601302632572" />
++    <state width="1877" height="139" key="GridCell.Tab.0.right" timestamp="1609684960921">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="1320" height="186" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1606648324561" />
++    <state width="938" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1601309951627" />
++    <state width="1877" height="139" key="GridCell.Tab.0.right/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609684960921" />
++    <state width="938" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601302632573" />
++    <state width="938" height="340" key="GridCell.Tab.1.bottom" timestamp="1601764700690">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="938" height="340" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601764700690" />
++    <state width="938" height="340" key="GridCell.Tab.1.center" timestamp="1601764700690">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="938" height="340" key="GridCell.Tab.1.center/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601764700690" />
++    <state width="938" height="340" key="GridCell.Tab.1.left" timestamp="1601764700690">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="938" height="340" key="GridCell.Tab.1.left/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601764700690" />
++    <state width="938" height="340" key="GridCell.Tab.1.right" timestamp="1601764700690">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state width="938" height="340" key="GridCell.Tab.1.right/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601764700690" />
++    <state x="193" y="38" key="SettingsEditor" timestamp="1606044952551">
++      <screen x="0" y="0" width="1366" height="768" />
++    </state>
++    <state x="193" y="38" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1606044952551" />
++    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/-1680.21.1680.1010@0.0.1920.1040" timestamp="1601397924402" />
++    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1601752305288" />
++    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601297563620" />
++    <state x="278" y="120" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1606048398568">
++      <screen x="0" y="0" width="1366" height="768" />
++    </state>
++    <state x="278" y="120" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1366.768@0.0.1366.768" timestamp="1606048398568" />
++    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601297397637">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601297397637" />
++    <state x="616" y="240" key="run.anything.popup" timestamp="1601297259172">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601297259172" />
++    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1601299482618">
++      <screen x="0" y="0" width="1920" height="1040" />
++    </state>
++    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601299482618" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+     <select />
+   </component>
+   <component name="com.intellij.coverage.CoverageDataManagerImpl">
++    <SUITE FILE_PATH="coverage/Association_S3$application.coverage" NAME="application Coverage Results" MODIFIED="1609684441216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+     <SUITE FILE_PATH="coverage/Association_S3$main.coverage" NAME="main Coverage Results" MODIFIED="1600893098059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
+-    <SUITE FILE_PATH="coverage/Association_S3$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1607254242377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
+-    <SUITE FILE_PATH="coverage/Association_S3$application.coverage" NAME="application Coverage Results" MODIFIED="1607329899781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/Association_S3$Run_config.coverage" NAME="Run config Coverage Results" MODIFIED="1607431353529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+     <SUITE FILE_PATH="coverage/Association_S3$fenetre_interface.coverage" NAME="fenetre_interface Coverage Results" MODIFIED="1606044963991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
+-    <SUITE FILE_PATH="coverage/Association_S3$Interface.coverage" NAME="Interface Coverage Results" MODIFIED="1607255066384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
+-    <SUITE FILE_PATH="coverage/Association_S3$Run_config.coverage" NAME="Run config Coverage Results" MODIFIED="1603722176634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+-    <SUITE FILE_PATH="coverage/Association_S3$test.coverage" NAME="test Coverage Results" MODIFIED="1607273657944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/metier" />
++    <SUITE FILE_PATH="coverage/Association_S3$test.coverage" NAME="test Coverage Results" MODIFIED="1605983677287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/metier" />
++    <SUITE FILE_PATH="coverage/Association_S3$Interface.coverage" NAME="Interface Coverage Results" MODIFIED="1606647291915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/Association-S3.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\">\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <excludeFolder url=\"file://$MODULE_DIR$/venv\" />\r\n    </content>\r\n    <orderEntry type=\"jdk\" jdkName=\"Python 3.8 (Association-S3)\" jdkType=\"Python SDK\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/Association-S3.iml	(revision 99088110bfe3ed72be1ec205eaebea5e626ffe59)
++++ .idea/Association-S3.iml	(date 1609684315326)
+@@ -1,10 +1,16 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <module type="JAVA_MODULE" version="4">
++  <component name="FacetManager">
++    <facet type="Python" name="Python">
++      <configuration sdkName="Python 3.8 (Association-S3)" />
++    </facet>
++  </component>
+   <component name="NewModuleRootManager">
+     <content url="file://$MODULE_DIR$">
+       <excludeFolder url="file://$MODULE_DIR$/venv" />
+     </content>
+-    <orderEntry type="jdk" jdkName="Python 3.8 (Association-S3)" jdkType="Python SDK" />
++    <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="library" name="Python 3.8 (Association-S3) interpreter library" level="application" />
+   </component>
+ </module>
+\ No newline at end of file

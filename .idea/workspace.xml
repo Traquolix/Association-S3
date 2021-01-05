@@ -1,37 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <expand />
+    <select />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="Avancement de la vue">
+      <change afterPath="$PROJECT_DIR$/metier/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue/pdf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controleurs/ControleurAdherents.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurAdherents.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/StockageAdherentCsv.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/StockageAdherentCsv.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/adherents.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/adherents.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metier/Adherent.py" beforeDir="false" afterPath="$PROJECT_DIR$/metier/Adherent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metier/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/metier/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/main/main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metier/Facture.py" beforeDir="false" afterPath="$PROJECT_DIR$/metier/Facture.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modèle/GenererFacture.py" beforeDir="false" afterPath="$PROJECT_DIR$/modèle/GenererFacture.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/Fenetre.py" beforeDir="false" afterPath="$PROJECT_DIR$/vue/Fenetre.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="JupyterTrust" id="1bf12fc1-4af2-473f-92f7-731c4ca82de9" />
+  <component name="JupyterTrust" id="877c44b3-954f-4e92-9e21-2e416053a99b" />
   <component name="ProjectId" id="1hvWva97VznRJ06PDFDyJvfPISG" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -77,11 +59,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Milo\Desktop\repos\Association-S3\metier" />
+      <recent name="C:\Users\Milo\Desktop\repos\Association-S3\vue" />
       <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$/modèle" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="C:\Users\Milo\Desktop\repos\Association-S3\venv\Lib\site-packages" />
-      <recent name="C:\Users\Milo\Desktop\repos\Association-S3\utils" />
     </key>
   </component>
   <component name="RunManager" selected="Python.application">
@@ -147,9 +129,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Milo\Desktop\repos\Association-S3\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -206,6 +188,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.Run config" />
+      <item itemvalue="Python.application" />
+      <item itemvalue="Python.Interface" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.test (1)" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.application" />
@@ -253,6 +242,8 @@
       <workItem from="1607430737910" duration="4056000" />
       <workItem from="1607497059962" duration="58000" />
       <workItem from="1607933511740" duration="6052000" />
+      <workItem from="1609749069650" duration="3710000" />
+      <workItem from="1609771796565" duration="807000" />
     </task>
     <task id="LOCAL-00001" summary="test + mise en place du modèle MVC">
       <created>1606046027952</created>
@@ -291,6 +282,31 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/Users/Milo/Desktop/repos/Association-S3/Controleurs" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -310,6 +326,11 @@
         </entry>
       </map>
     </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
@@ -319,17 +340,75 @@
     <MESSAGE value="Avancement de la vue" />
     <option name="LAST_COMMIT_MESSAGE" value="Avancement de la vue" />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="698" y="344" key="#Notifications" timestamp="1609686168477">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="698" y="344" key="#Notifications/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609686168477" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609687656803">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609687656803" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609687469219">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609687469219" />
+    <state x="184" y="86" key="DiffContextDialog" timestamp="1609685604598">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="184" y="86" key="DiffContextDialog/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609685604598" />
+    <state width="1877" height="139" key="GridCell.Tab.0.bottom" timestamp="1609772610320">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="139" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609772610320" />
+    <state width="1877" height="139" key="GridCell.Tab.0.center" timestamp="1609772610320">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="139" key="GridCell.Tab.0.center/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609772610320" />
+    <state width="1877" height="139" key="GridCell.Tab.0.left" timestamp="1609772610320">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="139" key="GridCell.Tab.0.left/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609772610320" />
+    <state width="1877" height="139" key="GridCell.Tab.0.right" timestamp="1609772610320">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="139" key="GridCell.Tab.0.right/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609772610320" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1609753088760">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609753088760" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1609753088760">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609753088760" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1609753088760">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609753088760" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1609753088760">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609753088760" />
+    <state x="753" y="222" key="RollbackChangesDialog" timestamp="1609685610640">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="753" y="222" key="RollbackChangesDialog/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609685610640" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1609687650338">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/-1680.32.1680.1010@0.0.1920.1040" timestamp="1609687650338" />
+  </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Association_S3$application.coverage" NAME="application Coverage Results" MODIFIED="1609771805280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Association_S3$main.coverage" NAME="main Coverage Results" MODIFIED="1600893098059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
-    <SUITE FILE_PATH="coverage/Association_S3$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1607432166455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
-    <SUITE FILE_PATH="coverage/Association_S3$application.coverage" NAME="application Coverage Results" MODIFIED="1607939557141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Association_S3$Run_config.coverage" NAME="Run config Coverage Results" MODIFIED="1607431353529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Association_S3$fenetre_interface.coverage" NAME="fenetre_interface Coverage Results" MODIFIED="1606044963991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
-    <SUITE FILE_PATH="coverage/Association_S3$Interface.coverage" NAME="Interface Coverage Results" MODIFIED="1607255066384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
-    <SUITE FILE_PATH="coverage/Association_S3$Run_config.coverage" NAME="Run config Coverage Results" MODIFIED="1603722176634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/Association_S3$test.coverage" NAME="test Coverage Results" MODIFIED="1607432332347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/metier" />
+    <SUITE FILE_PATH="coverage/Association_S3$test.coverage" NAME="test Coverage Results" MODIFIED="1605983677287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/metier" />
+    <SUITE FILE_PATH="coverage/Association_S3$Interface.coverage" NAME="Interface Coverage Results" MODIFIED="1606647291915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
+    <SUITE FILE_PATH="coverage/Association_S3$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1607254242377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
   </component>
 </project>
