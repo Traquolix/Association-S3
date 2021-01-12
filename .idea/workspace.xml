@@ -25,39 +25,13 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="Modification gestion adhérents">
-      <change afterPath="$PROJECT_DIR$/Controleurs/ControleurBonDeCommande.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Controleurs/ControleurFacture.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Controleurs/ControleurFenetre.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modele/Laboratoire.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Association-S3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Association-S3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="Remise en place de la structure + Interface finie">
+      <change afterPath="$PROJECT_DIR$/modele/GenererFacture.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controleurs/ControleurAdherents.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurAdherents.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/StockageAdherentCsv.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/StockageAdherentCsv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/StockageLaboratoireCsv.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/StockageLaboratoireCsv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/adherents.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/adherents.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/laboratoire.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/laboratoire.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metier/Adherent.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/Adherent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metier/BonDeCommande.py" beforeDir="false" afterPath="$PROJECT_DIR$/metier/BonDeCommande.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metier/Laboratoire.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/metier/test.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/metier/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modèle/GestionAdherents.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/Fenetre.py" beforeDir="false" afterPath="$PROJECT_DIR$/vue/Fenetre.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/Interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/Interface.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/accueil.png" beforeDir="false" afterPath="$PROJECT_DIR$/vue/images/accueil.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/adherents.png" beforeDir="false" afterPath="$PROJECT_DIR$/vue/images/adherents.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/atala_logo.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/atala_logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/vue/images/atala_logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/boncommande.png" beforeDir="false" afterPath="$PROJECT_DIR$/vue/images/boncommande.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/facture.png" beforeDir="false" afterPath="$PROJECT_DIR$/vue/images/facture.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/logoAtala.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/logoAtala.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/logoAtala.xbm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controleurs/ControleurBonDeCommande.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurBonDeCommande.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metier/BonDeCommande.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/BonDeCommande.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metier/Facture.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/Facture.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modèle/GenererFacture.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -441,6 +415,7 @@
       <workItem from="1610122828716" duration="16615000" />
       <workItem from="1610211974614" duration="1113000" />
       <workItem from="1610217274955" duration="633000" />
+      <workItem from="1610444186213" duration="693000" />
     </task>
     <task id="LOCAL-00001" summary="test + mise en place du modèle MVC">
       <created>1606046027952</created>
@@ -484,7 +459,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609750701114</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Remise en place de la structure + Interface finie">
+      <created>1610444269480</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1610444269480</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -521,7 +503,8 @@
     <MESSAGE value="Avancement de la vue" />
     <MESSAGE value="Avancement de la vue 2" />
     <MESSAGE value="Modification gestion adhérents" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modification gestion adhérents" />
+    <MESSAGE value="Remise en place de la structure + Interface finie" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remise en place de la structure + Interface finie" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

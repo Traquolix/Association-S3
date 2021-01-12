@@ -1,6 +1,6 @@
 from data.StockageAdherentCsv import StockageAdherentCsv
 from data.StockageLaboratoireCsv import StockageLaboratoireCsv
-from metier.BonDeCommande import BonDeCommande
+from modele.BonDeCommande import BonDeCommande
 
 
 class ControleurBonDeCommande:
