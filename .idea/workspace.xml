@@ -25,19 +25,21 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="Remise en place de la structure du code part 3">
-      <change afterPath="$PROJECT_DIR$/data/organisations.csv" afterDir="false" />
+    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="Remise en place de la structure du code part 4 + changement partiel du nom des variables">
+      <change afterPath="$PROJECT_DIR$/data/adherents_independants.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modele/AdherentIndependant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controleurs/ControleurAdherents.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurAdherents.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controleurs/ControleurBonDeCommande.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurBonDeCommande.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controleurs/ControleurFacture.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurFacture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/StockageLaboratoireCsv.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/StockageOrganisationCsv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controleurs/ControleurFenetre.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurFenetre.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/StockageAdherentCsv.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/StockageAdherentCsv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/StockageOrganisationCsv.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/StockageOrganisationCsv.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/adherents.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/adherents.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/laboratoire.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modele/Adherent.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/Adherent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/organisations.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/organisations.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modele/BonDeCommande.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/BonDeCommande.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modele/GenererBonDeCommande.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/GenererBonDeCommande.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modele/Laboratoire.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/Organisation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Interface.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/Interface.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue/Fenetre.py" beforeDir="false" afterPath="$PROJECT_DIR$/vue/Fenetre.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -386,10 +388,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.application" />
+        <item itemvalue="Python.Interface" />
         <item itemvalue="Python.test_labo" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.test (1)" />
-        <item itemvalue="Python.Interface" />
       </list>
     </recent_temporary>
   </component>
@@ -513,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610445212548</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Remise en place de la structure du code part 4 + changement partiel du nom des variables">
+      <created>1611064399128</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1611064399129</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -553,7 +562,29 @@
     <MESSAGE value="Remise en place de la structure + Interface finie" />
     <MESSAGE value="Remise en place de la structure du code part 2" />
     <MESSAGE value="Remise en place de la structure du code part 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remise en place de la structure du code part 3" />
+    <MESSAGE value="Remise en place de la structure du code part 4 + changement partiel du nom des variables" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remise en place de la structure du code part 4 + changement partiel du nom des variables" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/vue/Fenetre.py</url>
+          <line>153</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Controleurs/ControleurAdherents.py</url>
+          <line>99</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Controleurs/ControleurAdherents.py</url>
+          <line>119</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -562,9 +593,9 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Association_S3$main.coverage" NAME="main Coverage Results" MODIFIED="1600893098059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
     <SUITE FILE_PATH="coverage/Association_S3$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1607432166455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
-    <SUITE FILE_PATH="coverage/Association_S3$application.coverage" NAME="application Coverage Results" MODIFIED="1611063748703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Association_S3$application.coverage" NAME="application Coverage Results" MODIFIED="1611094217165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Association_S3$fenetre_interface.coverage" NAME="fenetre_interface Coverage Results" MODIFIED="1606044963991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
-    <SUITE FILE_PATH="coverage/Association_S3$Interface.coverage" NAME="Interface Coverage Results" MODIFIED="1607255066384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
+    <SUITE FILE_PATH="coverage/Association_S3$Interface.coverage" NAME="Interface Coverage Results" MODIFIED="1611083553902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
     <SUITE FILE_PATH="coverage/Association_S3$test_labo.coverage" NAME="test_labo Coverage Results" MODIFIED="1610446826913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Association_S3$Run_config.coverage" NAME="Run config Coverage Results" MODIFIED="1603722176634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Association_S3$test.coverage" NAME="test Coverage Results" MODIFIED="1607432332347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/metier" />

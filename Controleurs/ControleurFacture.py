@@ -11,5 +11,5 @@ class ControleurFacture:
     def set_vue_facture(self, vue_facture):
         self.vue_facture = vue_facture
 
-    def actualiser_liste_laboratoire_noms(self):
+    def actualiser_liste_organisations_noms(self):
         return sorted(self.laboratoire_csv.lire_fichier_noms())

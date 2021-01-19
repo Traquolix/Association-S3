@@ -50,6 +50,8 @@ class Fenetre:
         self.ctrl_Adherents.set_vue_organisations(self.get_frame_VueOrganisations())
         self.ctrl_Adherents.set_vue_bon_commande(self.get_frame_VueBonDeCommande())
 
+        self.ctrl_Fenetre.set_vue_bon_de_commande(self.get_frame_VueBonDeCommande())
+
         self.ctrl_Bon_de_commande.set_vue_bon_commande(self.get_frame_VueBonDeCommande())
 
         self.ctrl_Facture.set_vue_facture(self.get_frame_VueFacture())
@@ -202,6 +204,8 @@ class VueAdherents(tk.Frame):
         formulaire.rowconfigure(1, weight=1)
         formulaire.rowconfigure(2, weight=1)
         formulaire.rowconfigure(3, weight=1)
+        formulaire.rowconfigure(4, weight=1)
+        formulaire.rowconfigure(5, weight=1)
         formulaire.grid(row=1, column=1, sticky="nsew")
 
         conteneur_nom = Frame(formulaire)
@@ -234,29 +238,72 @@ class VueAdherents(tk.Frame):
         self.prenom = Entry(conteneur_prenom, textvariable=self.str_prenom, width=20)
         self.prenom.grid(row=0, column=1)
 
-        conteneur_organisation = Frame(formulaire)
-        conteneur_organisation.config(bg='skyblue')
-        conteneur_organisation.columnconfigure(0, weight=1)
-        conteneur_organisation.columnconfigure(1, weight=1)
-        conteneur_organisation.columnconfigure(2, weight=2)
-        conteneur_organisation.rowconfigure(0, weight=1)
-        conteneur_organisation.grid(row=2, column=0, sticky="nsew")
+        conteneur_radio = Frame(formulaire)
+        conteneur_radio.config(bg='skyblue')
+        conteneur_radio.columnconfigure(0, weight=1)
+        conteneur_radio.columnconfigure(1, weight=1)
+        conteneur_radio.rowconfigure(0, weight=1)
+        conteneur_radio.grid(row=2, column=0, sticky="nsew")
 
-        lorga = Label(conteneur_organisation, text="organisation :")
+        self.choix = StringVar()
+        self.choix.set("organisation")
+
+        self.radio1 = Radiobutton(conteneur_radio, takefocus=0, variable=self.choix, text="organisation",
+                                  value="organisation", tristatevalue=0, highlightthickness=0,
+                                  command=lambda: self.choix_radio_button())
+        self.radio1.config(bg='skyblue', activebackground='skyblue')
+        self.radio1.grid(row=0, column=0, sticky="nsew")
+
+        self.radio2 = Radiobutton(conteneur_radio, variable=self.choix, takefocus=0, text="indépendant",
+                                  value="indépendant", tristatevalue=0, highlightthickness=0,
+                                  command=lambda: self.choix_radio_button())
+        self.radio2.config(bg='skyblue', activebackground='skyblue')
+        self.radio2.grid(row=0, column=1, sticky="nsew")
+
+        self.conteneur_organisation = Frame(formulaire)
+        self.conteneur_organisation.config(bg='skyblue')
+        self.conteneur_organisation.columnconfigure(0, weight=1)
+        self.conteneur_organisation.columnconfigure(1, weight=1)
+        self.conteneur_organisation.columnconfigure(2, weight=2)
+        self.conteneur_organisation.rowconfigure(0, weight=1)
+
+        lorga = Label(self.conteneur_organisation, text="organisation :")
         lorga.config(bg='skyblue')
         lorga.grid(row=0, column=0, padx=(0, 15))
-        self.organisations = tk.Listbox(conteneur_organisation, width=10, height=3)
+        self.organisations = tk.Listbox(self.conteneur_organisation, width=10, height=3)
         self.actualiser_liste_organisations()
         self.organisations.grid(row=0, column=1)
 
-        scrollbar = ttk.Scrollbar(conteneur_organisation)
+        scrollbar = ttk.Scrollbar(self.conteneur_organisation)
         scrollbar.grid(row=0, column=2)
         self.organisations.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.organisations.yview)
 
+        self.conteneur_independant = Frame(formulaire)
+        self.conteneur_independant.config(bg='skyblue')
+        self.conteneur_independant.columnconfigure(0, weight=1)
+        self.conteneur_independant.rowconfigure(0, weight=1)
+        self.conteneur_independant.rowconfigure(1, weight=1)
+
+        ladresse = Label(self.conteneur_independant, text="adresse :")
+        ladresse.config(bg='skyblue')
+        ladresse.grid(row=0, column=0, padx=(0, 15))
+        self.str_adresse = tk.StringVar()
+        self.str_adresse.set("")
+        self.adresse = Entry(self.conteneur_independant, textvariable=self.str_adresse, width=20)
+        self.adresse.grid(row=0, column=1)
+
+        lville = Label(self.conteneur_independant, text="ville :")
+        lville.config(bg='skyblue')
+        lville.grid(row=1, column=0, padx=(0, 15), pady=(0, 15))
+        self.str_ville = tk.StringVar()
+        self.str_ville.set("")
+        self.ville = Entry(self.conteneur_independant, textvariable=self.str_ville, width=20)
+        self.ville.grid(row=1, column=1, pady=(0, 15))
+
         ajouter = ttk.Button(formulaire, text="ajouter adhérent", style='my.TButton',
                              command=lambda: ctrl_adherent.ajouter_adherent())
-        ajouter.grid(row=3, column=0)
+        ajouter.grid(row=5, column=0)
 
         mid_frame = Frame(self)
         mid_frame.config(bg='skyblue')
@@ -265,9 +312,20 @@ class VueAdherents(tk.Frame):
         mid_frame.columnconfigure(0, weight=1)
         mid_frame.grid(row=1, column=1, sticky="nsew")
 
-        self.adherents = tk.Listbox(mid_frame, width=60)
+        conteneur_adherents = Frame(mid_frame)
+        conteneur_adherents.config(bg='skyblue')
+        conteneur_adherents.rowconfigure(0, weight=1)
+        conteneur_adherents.columnconfigure(0, weight=1)
+        conteneur_adherents.columnconfigure(1, weight=1)
+        conteneur_adherents.grid(row=0, column=0, sticky="nsew")
+        self.adherents = tk.Listbox(conteneur_adherents, width=60)
         self.actualiser_liste_adherents()
-        self.adherents.grid(row=0, column=0)
+        self.adherents.grid(row=0, column=0, sticky="ens")
+
+        scrollbar = ttk.Scrollbar(conteneur_adherents)
+        scrollbar.grid(row=0, column=1, sticky="wns")
+        self.adherents.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=self.adherents.yview)
 
         conteneur_supprimer = tk.Frame(mid_frame)
         conteneur_supprimer.config(bg='skyblue')
@@ -281,7 +339,7 @@ class VueAdherents(tk.Frame):
         supprimer.grid(row=0, column=0, padx=(0, 15))
 
         tout_supprimer = ttk.Button(conteneur_supprimer, text="tout supprimer", style='my.TButton',
-                               command=lambda: ctrl_adherent.supprimer_tout_adherents())
+                                    command=lambda: ctrl_adherent.supprimer_tout_adherents())
         tout_supprimer.grid(row=0, column=1)
 
         bottom_bar = tk.Frame(self)
@@ -298,14 +356,20 @@ class VueAdherents(tk.Frame):
         conteneur_gerer_organisation.columnconfigure(0, weight=1)
         conteneur_gerer_organisation.grid(row=0, column=0, columnspan=1, sticky="nsew")
         gerer_organisation = ttk.Button(conteneur_gerer_organisation, text="gérer organisation", style='my.TButton',
-                                command=lambda: ctrl_fenetre.show_frame(VueOrganisations))
+                                        command=lambda: ctrl_fenetre.show_frame(VueOrganisations))
         gerer_organisation.grid(row=0, column=0)
+
+        self.choix_radio_button()
 
     def actualiser_liste_adherents(self):
         self.adherents.delete(0, END)
         liste = self.ctrlAdherent.actualiser_liste_adherents()
+        liste2 = self.ctrlAdherent.actualiser_liste_adherents_independants()
         cpt = 1
         for adherent in liste:
+            self.adherents.insert(cpt, adherent)
+            cpt += 1
+        for adherent in liste2:
             self.adherents.insert(cpt, adherent)
             cpt += 1
         self.adherents.select_set(0)
@@ -328,9 +392,23 @@ class VueAdherents(tk.Frame):
     def get_organisation(self):
         return self.organisations.get(ANCHOR)
 
+    def get_choix_selectionne(self):
+        return self.choix.get()
+
+    def get_adresse(self):
+        return self.adresse.get()
+
+    def get_ville(self):
+        return self.ville.get()
+
+    def get_selected_adherent(self):
+        return self.adherents.get(ANCHOR)
+
     def viderChamps(self):
         self.str_prenom.set("")
         self.str_nom.set("")
+        self.str_adresse.set("")
+        self.str_ville.set("")
         self.organisations.select_set(0)
 
     def champ_vide(self):
@@ -339,16 +417,25 @@ class VueAdherents(tk.Frame):
             est_vide = True
         if self.get_nom() == "":
             est_vide = True
+        if self.get_ville() == "" and self.get_choix_selectionne() == "indépendant":
+            est_vide = True
+        if self.get_adresse() == "" and self.get_choix_selectionne() == "indépendant":
+            est_vide = True
         return est_vide
-
-    def get_selected_adherent(self):
-        return self.adherents.get(ANCHOR)
 
     def listbox_adherent_est_vide(self):
         return self.adherents.size() == 0
 
     def listbox_organisations_est_vide(self):
         return self.organisations.size() == 0
+
+    def choix_radio_button(self):
+        if self.choix.get() == "organisation":
+            self.conteneur_organisation.grid(row=4, column=0, sticky="nsew")
+            self.conteneur_independant.grid_forget()
+        if self.choix.get() == "indépendant":
+            self.conteneur_organisation.grid_forget()
+            self.conteneur_independant.grid(row=4, column=0, sticky="nsew")
 
     @staticmethod
     def message_erreur_suppression():
@@ -511,6 +598,9 @@ class VueOrganisations(tk.Frame):
     def get_ville(self):
         return self.ville.get()
 
+    def get_selected_organisation(self):
+        return self.organisations.get(ANCHOR)
+
     def viderChamps(self):
         self.str_nom.set("")
         self.str_adresse.set("")
@@ -530,16 +620,13 @@ class VueOrganisations(tk.Frame):
         self.organisations.delete(0, END)
         liste = self.ctrl_adherent.actualiser_liste_organisations_complets()
         cpt = 1
-        for laboratoire in liste:
-            self.organisations.insert(cpt, laboratoire)
+        for organisation in liste:
+            self.organisations.insert(cpt, organisation)
             cpt += 1
         self.organisations.select_set(0)
 
     def listbox_organisations_est_vide(self):
         return self.organisations.size() == 0
-
-    def get_selected_organisation(self):
-        return self.organisations.get(ANCHOR)
 
     @staticmethod
     def message_erreur_suppression():
@@ -556,7 +643,6 @@ class VueOrganisations(tk.Frame):
 
 class VueFacture(tk.Frame):
     def __init__(self, parent, ctrl_fenetre, ctrl_facture):
-
         self.ctrl_facture = ctrl_facture
 
         tk.Frame.__init__(self, parent)
@@ -632,25 +718,25 @@ class VueFacture(tk.Frame):
         self.num_bon = Entry(conteneur_num, textvariable=self.str_num_bon, width=20)
         self.num_bon.grid(row=1, column=1)
 
-        conteneur_labo = Frame(conteneur_formulaire_haut)
-        conteneur_labo.config(bg='skyblue')
-        conteneur_labo.columnconfigure(0, weight=1)
-        conteneur_labo.columnconfigure(1, weight=1)
-        conteneur_labo.columnconfigure(2, weight=2)
-        conteneur_labo.rowconfigure(0, weight=1)
-        conteneur_labo.grid(row=1, column=0, sticky='e', padx=(0, 60))
+        conteneur_organisation = Frame(conteneur_formulaire_haut)
+        conteneur_organisation.config(bg='skyblue')
+        conteneur_organisation.columnconfigure(0, weight=1)
+        conteneur_organisation.columnconfigure(1, weight=1)
+        conteneur_organisation.columnconfigure(2, weight=2)
+        conteneur_organisation.rowconfigure(0, weight=1)
+        conteneur_organisation.grid(row=1, column=0, sticky='e', padx=(0, 60))
 
-        llabo = Label(conteneur_labo, text="destinataire :")
-        llabo.config(bg='skyblue')
-        llabo.grid(row=0, column=0, padx=(0, 15))
-        self.labo = tk.Listbox(conteneur_labo, width=10, height=3)
-        self.actualiser_liste_laboratoires()
-        self.labo.grid(row=0, column=1, padx=(0, 15))
+        lorganisations = Label(conteneur_organisation, text="destinataire :")
+        lorganisations.config(bg='skyblue')
+        lorganisations.grid(row=0, column=0, padx=(0, 15))
+        self.organisations = tk.Listbox(conteneur_organisation, width=10, height=3)
+        self.actualiser_liste_organisations()
+        self.organisations.grid(row=0, column=1, padx=(0, 15))
 
-        scrollbar = ttk.Scrollbar(conteneur_labo)
+        scrollbar = ttk.Scrollbar(conteneur_organisation)
         scrollbar.grid(row=0, column=2)
-        self.labo.config(yscrollcommand=scrollbar.set)
-        scrollbar.config(command=self.labo.yview)
+        self.organisations.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=self.organisations.yview)
 
         conteneur_montant_total = Frame(conteneur_formulaire_haut)
         conteneur_montant_total.config(bg='skyblue')
@@ -765,19 +851,19 @@ class VueFacture(tk.Frame):
         a.grid(row=0, column=0)
 
     def actualiser_liste_organisations(self):
-        self.labo.delete(0, END)
-        liste = self.ctrl_facture.actualiser_liste_laboratoire_noms()
+        self.organisations.delete(0, END)
+        liste = self.ctrl_facture.actualiser_liste_organisations_noms()
         cpt = 1
-        for laboratoire in liste:
-            self.labo.insert(cpt, laboratoire)
+        for organisation in liste:
+            self.organisations.insert(cpt, organisation)
             cpt += 1
-        self.labo.select_set(0)
+        self.organisations.select_set(0)
 
     def listbox_est_vide(self):
-        return self.labo.size() == 0
+        return self.organisations.size() == 0
 
-    def get_selected_laboratoire(self):
-        return self.labo.get(ANCHOR)
+    def get_selected_organisation(self):
+        return self.organisations.get(ANCHOR)
 
 
 class VueBonDeCommande(tk.Frame):
@@ -801,7 +887,7 @@ class VueBonDeCommande(tk.Frame):
 
         logo_btn_accueil = tk.PhotoImage(file='vue/images/accueil.png')
         accueil = ttk.Button(conteneur_bouton_accueil, text="accueil", image=logo_btn_accueil, style='my.TButton',
-                             compound="left", command=lambda: ctrl_fenetre.show_frame(Accueil))
+                             compound="left", command=lambda: ctrl_fenetre.bon_commande_accueil(Accueil))
         accueil.photo = logo_btn_accueil
         accueil.place(relx=0.5, rely=0.5, anchor=CENTER)
 
@@ -826,7 +912,7 @@ class VueBonDeCommande(tk.Frame):
         conteneur_formulaire_haut.columnconfigure(1, weight=1)
         conteneur_formulaire_haut.grid(row=0, column=0, columnspan=3, sticky="nsew")
 
-        conteneur_num_bon = Frame(conteneur_formulaire_haut )
+        conteneur_num_bon = Frame(conteneur_formulaire_haut)
         conteneur_num_bon.config(bg='skyblue')
         conteneur_num_bon.rowconfigure(0, weight=1)
         conteneur_num_bon.columnconfigure(0, weight=1)
@@ -841,25 +927,25 @@ class VueBonDeCommande(tk.Frame):
         self.num_bon = Entry(conteneur_num_bon, textvariable=self.str_num, width=20)
         self.num_bon.grid(row=0, column=1)
 
-        conteneur_labo = Frame(conteneur_formulaire_haut)
-        conteneur_labo.config(bg='skyblue')
-        conteneur_labo.columnconfigure(0, weight=1)
-        conteneur_labo.columnconfigure(1, weight=1)
-        conteneur_labo.columnconfigure(2, weight=2)
-        conteneur_labo.rowconfigure(0, weight=1)
-        conteneur_labo.grid(row=1, column=0)
+        conteneur_organisations = Frame(conteneur_formulaire_haut)
+        conteneur_organisations.config(bg='skyblue')
+        conteneur_organisations.columnconfigure(0, weight=1)
+        conteneur_organisations.columnconfigure(1, weight=1)
+        conteneur_organisations.columnconfigure(2, weight=2)
+        conteneur_organisations.rowconfigure(0, weight=1)
+        conteneur_organisations.grid(row=1, column=0)
 
-        llabo = Label(conteneur_labo, text="destinataire :")
-        llabo.config(bg='skyblue')
-        llabo.grid(row=0, column=0, padx=(0, 15))
-        self.labo = tk.Listbox(conteneur_labo, width=10, height=3)
-        self.actualiser_liste_laboratoires()
-        self.labo.grid(row=0, column=1, padx=(0, 15))
+        lorganisations = Label(conteneur_organisations, text="destinataire :")
+        lorganisations.config(bg='skyblue')
+        lorganisations.grid(row=0, column=0, padx=(0, 15))
+        self.organisations = tk.Listbox(conteneur_organisations, width=20, height=3)
+        self.actualiser_liste_organisations()
+        self.organisations.grid(row=0, column=1, padx=(0, 15))
 
-        scrollbar = ttk.Scrollbar(conteneur_labo)
+        scrollbar = ttk.Scrollbar(conteneur_organisations)
         scrollbar.grid(row=0, column=2)
-        self.labo.config(yscrollcommand=scrollbar.set)
-        scrollbar.config(command=self.labo.yview)
+        self.organisations.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=self.organisations.yview)
 
         conteneur_montant_total = Frame(conteneur_formulaire_haut)
         conteneur_montant_total.config(bg='skyblue')
@@ -892,7 +978,8 @@ class VueBonDeCommande(tk.Frame):
         self.nombre_adherents = Spinbox(conteneur_nombre_adherents, from_=1, to=3, textvariable=self.int_nombre)
         self.nombre_adherents.grid(row=0, column=1, padx=(0, 30))
         self.valider = ttk.Button(conteneur_nombre_adherents, text="valider", style='my.TButton',
-                             compound="left", command=lambda: ctrl_bon_commande.valider_informations_generales_bon())
+                                  compound="left",
+                                  command=lambda: ctrl_bon_commande.valider_informations_generales_bon())
         self.valider.grid(row=0, column=2)
 
         conteneur_formulaire_bas = Frame(conteneur_milieu, width=600)
@@ -944,7 +1031,7 @@ class VueBonDeCommande(tk.Frame):
         conteneur_montant_ht.rowconfigure(0, weight=1)
         conteneur_montant_ht.columnconfigure(0, weight=1)
         conteneur_montant_ht.columnconfigure(1, weight=1)
-        conteneur_montant_ht.grid(row=2, column=0, pady=(20, 20),  sticky="e")
+        conteneur_montant_ht.grid(row=2, column=0, pady=(20, 20), sticky="e")
         label_montant_ht = Label(conteneur_montant_ht, text="montant HT : ")
         label_montant_ht.config(bg='skyblue')
         label_montant_ht.grid(row=0, column=0, padx=(0, 15))
@@ -963,10 +1050,9 @@ class VueBonDeCommande(tk.Frame):
 
         self.adherents = tk.Listbox(conteneur_adherents, width=40)
         self.adherents.config(state='disabled')
-        #self.actualiser_liste_adherents()
+        # self.actualiser_liste_adherents()
         self.adherents.grid(row=0, column=0)
 
-        #conteneur_remarque = tk.DoubleVar(con)
         conteneur_informations_droite = tk.Frame(conteneur_formulaire_bas)
         conteneur_informations_droite.config(bg='skyblue')
         conteneur_informations_droite.rowconfigure(0, weight=1)
@@ -988,7 +1074,8 @@ class VueBonDeCommande(tk.Frame):
         self.remarque.config(state="disabled")
         self.remarque.grid(row=1, column=0)
 
-        self.ajouter = ttk.Button(conteneur_informations_droite, text="ajouter", style='my.TButton', command=lambda: ctrl_bon_commande.ajouter_informations_adherents_bon())
+        self.ajouter = ttk.Button(conteneur_informations_droite, text="ajouter", style='my.TButton',
+                                  command=lambda: ctrl_bon_commande.ajouter_informations_adherents_bon())
         self.ajouter.config(state='disabled')
         self.ajouter.grid(row=1, column=0)
 
@@ -999,7 +1086,8 @@ class VueBonDeCommande(tk.Frame):
         ligne_bas.columnconfigure(0, weight=1)
         ligne_bas.grid(row=2, column=0, columnspan=3, sticky="nsew")
 
-        self.a = ttk.Treeview(ligne_bas, columns=('designation', 'prix_unitaire', 'quantite', 'montant_HT', 'remarques'))
+        self.a = ttk.Treeview(ligne_bas,
+                              columns=('designation', 'prix_unitaire', 'quantite', 'montant_HT', 'remarques'))
         self.a.heading('designation', text='Désignation')
         self.a.heading('prix_unitaire', text='Prix unitaire')
         self.a.heading('quantite', text='Quantité')
@@ -1008,7 +1096,8 @@ class VueBonDeCommande(tk.Frame):
         self.a['show'] = 'headings'
         self.a.grid(row=0, column=0)
 
-        self.generer = ttk.Button(ligne_bas, text="générer bon de commande", style='my.TButton', command=lambda : ctrl_bon_commande.generer())
+        self.generer = ttk.Button(ligne_bas, text="générer bon de commande", style='my.TButton',
+                                  command=lambda: ctrl_bon_commande.generer())
         self.generer.config(state='disabled')
         self.generer.grid(row=1, column=0)
 
@@ -1020,14 +1109,15 @@ class VueBonDeCommande(tk.Frame):
             cpt += 1
         self.adherents.select_set(0)
 
-    def actualiser_liste_laboratoires(self):
-        self.labo.delete(0, END)
-        liste = self.ctrl_bon_commande.actualiser_liste_laboratoire_noms()
-        cpt = 1
-        for laboratoire in liste:
-            self.labo.insert(cpt, laboratoire)
+    def actualiser_liste_organisations(self):
+        self.organisations.delete(0, END)
+        liste = self.ctrl_bon_commande.actualiser_liste_organisations_noms()
+        self.organisations.insert(1, "indépendants")
+        cpt = 2
+        for organisation in liste:
+            self.organisations.insert(cpt, organisation)
             cpt += 1
-        self.labo.select_set(0)
+        self.organisations.select_set(0)
 
     def nombre_adherents_liste(self):
         return self.adherents.size()
@@ -1049,18 +1139,18 @@ class VueBonDeCommande(tk.Frame):
         return est_vide
 
     def listbox_est_vide(self):
-        return self.labo.size() == 0
+        return self.organisations.size() == 0
 
     def activer_champs_partie1(self):
         self.num_bon.config(state="normal")
-        self.labo.config(state="normal")
+        self.organisations.config(state="normal")
         self.montant_total.config(state="normal")
         self.nombre_adherents.config(state="normal")
         self.valider.config(state="normal")
 
     def desactiver_champs_partie1(self):
         self.num_bon.config(state="disabled")
-        self.labo.config(state="disabled")
+        self.organisations.config(state="disabled")
         self.montant_total.config(state="disabled")
         self.nombre_adherents.config(state="disabled")
         self.valider.config(state="disabled")
@@ -1100,7 +1190,7 @@ class VueBonDeCommande(tk.Frame):
         return self.num_bon.get()
 
     def get_destinataire(self):
-        return self.labo.get(ANCHOR)
+        return self.organisations.get(ANCHOR)
 
     def get_montant_total(self):
         return self.montant_total.get()
@@ -1133,6 +1223,16 @@ class VueBonDeCommande(tk.Frame):
         self.a.set(designation, 'montant_HT', montant_ht)
         self.a.set(designation, 'remarques', remarque)
 
+    def effacer_informations(self):
+        self.ctrl_bon_commande.nouveau_bon_de_commande()
+        self.str_num.set("")
+        self.str_montant_total.set("")
+        self.nombre_adherents.selection_to(0)
+        self.str_prix_unitaire.set("")
+        self.str_montant_ht.set("")
+        for i in self.a.get_children():
+            self.a.delete(i)
+
     @staticmethod
     def get_fichier_path():
         filename = tk.filedialog.asksaveasfilename(defaultextension=".pdf")
@@ -1144,7 +1244,7 @@ class VueBonDeCommande(tk.Frame):
 
     @staticmethod
     def message_erreur_nombres_adherents():
-        messagebox.showwarning(title="erreur de saisie", message="Il n'y a pas assez d'adhérents liés au labo")
+        messagebox.showwarning(title="erreur de saisie", message="Il n'y a pas assez d'adhérents")
 
     @staticmethod
     def message_erreur_ajout_adherent():
