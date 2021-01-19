@@ -12,16 +12,11 @@ pathlib.Path(__file__).parent.absolute()
 class GenererFacture:
 
     def genererFacture(path, facture):
-        test = "18112385"
         test2 = "Dans ma ville"
-        getsomme = "10 000"
-        année = "2021"
-        x = "1"
-        y = "12"
-        nom = "Jean Kevin"
-        nom2 = " Jean Patrice"
-        numbdc = "FIUZIUFZIUNHAOJIFZ"
-        date = "19/01/2021"
+        test3 = "Mon université"
+        test4 = "Dans ma ville"
+        # Faire juste une boucle pour afficher tt les adhérants
+
 
         compt = 155
 
@@ -41,7 +36,7 @@ class GenererFacture:
         c.setFont("Helvetica-Bold", 4)
         c.drawCentredString(125, 37, "Siret : 393 902 721 00017")
         c.setFont("Helvetica-Bold", 8)
-        c.drawString(10, 65, "Mémoire valant facture numéro " + test)
+        c.drawString(10, 65, "Mémoire valant facture numéro " + facture.get_numFacture())
         c.setFont("Helvetica-Bold", 5)
         c.drawString(10, 75, "ATALA : Association pour le Traitement Automatique des Langues")
         c.setFont("Helvetica-Bold", 4)
@@ -49,9 +44,11 @@ class GenererFacture:
                      "Non astreint à l'inscription au registre de commerce, T.V.A non applicable, article 293 B du CGI")
         c.setFont("Helvetica-Bold", 4)
         c.drawString(10, 120, "Mémoire")
-        c.drawString(50, 120, "DOIT :    " + test2)
-        c.drawString(10, 150,
-                     "La somme de " + getsomme + " €, cotisation à l'ATALA pour l'année " + année + " de " + x + " adhérent tarif proffessionnel : ")
+        c.drawString(66, 110, test2)
+        c.drawString(66, 115, test3)
+        c.drawString(50, 120, "DOIT :    " + test4)
+
+        c.drawString(10, 150,"La somme de " + facture.get_montant() + " €, cotisation à l'ATALA pour l'année " + str(datetime.date.year) + " de " + x + " adhérent tarif proffessionnel : ")
         for i in range(3):
             c.drawString(10, compt, "- " + nom + " -")
             compt += 5
@@ -61,9 +58,9 @@ class GenererFacture:
             c.drawString(10, compt, "- " + nom2 + " -")
             compt += 5
         c.setFont("Helvetica-Bold", 5)
-        c.drawCentredString(105, compt + 5, "correspondant au bon de commande : " + numbdc)
+        c.drawCentredString(105, compt + 5, "correspondant au bon de commande : " + facture.get_refBdc())
         c.setFont("Helvetica-Bold", 4)
-        c.drawRightString(180, compt + 20, "À Nantes, le " + date)
+        c.drawRightString(180, compt + 20, "À Nantes, le " + str(datetime.date.day) + "/" + str(datetime.date.month) + "/" + str(datetime.date.year))
         c.drawRightString(180, compt + 40, "Pour l'ATALA, ")
         c.drawRightString(180, compt + 45, "La trésorière, ")
         c.drawRightString(180, compt + 50, "Solen QUINIOU ")
