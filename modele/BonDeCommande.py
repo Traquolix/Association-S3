@@ -64,6 +64,12 @@ class BonDeCommande:
     def set_adresse_labo(self, adresse):
         self.adresse_labo = adresse
 
+    def get_nom_labo(self):
+        return self.nom_labo
+
+    def get_adresse(self):
+        return self.adresse_labo
+
     def set_ville_labo(self, ville):
         self.ville_labo = ville
 
@@ -82,4 +88,4 @@ class BonDeCommande:
         self.ajoute += 1
 
     def __str__(self):
-        return "numéro bon de commande : " + self.numero_bon + "\nnom destinataire : " + self.nom_labo + "\nadresse destinataire : " + self.adresse_labo + "\nville destinataire : " + self.ville_labo + "\nmontant total : " + str(self.totalHT)
+        return "numéro bon de commande : " + self.numero_bon + "\nnom destinataire : " + self.nom_labo + "\nadresse destinataire : " + self.adresse_labo + "\nville destinataire : " + self.ville_labo + "\nmontant total : " + str(self.totalHT) + "\n" +self.adherents.__str__()

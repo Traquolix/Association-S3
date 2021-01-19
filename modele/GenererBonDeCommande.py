@@ -4,20 +4,16 @@ import sys
 import os.path
 import reportlab
 from pathlib import Path
+import datetime
 import pathlib
 from reportlab.pdfgen import canvas
 pathlib.Path(__file__).parent.absolute()
 
 
-class GenererFacture:
-
-    def __init__(self):
-        self.oui = 1 # c'est juste pour pas qu'il y est d'erreurs
-
+class GenererBonDeCommande:
 
     @staticmethod
-    def genererFacture(path, numeroCommande, date, nomClient, adresseClient):
-
+    def genererBonDeCommande(path, bon_de_commande):
 
         c = canvas.Canvas("invoice.pdf", pagesize=(200, 250), bottomup=0)
         c.translate(10, 40)
@@ -39,10 +35,10 @@ class GenererFacture:
 
         c.roundRect(15, 63, 170, 40, 10, stroke=1, fill=0)
         c.setFont("Times-Bold", 5)
-        c.drawRightString(70, 70, "COMMANDE N°:" + numeroCommande)
-        c.drawRightString(70, 80, "DATE :" + date)
-        c.drawRightString(70, 90, "NOM DU CLIENT :" + nomClient)
-        c.drawRightString(70, 100, "ADRESSE:" + adresseClient)
+        c.drawRightString(70, 70, "COMMANDE N°:" + bon_de_commande.get_numero_bon())
+        c.drawRightString(70, 80, "DATE :" + str(datetime.date.day) + "/" + str(datetime.date.month) + "/" + str(datetime.date.year))
+        c.drawRightString(70, 90, "NOM DU CLIENT :" + bon_de_commande.get_nom_labo())
+        c.drawRightString(70, 100, "ADRESSE:" + bon_de_commande.get_adresse_labo())
 
         c.roundRect(15, 108, 170, 130, 10, stroke=1, fill=0)
         c.line(15, 120, 185, 120)

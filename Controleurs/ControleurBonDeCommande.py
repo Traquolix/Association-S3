@@ -1,6 +1,7 @@
 from data.StockageAdherentCsv import StockageAdherentCsv
-from data.StockageLaboratoireCsv import StockageLaboratoireCsv
+from data.StockageOrganisationCsv import StockageOrganisationCsv
 from modele.BonDeCommande import BonDeCommande
+from modele.GenererBonDeCommande import GenererBonDeCommande
 
 
 class ControleurBonDeCommande:
@@ -8,7 +9,8 @@ class ControleurBonDeCommande:
     def __init__(self, fenetre):
         self.fenetre = fenetre
         self.adherents_csv = StockageAdherentCsv()
-        self.laboratoire_csv = StockageLaboratoireCsv()
+        self.laboratoire_csv = StockageOrganisationCsv()
+        self.generateur_bon_de_commande = GenererBonDeCommande()
         self.vue_bon_commande = None
         self.bon_de_commande = None
 
@@ -31,9 +33,10 @@ class ControleurBonDeCommande:
             else:
                 self.nouveau_bon_de_commande(nombre_adherents)
                 self.bon_de_commande.set_numero_bon(numero_bon)
+                self.bon_de_commande.set_montant_total(montant_total)
                 self.bon_de_commande.set_nom_labo(destinataire)
                 self.bon_de_commande.set_adresse_labo(self.laboratoire_csv.get_adresse(destinataire))
-                self.bon_de_commande.set_ville_labo("44000 Nantes")
+                self.bon_de_commande.set_ville_labo(self.laboratoire_csv.get_ville(destinataire))
 
                 self.vue_bon_commande.activer_champs_partie2()
                 self.vue_bon_commande.desactiver_champs_partie1()
@@ -56,6 +59,11 @@ class ControleurBonDeCommande:
             self.bon_de_commande.ajouter_adherent(designation, prix_unitaire, quantite, montant_ht, remarque)
             self.vue_bon_commande.actualiser_liste_adherents_ajoutes(designation, prix_unitaire, quantite, montant_ht, remarque)
             self.vue_bon_commande.vider_champs_partie2()
+
+    def generer(self):
+        print(self.bon_de_commande)
+        path = self.vue_bon_commande.get_fichier_path()
+        # self.generateur_bon_de_commande.genererBonDeCommande(path, self.bon_de_commande)
 
     def actualiser_liste_adherents_noms(self, nom_labo):
         return sorted(self.adherents_csv.lire_fichier_labo(nom_labo))

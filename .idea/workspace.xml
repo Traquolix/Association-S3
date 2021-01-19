@@ -25,13 +25,20 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="Remise en place de la structure + Interface finie">
-      <change afterPath="$PROJECT_DIR$/modele/GenererFacture.py" afterDir="false" />
+    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="Remise en place de la structure du code part 3">
+      <change afterPath="$PROJECT_DIR$/data/organisations.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controleurs/ControleurAdherents.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurAdherents.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controleurs/ControleurBonDeCommande.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurBonDeCommande.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metier/BonDeCommande.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/BonDeCommande.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metier/Facture.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/Facture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modèle/GenererFacture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controleurs/ControleurFacture.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurFacture.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/StockageLaboratoireCsv.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/StockageOrganisationCsv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/adherents.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/adherents.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/laboratoire.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modele/Adherent.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/Adherent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modele/BonDeCommande.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/BonDeCommande.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modele/GenererBonDeCommande.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/GenererBonDeCommande.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modele/Laboratoire.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/Organisation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue/Fenetre.py" beforeDir="false" afterPath="$PROJECT_DIR$/vue/Fenetre.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,10 +84,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$/modele" />
       <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$/vue/images" />
-      <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$/modèle" />
     </key>
   </component>
@@ -261,6 +268,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test_labo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Association-S3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/test_labo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="Python.FlaskServer">
       <module name="main" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -357,6 +386,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.application" />
+        <item itemvalue="Python.test_labo" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.test (1)" />
         <item itemvalue="Python.Interface" />
@@ -415,7 +445,10 @@
       <workItem from="1610122828716" duration="16615000" />
       <workItem from="1610211974614" duration="1113000" />
       <workItem from="1610217274955" duration="633000" />
-      <workItem from="1610444186213" duration="693000" />
+      <workItem from="1610444186213" duration="6779000" />
+      <workItem from="1610525512820" duration="14000" />
+      <workItem from="1610694348181" duration="5251000" />
+      <workItem from="1611062217903" duration="71000" />
     </task>
     <task id="LOCAL-00001" summary="test + mise en place du modèle MVC">
       <created>1606046027952</created>
@@ -466,7 +499,21 @@
       <option name="project" value="LOCAL" />
       <updated>1610444269480</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Remise en place de la structure du code part 2">
+      <created>1610445183375</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1610445183375</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Remise en place de la structure du code part 3">
+      <created>1610445212548</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1610445212548</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,7 +551,9 @@
     <MESSAGE value="Avancement de la vue 2" />
     <MESSAGE value="Modification gestion adhérents" />
     <MESSAGE value="Remise en place de la structure + Interface finie" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remise en place de la structure + Interface finie" />
+    <MESSAGE value="Remise en place de la structure du code part 2" />
+    <MESSAGE value="Remise en place de la structure du code part 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remise en place de la structure du code part 3" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -513,9 +562,10 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Association_S3$main.coverage" NAME="main Coverage Results" MODIFIED="1600893098059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
     <SUITE FILE_PATH="coverage/Association_S3$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1607432166455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
-    <SUITE FILE_PATH="coverage/Association_S3$application.coverage" NAME="application Coverage Results" MODIFIED="1610217293155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Association_S3$application.coverage" NAME="application Coverage Results" MODIFIED="1611063748703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Association_S3$fenetre_interface.coverage" NAME="fenetre_interface Coverage Results" MODIFIED="1606044963991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
     <SUITE FILE_PATH="coverage/Association_S3$Interface.coverage" NAME="Interface Coverage Results" MODIFIED="1607255066384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
+    <SUITE FILE_PATH="coverage/Association_S3$test_labo.coverage" NAME="test_labo Coverage Results" MODIFIED="1610446826913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
     <SUITE FILE_PATH="coverage/Association_S3$Run_config.coverage" NAME="Run config Coverage Results" MODIFIED="1603722176634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Association_S3$test.coverage" NAME="test Coverage Results" MODIFIED="1607432332347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/metier" />
   </component>

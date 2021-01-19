@@ -3,7 +3,7 @@ class Adherent:
     def __init__(self):
         self.prenom = ""
         self.nom = ""
-        self.laboratoire = ""
+        self.organisation = ""
 
     def get_prenom(self):
         return self.prenom
@@ -17,8 +17,8 @@ class Adherent:
     def set_nom(self, nv_nom):
         self.nom = nv_nom
 
-    def set_laboratoire(self, nv_labo):
-        self.laboratoire = nv_labo
+    def set_organisation(self, nv_orga):
+        self.organisation = nv_orga
 
-    def get_laboratoire(self):
-        return self.laboratoire
+    def get_organisation(self):
+        return self.organisation
