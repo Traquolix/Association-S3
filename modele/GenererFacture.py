@@ -15,15 +15,16 @@ class GenererFacture:
         test2 = "Dans ma ville"
         test3 = "Mon université"
         test4 = "Dans ma ville"
-        # Faire juste une boucle pour afficher tt les adhérants
-
+        prenom = "Jean"
+        nom = "Benois"
+        typeTarif = "tarif étudiant"
 
         compt = 155
 
         c = canvas.Canvas("test.pdf", pagesize=(210, 297), bottomup=0)
         c.translate(10, 40)
         c.scale(1, -1)
-        # c.drawImage(path, 0, 0, width=50, height=30)
+        c.drawImage(path, 0, 0, width=50, height=30)
         c.scale(1, -1)
         c.translate(-10, -40)
         c.setFont("Helvetica-Bold", 7)
@@ -48,14 +49,9 @@ class GenererFacture:
         c.drawString(66, 115, test3)
         c.drawString(50, 120, "DOIT :    " + test4)
 
-        c.drawString(10, 150,"La somme de " + facture.get_montant() + " €, cotisation à l'ATALA pour l'année " + str(datetime.date.year) + " de " + x + " adhérent tarif proffessionnel : ")
-        for i in range(3):
-            c.drawString(10, compt, "- " + nom + " -")
-            compt += 5
-        c.drawString(10, compt, " Et de " + y + " adhérent tarif étudiant : ")
-        compt += 5
-        for i in range(3):
-            c.drawString(10, compt, "- " + nom2 + " -")
+        c.drawString(10, 150,"La somme de " + facture.get_montant() + " €, cotisation à l'ATALA pour l'année " + str(datetime.date.year) + " de " + facture.get_nbAdh() + " adhérent : ")
+        for i in range(8):  # a remplacer par un for each
+            c.drawString(10, compt, "- " + nom + " - " + prenom + " - " + typeTarif + " -")
             compt += 5
         c.setFont("Helvetica-Bold", 5)
         c.drawCentredString(105, compt + 5, "correspondant au bon de commande : " + facture.get_refBdc())
