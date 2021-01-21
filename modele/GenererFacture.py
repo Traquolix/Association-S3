@@ -16,14 +16,11 @@ class GenererFacture:
         test2 = "Dans ma ville"
         test3 = "Mon université"
         test4 = "Dans ma ville"
-        prenom = "Jean"
-        nom = "Benois"
-        typeTarif = "tarif étudiant"
 
         save_name = os.path.join(os.path.expanduser("~"), path, "Facture.pdf") # /!\ LE PATH EST DEPUIS LA RACINE
         image = 'image/atala_logo.png'
         compt = 155
-
+        tab_adh = facture.adherents
         c = canvas.Canvas(save_name, pagesize=(210, 297), bottomup=0)
         c.translate(10, 40)
         c.scale(1, -1)
@@ -53,8 +50,8 @@ class GenererFacture:
         c.drawString(50, 120, "DOIT :    " + test4)
 
         c.drawString(10, 150,"La somme de " + facture.get_montant() + " €, cotisation à l'ATALA pour l'année " + str(datetime.date.year) + " de " + facture.get_nbAdh() + " adhérent : ")
-        for i in range(8):  # a remplacer par un for each
-            c.drawString(10, compt, "- " + nom + " - " + prenom + " - " + typeTarif + " -")
+        for adh in tab_adh:
+            c.drawString(10, compt, "- " + adh.prenom + " - " + adh.nom + " - " + adh.type_tarif + " -")
             compt += 5
         c.setFont("Helvetica-Bold", 5)
         c.drawCentredString(105, compt + 5, "correspondant au bon de commande : " + facture.get_refBdc())
