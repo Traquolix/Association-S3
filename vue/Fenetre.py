@@ -189,15 +189,15 @@ class VueAdherents(tk.Frame):
         titre.config(font=("Courier", 20), bg="skyblue")
         titre.grid(row=0, column=1, columnspan=2, sticky='nsew')
 
-        left_frame = Frame(self)
-        left_frame.config(bg='skyblue')
-        left_frame.columnconfigure(0, weight=1)
-        left_frame.rowconfigure(0, weight=1)
-        left_frame.rowconfigure(1, weight=1)
-        left_frame.rowconfigure(2, weight=1)
-        left_frame.grid(row=1, column=0, sticky="nsew")
+        conteneur_milieu_gauche = Frame(self)
+        conteneur_milieu_gauche.config(bg='skyblue')
+        conteneur_milieu_gauche.columnconfigure(0, weight=1)
+        conteneur_milieu_gauche.rowconfigure(0, weight=1)
+        conteneur_milieu_gauche.rowconfigure(1, weight=1)
+        conteneur_milieu_gauche.rowconfigure(2, weight=1)
+        conteneur_milieu_gauche.grid(row=1, column=0, sticky="nsew")
 
-        formulaire = Frame(left_frame)
+        formulaire = Frame(conteneur_milieu_gauche)
         formulaire.config(bg='skyblue')
         formulaire.columnconfigure(0, weight=1)
         formulaire.rowconfigure(0, weight=1)
@@ -305,14 +305,14 @@ class VueAdherents(tk.Frame):
                              command=lambda: ctrl_adherent.ajouter_adherent())
         ajouter.grid(row=5, column=0)
 
-        mid_frame = Frame(self)
-        mid_frame.config(bg='skyblue')
-        mid_frame.rowconfigure(0, weight=1)
-        mid_frame.rowconfigure(1, weight=1)
-        mid_frame.columnconfigure(0, weight=1)
-        mid_frame.grid(row=1, column=1, sticky="nsew")
+        conteneur_milieu = Frame(self)
+        conteneur_milieu.config(bg='skyblue')
+        conteneur_milieu.rowconfigure(0, weight=1)
+        conteneur_milieu.rowconfigure(1, weight=1)
+        conteneur_milieu.columnconfigure(0, weight=1)
+        conteneur_milieu.grid(row=1, column=1, sticky="nsew")
 
-        conteneur_adherents = Frame(mid_frame)
+        conteneur_adherents = Frame(conteneur_milieu)
         conteneur_adherents.config(bg='skyblue')
         conteneur_adherents.rowconfigure(0, weight=1)
         conteneur_adherents.columnconfigure(0, weight=1)
@@ -327,7 +327,7 @@ class VueAdherents(tk.Frame):
         self.adherents.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.adherents.yview)
 
-        conteneur_supprimer = tk.Frame(mid_frame)
+        conteneur_supprimer = tk.Frame(conteneur_milieu)
         conteneur_supprimer.config(bg='skyblue')
         conteneur_supprimer.rowconfigure(0, weight=1)
         conteneur_supprimer.columnconfigure(0, weight=1)
@@ -342,15 +342,15 @@ class VueAdherents(tk.Frame):
                                     command=lambda: ctrl_adherent.supprimer_tout_adherents())
         tout_supprimer.grid(row=0, column=1)
 
-        bottom_bar = tk.Frame(self)
-        bottom_bar.config(bg="skyblue")
-        bottom_bar.rowconfigure(0, weight=1)
-        bottom_bar.columnconfigure(0, weight=1)
-        bottom_bar.columnconfigure(1, weight=1)
-        bottom_bar.columnconfigure(2, weight=1)
-        bottom_bar.grid(row=2, column=0, columnspan=3, sticky="nsew")
+        conteneur_bas = tk.Frame(self)
+        conteneur_bas.config(bg="skyblue")
+        conteneur_bas.rowconfigure(0, weight=1)
+        conteneur_bas.columnconfigure(0, weight=1)
+        conteneur_bas.columnconfigure(1, weight=1)
+        conteneur_bas.columnconfigure(2, weight=1)
+        conteneur_bas.grid(row=2, column=0, columnspan=3, sticky="nsew")
 
-        conteneur_gerer_organisation = tk.Frame(bottom_bar)
+        conteneur_gerer_organisation = tk.Frame(conteneur_bas)
         conteneur_gerer_organisation.config(bg="skyblue")
         conteneur_gerer_organisation.rowconfigure(0, weight=1)
         conteneur_gerer_organisation.columnconfigure(0, weight=1)
@@ -485,15 +485,15 @@ class VueOrganisations(tk.Frame):
         titre.config(font=("Courier", 20), bg="skyblue")
         titre.grid(row=0, column=1, columnspan=2, sticky='nsew')
 
-        left_frame = Frame(self)
-        left_frame.config(bg='skyblue')
-        left_frame.columnconfigure(0, weight=1)
-        left_frame.rowconfigure(0, weight=1)
-        left_frame.rowconfigure(1, weight=1)
-        left_frame.rowconfigure(2, weight=1)
-        left_frame.grid(row=1, column=0, sticky="nsew")
+        conteneur_milieu_gauche = Frame(self)
+        conteneur_milieu_gauche.config(bg='skyblue')
+        conteneur_milieu_gauche.columnconfigure(0, weight=1)
+        conteneur_milieu_gauche.rowconfigure(0, weight=1)
+        conteneur_milieu_gauche.rowconfigure(1, weight=1)
+        conteneur_milieu_gauche.rowconfigure(2, weight=1)
+        conteneur_milieu_gauche.grid(row=1, column=0, sticky="nsew")
 
-        formulaire = Frame(left_frame)
+        formulaire = Frame(conteneur_milieu_gauche)
         formulaire.config(bg='skyblue')
         formulaire.columnconfigure(0, weight=1)
         formulaire.rowconfigure(0, weight=1)
@@ -551,14 +551,14 @@ class VueOrganisations(tk.Frame):
                              command=lambda: ctrl_adherent.ajouter_organisation())
         ajouter.grid(row=3, column=0)
 
-        mid_frame = Frame(self)
-        mid_frame.config(bg='skyblue')
-        mid_frame.rowconfigure(0, weight=1)
-        mid_frame.rowconfigure(1, weight=1)
-        mid_frame.columnconfigure(0, weight=1)
-        mid_frame.grid(row=1, column=1, sticky="nsew")
+        conteneur_milieu = Frame(self)
+        conteneur_milieu.config(bg='skyblue')
+        conteneur_milieu.rowconfigure(0, weight=1)
+        conteneur_milieu.rowconfigure(1, weight=1)
+        conteneur_milieu.columnconfigure(0, weight=1)
+        conteneur_milieu.grid(row=1, column=1, sticky="nsew")
 
-        conteneur_organisation = tk.Frame(mid_frame)
+        conteneur_organisation = tk.Frame(conteneur_milieu)
         conteneur_organisation.config(bg='skyblue')
         conteneur_organisation.rowconfigure(0, weight=1)
         conteneur_organisation.columnconfigure(0, weight=1)
@@ -574,7 +574,7 @@ class VueOrganisations(tk.Frame):
         self.organisations.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.organisations.yview)
 
-        conteneur_supprimer = tk.Frame(mid_frame)
+        conteneur_supprimer = tk.Frame(conteneur_milieu)
         conteneur_supprimer.config(bg='skyblue')
         conteneur_supprimer.rowconfigure(0, weight=1)
         conteneur_supprimer.columnconfigure(0, weight=1)
@@ -694,81 +694,78 @@ class VueFacture(tk.Frame):
         conteneur_formulaire_haut.columnconfigure(1, weight=1)
         conteneur_formulaire_haut.grid(row=0, column=0, columnspan=3, sticky="nsew")
 
-        conteneur_num = Frame(conteneur_formulaire_haut)
-        conteneur_num.config(bg='skyblue')
-        conteneur_num.rowconfigure(0, weight=1)
-        conteneur_num.rowconfigure(1, weight=1)
-        conteneur_num.columnconfigure(0, weight=1)
-        conteneur_num.columnconfigure(1, weight=1)
-        conteneur_num.grid(row=0, column=0)
+        conteneur_formulaire_haut_gauche = Frame(conteneur_formulaire_haut)
+        conteneur_formulaire_haut_gauche.config(bg='skyblue')
+        conteneur_formulaire_haut_gauche.rowconfigure(0, weight=1)
+        conteneur_formulaire_haut_gauche.rowconfigure(1, weight=1)
+        conteneur_formulaire_haut_gauche.rowconfigure(2, weight=1)
+        conteneur_formulaire_haut_gauche.columnconfigure(0, weight=1)
+        conteneur_formulaire_haut_gauche.columnconfigure(1, weight=1)
+        conteneur_formulaire_haut_gauche.grid(row=0, rowspan=2, column=0)
 
-        label_num_facture = Label(conteneur_num, text="numéro facture :")
+        label_num_facture = Label(conteneur_formulaire_haut_gauche, text="numéro facture :")
         label_num_facture.config(bg='skyblue')
         label_num_facture.grid(row=0, column=0, pady=(0, 10), padx=(0, 15))
         self.str_num_facture = tk.StringVar()
         self.str_num_facture.set("")
-        self.num_facture = Entry(conteneur_num, textvariable=self.str_num_facture, width=20)
+        self.num_facture = Entry(conteneur_formulaire_haut_gauche, textvariable=self.str_num_facture, width=20)
         self.num_facture.grid(row=0, column=1, pady=(0, 10))
 
-        label_num_bon = Label(conteneur_num, text="bon de commande référent : ")
+        label_num_bon = Label(conteneur_formulaire_haut_gauche, text="bon de commande référent : ")
         label_num_bon.config(bg='skyblue')
-        label_num_bon.grid(row=1, column=0, padx=(0, 15))
+        label_num_bon.grid(row=1, column=0, padx=(0, 15), pady=(0, 10))
         self.str_num_bon = tk.StringVar()
         self.str_num_bon.set("")
-        self.num_bon = Entry(conteneur_num, textvariable=self.str_num_bon, width=20)
-        self.num_bon.grid(row=1, column=1)
+        self.num_bon = Entry(conteneur_formulaire_haut_gauche, textvariable=self.str_num_bon, width=20)
+        self.num_bon.grid(row=1, column=1, pady=(0, 10))
 
-        conteneur_organisation = Frame(conteneur_formulaire_haut)
-        conteneur_organisation.config(bg='skyblue')
-        conteneur_organisation.columnconfigure(0, weight=1)
-        conteneur_organisation.columnconfigure(1, weight=1)
-        conteneur_organisation.columnconfigure(2, weight=2)
-        conteneur_organisation.rowconfigure(0, weight=1)
-        conteneur_organisation.grid(row=1, column=0, sticky='e', padx=(0, 60))
+        label_montant_total = Label(conteneur_formulaire_haut_gauche, text="montant total : ")
+        label_montant_total.config(bg='skyblue')
+        label_montant_total.grid(row=2, column=0, padx=(0, 15))
+        self.str_montant_total = tk.StringVar()
+        self.str_montant_total.set("")
+        self.montant_total = Entry(conteneur_formulaire_haut_gauche, textvariable=self.str_montant_total, width=20)
+        self.montant_total.grid(row=2, column=1)
 
-        lorganisations = Label(conteneur_organisation, text="destinataire :")
+        conteneur_formulaire_haut_droite = Frame(conteneur_formulaire_haut)
+        conteneur_formulaire_haut_droite.config(bg='skyblue')
+        conteneur_formulaire_haut_droite.rowconfigure(0, weight=1)
+        conteneur_formulaire_haut_droite.rowconfigure(1, weight=1)
+        conteneur_formulaire_haut_droite.rowconfigure(2, weight=1)
+        conteneur_formulaire_haut_droite.columnconfigure(0, weight=1)
+        conteneur_formulaire_haut_droite.columnconfigure(1, weight=1)
+        conteneur_formulaire_haut_droite.columnconfigure(2, weight=1)
+        conteneur_formulaire_haut_droite.grid(row=0, rowspan=2, column=1)
+
+        conteneur_organisations = Frame(conteneur_formulaire_haut_droite)
+        conteneur_organisations.config(bg='skyblue')
+        conteneur_organisations.rowconfigure(0, weight=1)
+        conteneur_organisations.columnconfigure(0, weight=1)
+        conteneur_organisations.columnconfigure(1, weight=1)
+        conteneur_organisations.columnconfigure(2, weight=1)
+        conteneur_organisations.grid(row=0, columnspan=3, column=0, pady=(0,15))
+
+        lorganisations = Label(conteneur_organisations, text="destinataire :")
         lorganisations.config(bg='skyblue')
         lorganisations.grid(row=0, column=0, padx=(0, 15))
-        self.organisations = tk.Listbox(conteneur_organisation, width=10, height=3)
+        self.organisations = tk.Listbox(conteneur_organisations, width=10, height=3)
         self.actualiser_liste_organisations()
         self.organisations.grid(row=0, column=1, padx=(0, 15))
 
-        scrollbar = ttk.Scrollbar(conteneur_organisation)
+        scrollbar = ttk.Scrollbar(conteneur_organisations)
         scrollbar.grid(row=0, column=2)
         self.organisations.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.organisations.yview)
 
-        conteneur_montant_total = Frame(conteneur_formulaire_haut)
-        conteneur_montant_total.config(bg='skyblue')
-        conteneur_montant_total.rowconfigure(0, weight=1)
-        conteneur_montant_total.columnconfigure(0, weight=1)
-        conteneur_montant_total.columnconfigure(1, weight=1)
-        conteneur_montant_total.grid(row=0, column=1, sticky='w')
-
-        label_montant_total = Label(conteneur_montant_total, text="montant total : ")
-        label_montant_total.config(bg='skyblue')
-        label_montant_total.grid(row=0, column=0, padx=(0, 15))
-        self.str_montant_total = tk.StringVar()
-        self.str_montant_total.set("")
-        self.montant_total = Entry(conteneur_montant_total, textvariable=self.str_montant_total, width=20)
-        self.montant_total.grid(row=0, column=1)
-
-        conteneur_nombre_adherents = Frame(conteneur_formulaire_haut)
-        conteneur_nombre_adherents.config(bg='skyblue')
-        conteneur_nombre_adherents.rowconfigure(0, weight=1)
-        conteneur_nombre_adherents.columnconfigure(0, weight=1)
-        conteneur_nombre_adherents.columnconfigure(1, weight=1)
-        conteneur_nombre_adherents.columnconfigure(2, weight=1)
-        conteneur_nombre_adherents.grid(row=1, column=1, sticky='w')
-
-        label_nombre_adherents = Label(conteneur_nombre_adherents, text="nombre adhérents : ")
+        label_nombre_adherents = Label(conteneur_formulaire_haut_droite, text="nombre adhérents : ")
         label_nombre_adherents.config(bg='skyblue')
-        label_nombre_adherents.grid(row=0, column=0, padx=(0, 15))
-        self.nombre_adherents = Spinbox(conteneur_nombre_adherents, from_=1, to=3)
-        self.nombre_adherents.grid(row=0, column=1, padx=(0, 30))
-        valider = ttk.Button(conteneur_nombre_adherents, text="valider", style='my.TButton',
+        label_nombre_adherents.grid(row=1, column=0, padx=(0, 15), pady=(0, 15))
+        self.nombre_adherents = Spinbox(conteneur_formulaire_haut_droite, from_=1, to=3)
+        self.nombre_adherents.grid(row=1, column=1, padx=(0, 30), pady=(0, 15))
+
+        self.valider = ttk.Button(conteneur_formulaire_haut_droite, text="valider", style='my.TButton',
                              compound="left", command=lambda: ctrl_fenetre.show_frame(Accueil))
-        valider.grid(row=0, column=2)
+        self.valider.grid(row=1, column=2, pady=(0, 15))
 
         conteneur_formulaire_bas = Frame(conteneur_milieu, width=600)
         conteneur_formulaire_bas.config(bg='skyblue')
@@ -827,9 +824,9 @@ class VueFacture(tk.Frame):
         # self.actualiser_liste_adherents()
         self.adherents.grid(row=0, column=0)
 
-        ajouter = ttk.Button(conteneur_adherents, text="ajouter", style='my.TButton')
-        ajouter.config(state='disabled')
-        ajouter.grid(row=1, column=0)
+        self.ajouter = ttk.Button(conteneur_adherents, text="ajouter", style='my.TButton')
+        self.ajouter.config(state='disabled')
+        self.ajouter.grid(row=1, column=0)
 
         ligne_bas = Frame(self)
         ligne_bas.config(bg='skyblue')
@@ -842,28 +839,118 @@ class VueFacture(tk.Frame):
         ligne_bas.columnconfigure(3, weight=1)
         ligne_bas.grid(row=2, column=0, columnspan=3, sticky="nsew")
 
-        a = ttk.Treeview(ligne_bas, columns=('prenom', 'nom', 'tarif', 'statut'))
-        a.heading('prenom', text='Prénom')
-        a.heading('nom', text='Nom')
-        a.heading('tarif', text='type de Tarif')
-        a.heading('statut', text='Statut')
-        a['show'] = 'headings'
-        a.grid(row=0, column=0)
+        adherents_ajoutes = ttk.Treeview(ligne_bas, columns=('prenom', 'nom', 'tarif', 'statut'))
+        adherents_ajoutes.heading('prenom', text='Prénom')
+        adherents_ajoutes.heading('nom', text='Nom')
+        adherents_ajoutes.heading('tarif', text='type de Tarif')
+        adherents_ajoutes.heading('statut', text='Statut')
+        adherents_ajoutes['show'] = 'headings'
+        adherents_ajoutes.grid(row=1, column=1)
+
+    def actualiser_liste_adherents(self, liste):
+        self.adherents.delete(0, END)
+        cpt = 1
+        for adherent in liste:
+            self.adherents.insert(cpt, adherent)
+            cpt += 1
+        self.adherents.select_set(0)
 
     def actualiser_liste_organisations(self):
         self.organisations.delete(0, END)
         liste = self.ctrl_facture.actualiser_liste_organisations_noms()
-        cpt = 1
+        self.organisations.insert(1, "indépendants")
+        cpt = 2
         for organisation in liste:
             self.organisations.insert(cpt, organisation)
             cpt += 1
         self.organisations.select_set(0)
 
+    def nombre_adherents_liste(self):
+        return self.adherents.size()
+
+    def champs_partie1_vides(self):
+        est_vide = False
+        if self.get_numero_bon() == "":
+            est_vide = True
+        if self.get_numero_facture() == "":
+            est_vide = True
+        if self.get_montant_total() == "":
+            est_vide = True
+        return est_vide
+
+    def champs_partie2_vides(self):
+        est_vide = False
+        if self.get_type_tarif() == "":
+            est_vide = True
+        if self.get_statut() == "":
+            est_vide = True
+        return est_vide
+
     def listbox_est_vide(self):
         return self.organisations.size() == 0
 
-    def get_selected_organisation(self):
+    def activer_champs_partie1(self):
+        self.num_bon.config(state="normal")
+        self.organisations.config(state="normal")
+        self.montant_total.config(state="normal")
+        self.nombre_adherents.config(state="normal")
+        self.valider.config(state="normal")
+
+    def desactiver_champs_partie1(self):
+        self.num_bon.config(state="disabled")
+        self.organisations.config(state="disabled")
+        self.montant_total.config(state="disabled")
+        self.nombre_adherents.config(state="disabled")
+        self.valider.config(state="disabled")
+
+    def activer_champs_partie2(self):
+        self.type_tarif.config(state="normal")
+        self.statut.config(state="normal")
+        self.adherents.config(state="normal")
+        self.ajouter.config(state="normal")
+
+    def activer_generer(self):
+        self.generer.config(state="normal")
+
+    def desactiver_generer(self):
+        self.generer.config(state="disabled")
+
+    def desactiver_champs_partie2(self):
+        self.prix_unitaire.config(state="disabled")
+        self.quantite.config(state="disabled")
+        self.montant_ht.config(state="disabled")
+        self.adherents.config(state="disabled")
+        self.remarque.config(state="disabled")
+        self.ajouter.config(state="disabled")
+        self.generer.config(state="disabled")
+
+    def vider_champs_partie2(self):
+        self.str_prix_unitaire.set("")
+        self.quantite.selection_to(0)
+        self.str_montant_ht.set("")
+        self.adherents.select_set(0)
+        self.remarque.delete(1.0, END)
+
+    def get_numero_bon(self):
+        return self.num_bon.get()
+
+    def get_numero_facture(self):
+        return self.num_facture.get()
+
+    def get_destinataire(self):
         return self.organisations.get(ANCHOR)
+
+    def get_montant_total(self):
+        return self.montant_total.get()
+
+    def get_nombre_adherents(self):
+        return self.nombre_adherents.get()
+
+    def get_type_tarif(self):
+        return self.type_tarif.get()
+
+    def get_statut(self):
+        return self.statut.get()
 
 
 class VueBonDeCommande(tk.Frame):
@@ -978,7 +1065,6 @@ class VueBonDeCommande(tk.Frame):
         self.nombre_adherents = Spinbox(conteneur_nombre_adherents, from_=1, to=3, textvariable=self.int_nombre)
         self.nombre_adherents.grid(row=0, column=1, padx=(0, 30))
         self.valider = ttk.Button(conteneur_nombre_adherents, text="valider", style='my.TButton',
-                                  compound="left",
                                   command=lambda: ctrl_bon_commande.valider_informations_generales_bon())
         self.valider.grid(row=0, column=2)
 
@@ -1086,15 +1172,15 @@ class VueBonDeCommande(tk.Frame):
         ligne_bas.columnconfigure(0, weight=1)
         ligne_bas.grid(row=2, column=0, columnspan=3, sticky="nsew")
 
-        self.a = ttk.Treeview(ligne_bas,
+        self.adherents_ajoutes = ttk.Treeview(ligne_bas,
                               columns=('designation', 'prix_unitaire', 'quantite', 'montant_HT', 'remarques'))
-        self.a.heading('designation', text='Désignation')
-        self.a.heading('prix_unitaire', text='Prix unitaire')
-        self.a.heading('quantite', text='Quantité')
-        self.a.heading('montant_HT', text='Montant HT')
-        self.a.heading('remarques', text='Remarques')
-        self.a['show'] = 'headings'
-        self.a.grid(row=0, column=0)
+        self.adherents_ajoutes.heading('designation', text='Désignation')
+        self.adherents_ajoutes.heading('prix_unitaire', text='Prix unitaire')
+        self.adherents_ajoutes.heading('quantite', text='Quantité')
+        self.adherents_ajoutes.heading('montant_HT', text='Montant HT')
+        self.adherents_ajoutes.heading('remarques', text='Remarques')
+        self.adherents_ajoutes['show'] = 'headings'
+        self.adherents_ajoutes.grid(row=0, column=0)
 
         self.generer = ttk.Button(ligne_bas, text="générer bon de commande", style='my.TButton',
                                   command=lambda: ctrl_bon_commande.generer())
@@ -1216,12 +1302,12 @@ class VueBonDeCommande(tk.Frame):
         return adherent
 
     def actualiser_liste_adherents_ajoutes(self, designation, prix_unitaire, quantite, montant_ht, remarque):
-        self.a.insert('', 'end', designation, text=designation)
-        self.a.set(designation, 'designation', designation)
-        self.a.set(designation, 'prix_unitaire', prix_unitaire)
-        self.a.set(designation, 'quantite', quantite)
-        self.a.set(designation, 'montant_HT', montant_ht)
-        self.a.set(designation, 'remarques', remarque)
+        self.adherents_ajoutes.insert('', 'end', designation, text=designation)
+        self.adherents_ajoutes.set(designation, 'designation', designation)
+        self.adherents_ajoutes.set(designation, 'prix_unitaire', prix_unitaire)
+        self.adherents_ajoutes.set(designation, 'quantite', quantite)
+        self.adherents_ajoutes.set(designation, 'montant_HT', montant_ht)
+        self.adherents_ajoutes.set(designation, 'remarques', remarque)
 
     def effacer_informations(self):
         self.ctrl_bon_commande.nouveau_bon_de_commande()
@@ -1230,8 +1316,8 @@ class VueBonDeCommande(tk.Frame):
         self.nombre_adherents.selection_to(0)
         self.str_prix_unitaire.set("")
         self.str_montant_ht.set("")
-        for i in self.a.get_children():
-            self.a.delete(i)
+        for i in self.adherents_ajoutes.get_children():
+            self.adherents_ajoutes.delete(i)
 
     @staticmethod
     def get_fichier_path():

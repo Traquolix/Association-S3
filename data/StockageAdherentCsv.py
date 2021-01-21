@@ -77,15 +77,13 @@ class StockageAdherentCsv:
 
     def lire_fichier_organisations(self, nom_organisation):
         adherents = []
-        ligne = []
         with open(self.fichier_adherent, newline='') as csvfile:
             csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
             cpt = 0
             for row in csvreader:
                 if cpt != 0:
                     if row[2] == nom_organisation:
-                        ligne.append(row[0])
-                        ligne.append(row[1])
+                        ligne = [row[0], row[1]]
                         adherents.append(ligne)
                 cpt = cpt + 1
         return adherents
