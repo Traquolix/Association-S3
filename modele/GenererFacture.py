@@ -13,14 +13,11 @@ class GenererFacture:
 
     @staticmethod
     def genererFacture(path, facture):
-        test2 = "Dans ma ville"
-        test3 = "Mon université"
-        test4 = "Dans ma ville"
-
         save_name = os.path.join(os.path.expanduser("~"), path, "Facture.pdf") # /!\ LE PATH EST DEPUIS LA RACINE
         image = 'image/atala_logo.png'
         compt = 155
-        tab_adh = facture.adherents
+
+        tab_adh = facture.get_adherents()
         c = canvas.Canvas(save_name, pagesize=(210, 297), bottomup=0)
         c.translate(10, 40)
         c.scale(1, -1)
@@ -45,9 +42,9 @@ class GenererFacture:
                      "Non astreint à l'inscription au registre de commerce, T.V.A non applicable, article 293 B du CGI")
         c.setFont("Helvetica-Bold", 4)
         c.drawString(10, 120, "Mémoire")
-        c.drawString(66, 110, test2)
-        c.drawString(66, 115, test3)
-        c.drawString(50, 120, "DOIT :    " + test4)
+        c.drawString(66, 110, facture.get_nom_organisation())
+        c.drawString(66, 115, facture.get_adresse_organisation())
+        c.drawString(50, 120, "DOIT :    " + facture.get_ville_organisation())
 
         c.drawString(10, 150,"La somme de " + facture.get_montant() + " €, cotisation à l'ATALA pour l'année " + str(datetime.date.year) + " de " + facture.get_nbAdh() + " adhérent : ")
         for adh in tab_adh:

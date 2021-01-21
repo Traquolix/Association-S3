@@ -35,6 +35,24 @@ class Facture:
     def get_nbAdh(self):
         return self.nbAdh
 
+    def set_nom_organisation(self, nom_organisation):
+        self.nom_organisation = nom_organisation
+
+    def get_nom_organisation(self):
+        return self.nom_organisation
+
+    def set_adresse_organisation(self, adresse_organisation):
+        self.adresse_organisation = adresse_organisation
+
+    def get_adresse_organisation(self):
+        return self.adresse_organisation
+
+    def set_ville_organisation(self, ville_organisation):
+        self.ville_organisation = ville_organisation
+
+    def get_ville_organisation(self):
+        return self.ville_organisation
+
     def get_adherents(self):
         return self.adherents
 
