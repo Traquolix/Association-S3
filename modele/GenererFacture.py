@@ -11,6 +11,7 @@ pathlib.Path(__file__).parent.absolute()
 
 class GenererFacture:
 
+    @staticmethod
     def genererFacture(path, facture):
         test2 = "Dans ma ville"
         test3 = "Mon université"
@@ -19,10 +20,11 @@ class GenererFacture:
         nom = "Benois"
         typeTarif = "tarif étudiant"
 
+        save_name = os.path.join(os.path.expanduser("~"), path, "Facture.pdf") # /!\ LE PATH EST DEPUIS LA RACINE
         image = 'image/atala_logo.png'
         compt = 155
 
-        c = canvas.Canvas("test.pdf", pagesize=(210, 297), bottomup=0)
+        c = canvas.Canvas(save_name, pagesize=(210, 297), bottomup=0)
         c.translate(10, 40)
         c.scale(1, -1)
         c.drawImage(image, 0, 0, width=70, height=45)

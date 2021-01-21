@@ -15,8 +15,9 @@ class GenererBonDeCommande:
     @staticmethod
     def genererBonDeCommande(path, bon_de_commande):
         image = 'image/atala_logo.png'
+        save_name = os.path.join(os.path.expanduser("~"), path, "BonDeCommande.pdf") # /!\ LE PATH EST DEPUIS LA RACINE
 
-        c = canvas.Canvas("invoice.pdf", pagesize=(200, 250), bottomup=0)
+        c = canvas.Canvas(save_name, pagesize=(200, 250), bottomup=0)
         c.translate(10, 40)
         c.scale(1, -1)
         c.drawImage(image, 0, 0, width=50, height=30)
