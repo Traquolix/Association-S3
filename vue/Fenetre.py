@@ -743,12 +743,12 @@ class VueFacture(tk.Frame):
         conteneur_organisations.columnconfigure(0, weight=1)
         conteneur_organisations.columnconfigure(1, weight=1)
         conteneur_organisations.columnconfigure(2, weight=1)
-        conteneur_organisations.grid(row=0, columnspan=3, column=0, pady=(0,15))
+        conteneur_organisations.grid(row=0, columnspan=3, column=0, pady=(0, 15), sticky='w')
 
         lorganisations = Label(conteneur_organisations, text="destinataire :")
         lorganisations.config(bg='skyblue')
         lorganisations.grid(row=0, column=0, padx=(0, 15))
-        self.organisations = tk.Listbox(conteneur_organisations, width=10, height=3)
+        self.organisations = tk.Listbox(conteneur_organisations, width=20, height=3)
         self.actualiser_liste_organisations()
         self.organisations.grid(row=0, column=1, padx=(0, 15))
 

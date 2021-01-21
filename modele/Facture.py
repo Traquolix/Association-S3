@@ -3,8 +3,11 @@ class Facture:
     def __init__(self):
         self.numFacture = ""
         self.refBdc = ""
-        self.montant = ""
-        self.nbAdh = ""
+        self.montant = 0
+        self.nbAdh = 0
+        self.nom_organisation = ""
+        self.adresse_organisation = ""
+        self.ville_organisation = ""
         self.adherents = []
         self.ajoute = 0 # Compteur juste utilisé par l'interface
 
