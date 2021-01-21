@@ -14,8 +14,8 @@ class GenererBonDeCommande:
 
     @staticmethod
     def genererBonDeCommande(path, bon_de_commande):
-        image = 'image/atala_logo.png'
-        save_name = os.path.join(os.path.expanduser("~"), path, "BonDeCommande.pdf") # /!\ LE PATH EST DEPUIS LA RACINE
+        image = 'vue/images/atala_logo.png'
+        save_name = os.path.join(os.path.expanduser("~"), path) # /!\ LE PATH EST DEPUIS LA RACINE
 
         c = canvas.Canvas(save_name, pagesize=(200, 250), bottomup=0)
         c.translate(10, 40)
@@ -39,8 +39,8 @@ class GenererBonDeCommande:
         c.setFont("Times-Bold", 5)
         c.drawRightString(70, 70, "COMMANDE N°:" + bon_de_commande.get_numero_bon())
         c.drawRightString(70, 80, "DATE :" + str(datetime.date.day) + "/" + str(datetime.date.month) + "/" + str(datetime.date.year))
-        c.drawRightString(70, 90, "NOM DU CLIENT :" + bon_de_commande.get_nom_labo())
-        c.drawRightString(70, 100, "ADRESSE:" + bon_de_commande.get_adresse_labo())
+        c.drawRightString(70, 90, "NOM DU CLIENT :" + bon_de_commande.get_nom_organisation())
+        c.drawRightString(70, 100, "ADRESSE:" + bon_de_commande.get_adresse())
 
         c.roundRect(15, 108, 170, 130, 10, stroke=1, fill=0)
         c.line(15, 120, 185, 120)
