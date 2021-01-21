@@ -25,10 +25,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="Correction classe Facture pour thibaud">
+    <list default="true" id="575c952d-dec9-4e76-ad9c-2eb439cee3b4" name="Default Changelist" comment="Correction classe Facture pour thibaud v2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modele/Facture.py" beforeDir="false" afterPath="$PROJECT_DIR$/modele/Facture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue/Fenetre.py" beforeDir="false" afterPath="$PROJECT_DIR$/vue/Fenetre.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controleurs/ControleurBonDeCommande.py" beforeDir="false" afterPath="$PROJECT_DIR$/Controleurs/ControleurBonDeCommande.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -526,7 +525,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611234098163</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Correction classe Facture pour thibaud v2">
+      <created>1611235175561</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1611235175561</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -569,7 +575,8 @@
     <MESSAGE value="Remise en place de la structure du code part 4 + changement partiel du nom des variables" />
     <MESSAGE value="Mise en place de la nouvelle gestion des adhérents plus finalisation de la partie interface Bon de commande" />
     <MESSAGE value="Correction classe Facture pour thibaud" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correction classe Facture pour thibaud" />
+    <MESSAGE value="Correction classe Facture pour thibaud v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction classe Facture pour thibaud v2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -594,7 +601,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Association_S3$main.coverage" NAME="main Coverage Results" MODIFIED="1600893098059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
     <SUITE FILE_PATH="coverage/Association_S3$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1607432166455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
-    <SUITE FILE_PATH="coverage/Association_S3$application.coverage" NAME="application Coverage Results" MODIFIED="1611234481003" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Association_S3$application.coverage" NAME="application Coverage Results" MODIFIED="1611236792253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Association_S3$fenetre_interface.coverage" NAME="fenetre_interface Coverage Results" MODIFIED="1606044963991" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
     <SUITE FILE_PATH="coverage/Association_S3$Interface.coverage" NAME="Interface Coverage Results" MODIFIED="1611083553902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/vue" />
     <SUITE FILE_PATH="coverage/Association_S3$test_labo.coverage" NAME="test_labo Coverage Results" MODIFIED="1610446826913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/test" />
