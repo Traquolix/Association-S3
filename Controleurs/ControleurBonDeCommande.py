@@ -77,7 +77,7 @@ class ControleurBonDeCommande:
 
     def generer(self):
         path = self.vue_bon_commande.get_fichier_path()
-        # self.generateur_bon_de_commande.genererBonDeCommande(path, self.bon_de_commande)
+        self.generateur_bon_de_commande.genererBonDeCommande(path, self.bon_de_commande)
 
     def actualiser_liste_adherents_noms(self, nom_organisation):
         return sorted(self.adherents_csv.lire_fichier_organisations(nom_organisation))

@@ -8,7 +8,8 @@ import datetime
 import pathlib
 from reportlab.pdfgen import canvas
 pathlib.Path(__file__).parent.absolute()
-
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import cm
 
 class GenererBonDeCommande:
 
@@ -17,15 +18,15 @@ class GenererBonDeCommande:
         image = 'vue/images/atala_logo.png'
         save_name = os.path.join(os.path.expanduser("~"), path) # /!\ LE PATH EST DEPUIS LA RACINE
 
-        c = canvas.Canvas(save_name, pagesize=(200, 250), bottomup=0)
-        c.translate(10, 40)
+        c = canvas.Canvas(save_name, pagesize=A4, bottomup=0)
+        c.translate(10, 110)
         c.scale(1, -1)
-        c.drawImage(image, 0, 0, width=50, height=30)
+        c.drawImage(image, 0, 0, width=239, height=97)
         c.scale(1, -1)
         c.translate(-10, -40)
         c.setFont("Helvetica-Bold", 10)
-        c.drawCentredString(125, 20, "BON DE COMMANDE")
-        c.line(70, 22, 180, 22)
+        c.drawCentredString(125*8.3, 20*11.7, "BON DE COMMANDE")
+        c.line(70*8.3, 22, 180*11.7, 22)
         c.setFont("Helvetica-Bold", 5)
         c.drawCentredString(125, 30, "45 rue d'Ulm")
         c.drawCentredString(125, 35, "75230 Paris Cedex 5")
