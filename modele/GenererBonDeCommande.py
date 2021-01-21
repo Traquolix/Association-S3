@@ -14,11 +14,12 @@ class GenererBonDeCommande:
 
     @staticmethod
     def genererBonDeCommande(path, bon_de_commande):
+        image = 'image/atala_logo.png'
 
         c = canvas.Canvas("invoice.pdf", pagesize=(200, 250), bottomup=0)
         c.translate(10, 40)
         c.scale(1, -1)
-        c.drawImage(path, 0, 0, width=50, height=30)
+        c.drawImage(image, 0, 0, width=50, height=30)
         c.scale(1, -1)
         c.translate(-10, -40)
         c.setFont("Helvetica-Bold", 10)
