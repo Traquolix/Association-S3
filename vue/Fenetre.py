@@ -51,6 +51,7 @@ class Fenetre:
         self.ctrl_Adherents.set_vue_bon_commande(self.get_frame_VueBonDeCommande())
 
         self.ctrl_Fenetre.set_vue_bon_de_commande(self.get_frame_VueBonDeCommande())
+        self.ctrl_Fenetre.set_vue_facture(self.get_frame_VueFacture())
 
         self.ctrl_Bon_de_commande.set_vue_bon_commande(self.get_frame_VueBonDeCommande())
 
@@ -673,7 +674,7 @@ class VueFacture(tk.Frame):
 
         logo_btn_accueil = tk.PhotoImage(file='vue/images/accueil.png')
         accueil = ttk.Button(conteneur_bouton_accueil, text="accueil", image=logo_btn_accueil, style='my.TButton',
-                             compound="left", command=lambda: ctrl_fenetre.show_frame(Accueil))
+                             compound="left", command=lambda: ctrl_fenetre.facture_accueil(Accueil))
         accueil.photo = logo_btn_accueil
         accueil.place(relx=0.5, rely=0.5, anchor=CENTER)
 
@@ -760,11 +761,13 @@ class VueFacture(tk.Frame):
         label_nombre_adherents = Label(conteneur_formulaire_haut_droite, text="nombre adhérents : ")
         label_nombre_adherents.config(bg='skyblue')
         label_nombre_adherents.grid(row=1, column=0, padx=(0, 15), pady=(0, 15))
-        self.nombre_adherents = Spinbox(conteneur_formulaire_haut_droite, from_=1, to=3)
+        self.int_nombre = tk.IntVar()
+        self.int_nombre.set(0)
+        self.nombre_adherents = Spinbox(conteneur_formulaire_haut_droite, from_=1, to=3, textvariable=self.int_nombre)
         self.nombre_adherents.grid(row=1, column=1, padx=(0, 30), pady=(0, 15))
 
         self.valider = ttk.Button(conteneur_formulaire_haut_droite, text="valider", style='my.TButton',
-                             compound="left", command=lambda: ctrl_fenetre.show_frame(Accueil))
+                             compound="left", command=lambda: ctrl_facture.valider_informations_generales_facture())
         self.valider.grid(row=1, column=2, pady=(0, 15))
 
         conteneur_formulaire_bas = Frame(conteneur_milieu, width=600)
@@ -808,7 +811,7 @@ class VueFacture(tk.Frame):
         label_statut.grid(row=0, column=0, padx=(0, 15))
         self.str_statut = tk.StringVar()
         self.str_statut.set("")
-        self.statut = Entry(conteneur_statut, textvariable=self.str_type_tarif, width=20)
+        self.statut = Entry(conteneur_statut, textvariable=self.str_statut, width=20)
         self.statut.config(state="disabled")
         self.statut.grid(row=0, column=1)
 
@@ -824,7 +827,7 @@ class VueFacture(tk.Frame):
         # self.actualiser_liste_adherents()
         self.adherents.grid(row=0, column=0)
 
-        self.ajouter = ttk.Button(conteneur_adherents, text="ajouter", style='my.TButton')
+        self.ajouter = ttk.Button(conteneur_adherents, text="ajouter", style='my.TButton', command=lambda : ctrl_facture.ajouter_informations_adherents_facture())
         self.ajouter.config(state='disabled')
         self.ajouter.grid(row=1, column=0)
 
@@ -839,13 +842,18 @@ class VueFacture(tk.Frame):
         ligne_bas.columnconfigure(3, weight=1)
         ligne_bas.grid(row=2, column=0, columnspan=3, sticky="nsew")
 
-        adherents_ajoutes = ttk.Treeview(ligne_bas, columns=('prenom', 'nom', 'tarif', 'statut'))
-        adherents_ajoutes.heading('prenom', text='Prénom')
-        adherents_ajoutes.heading('nom', text='Nom')
-        adherents_ajoutes.heading('tarif', text='type de Tarif')
-        adherents_ajoutes.heading('statut', text='Statut')
-        adherents_ajoutes['show'] = 'headings'
-        adherents_ajoutes.grid(row=1, column=1)
+        self.adherents_ajoutes = ttk.Treeview(ligne_bas, columns=('prenom', 'nom', 'tarif', 'statut'))
+        self.adherents_ajoutes.heading('prenom', text='Prénom')
+        self.adherents_ajoutes.heading('nom', text='Nom')
+        self.adherents_ajoutes.heading('tarif', text='type de Tarif')
+        self.adherents_ajoutes.heading('statut', text='Statut')
+        self.adherents_ajoutes['show'] = 'headings'
+        self.adherents_ajoutes.grid(row=0, column=1)
+
+        self.generer = ttk.Button(ligne_bas, text="générer bon de commande", style='my.TButton',
+                                  command=lambda: ctrl_facture.generer())
+        self.generer.config(state='disabled')
+        self.generer.grid(row=1, column=1)
 
     def actualiser_liste_adherents(self, liste):
         self.adherents.delete(0, END)
@@ -890,6 +898,7 @@ class VueFacture(tk.Frame):
         return self.organisations.size() == 0
 
     def activer_champs_partie1(self):
+        self.num_facture.config(state="normal")
         self.num_bon.config(state="normal")
         self.organisations.config(state="normal")
         self.montant_total.config(state="normal")
@@ -897,6 +906,7 @@ class VueFacture(tk.Frame):
         self.valider.config(state="normal")
 
     def desactiver_champs_partie1(self):
+        self.num_facture.config(state="disabled")
         self.num_bon.config(state="disabled")
         self.organisations.config(state="disabled")
         self.montant_total.config(state="disabled")
@@ -916,20 +926,15 @@ class VueFacture(tk.Frame):
         self.generer.config(state="disabled")
 
     def desactiver_champs_partie2(self):
-        self.prix_unitaire.config(state="disabled")
-        self.quantite.config(state="disabled")
-        self.montant_ht.config(state="disabled")
+        self.type_tarif.config(state="disabled")
+        self.statut.config(state="disabled")
         self.adherents.config(state="disabled")
-        self.remarque.config(state="disabled")
         self.ajouter.config(state="disabled")
-        self.generer.config(state="disabled")
 
     def vider_champs_partie2(self):
-        self.str_prix_unitaire.set("")
-        self.quantite.selection_to(0)
-        self.str_montant_ht.set("")
+        self.str_type_tarif.set("")
+        self.str_statut.set("")
         self.adherents.select_set(0)
-        self.remarque.delete(1.0, END)
 
     def get_numero_bon(self):
         return self.num_bon.get()
@@ -944,13 +949,53 @@ class VueFacture(tk.Frame):
         return self.montant_total.get()
 
     def get_nombre_adherents(self):
-        return self.nombre_adherents.get()
+        return self.int_nombre.get()
 
     def get_type_tarif(self):
         return self.type_tarif.get()
 
     def get_statut(self):
         return self.statut.get()
+
+    def get_adherent_selectionne(self):
+        adherent = self.adherents.get(ANCHOR)
+        self.adherents.delete(ANCHOR)
+        return adherent
+
+    def actualiser_liste_adherents_ajoutes(self, prenom, nom, type, statut):
+        self.adherents_ajoutes.insert('', 'end', prenom, text=prenom)
+        self.adherents_ajoutes.set(prenom, 'prenom', prenom)
+        self.adherents_ajoutes.set(prenom, 'nom', nom)
+        self.adherents_ajoutes.set(prenom, 'tarif', type)
+        self.adherents_ajoutes.set(prenom, 'statut', statut)
+
+    def effacer_informations(self):
+        self.ctrl_facture.nouvelle_facture()
+        self.str_num_facture.set("")
+        self.str_num_bon.set("")
+        self.str_montant_total.set("")
+        self.nombre_adherents.selection_to(0)
+        self.str_type_tarif.set("")
+        self.str_statut.set("")
+        for i in self.adherents_ajoutes.get_children():
+            self.adherents_ajoutes.delete(i)
+
+    @staticmethod
+    def get_fichier_path():
+        filename = tk.filedialog.asksaveasfilename(defaultextension=".pdf")
+        return filename
+
+    @staticmethod
+    def message_erreur_champs_vide():
+        messagebox.showwarning(title="erreur de saisie", message="veuillez remplir tout les champs")
+
+    @staticmethod
+    def message_erreur_nombres_adherents():
+        messagebox.showwarning(title="erreur de saisie", message="Il n'y a pas assez d'adhérents")
+
+    @staticmethod
+    def message_erreur_ajout_adherent():
+        messagebox.showerror(title="erreur d'ajout", message="Vous ne pouvez pas ajouter plus d'adhérents")
 
 
 class VueBonDeCommande(tk.Frame):
@@ -1061,7 +1106,7 @@ class VueBonDeCommande(tk.Frame):
         label_nombre_adherents.config(bg='skyblue')
         label_nombre_adherents.grid(row=0, column=0, padx=(0, 15))
         self.int_nombre = tk.IntVar()
-        self.int_nombre.set("")
+        self.int_nombre.set(0)
         self.nombre_adherents = Spinbox(conteneur_nombre_adherents, from_=1, to=3, textvariable=self.int_nombre)
         self.nombre_adherents.grid(row=0, column=1, padx=(0, 30))
         self.valider = ttk.Button(conteneur_nombre_adherents, text="valider", style='my.TButton',
@@ -1294,7 +1339,7 @@ class VueBonDeCommande(tk.Frame):
         return self.prix_unitaire.get()
 
     def get_remarque(self):
-        return self.remarque.get("1.0", "end")
+        return self.remarque.get("1.0", "end")[:-1]
 
     def get_adherent_selectionne(self):
         adherent = self.adherents.get(ANCHOR)

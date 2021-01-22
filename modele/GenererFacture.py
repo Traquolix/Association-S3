@@ -14,9 +14,10 @@ class GenererFacture:
 
     @staticmethod
     def genererFacture(path,facture):
-        image = 'image/atala_logo.png'
+        image = 'modele/image/atala_logo.png'
         compt = 425
         tab_adh = facture.get_adherents()
+        now = datetime.datetime.now()
 
         c = canvas.Canvas(path, pagesize=(A4), bottomup=0)
         c.translate(15, 150)
@@ -45,14 +46,14 @@ class GenererFacture:
         c.drawString(315, 320, facture.get_adresse_organisation())
         c.drawString(250, 350, "DOIT :    " + facture.get_ville_organisation())
         c.setFont("Helvetica-Bold", 13)
-        c.drawString(10, 400, "La somme de " + facture.get_montant() + " €, cotisation à l'ATALA pour l'année " + str(datetime.date.year) + " de " + facture.get_nbAdh() + " adhérent : ")
+        c.drawString(10, 400, "La somme de " + facture.get_montant() + " €, cotisation à l'ATALA pour l'année " + now.strftime("%Y") + " de " + str(facture.get_nbAdh()) + " adhérent : ")
         for adh in tab_adh:
             c.drawString(10, compt, "- " + adh[0] + " - " + adh[1] + " - " + adh[3] + " - " + adh[2] + " - ")
             compt += 20
         c.setFont("Helvetica-Bold", 19)
         c.drawCentredString(300, compt + 20, "correspondant au bon de commande : " + facture.get_refBdc())
         c.setFont("Helvetica-Bold", 14)
-        c.drawRightString(550, compt + 90, "À Nantes, le " + str(datetime.date.day) + "/" + str(datetime.date.month) + "/" + str(datetime.date.year))
+        c.drawRightString(550, compt + 90, "À Nantes, le " + now.strftime("%d/%m/%Y"))
         c.drawRightString(550, compt + 110, "Pour l'ATALA, ")
         c.drawRightString(550, compt + 130, "La trésorière, ")
         c.drawRightString(550, compt + 150, "Solen QUINIOU ")

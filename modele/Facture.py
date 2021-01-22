@@ -35,6 +35,9 @@ class Facture:
     def get_nbAdh(self):
         return self.nbAdh
 
+    def get_ajoute(self):
+        return self.ajoute
+
     def set_nom_organisation(self, nom_organisation):
         self.nom_organisation = nom_organisation
 
