@@ -18,9 +18,8 @@ class GenererBonDeCommande:
     @staticmethod
     def genererBonDeCommande(path, bon_de_commande):
         image = 'vue/images/atala_clean.png'
-        save_name = os.path.join(os.path.expanduser("~"), path)  # /!\ LE PATH EST DEPUIS LA RACINE
 
-        c = canvas.Canvas(save_name, pagesize=A4, bottomup=0)
+        c = canvas.Canvas(path, pagesize=A4, bottomup=0)
         # top
         c.translate(15, 150)
         c.scale(1, -1)

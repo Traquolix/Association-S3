@@ -19,7 +19,7 @@ class GenererFacture:
         tab_adh = facture.get_adherents()
         now = datetime.datetime.now()
 
-        c = canvas.Canvas(path, pagesize=(A4), bottomup=0)
+        c = canvas.Canvas(path, pagesize=A4, bottomup=0)
         c.translate(15, 150)
         c.scale(1, -1)
         c.drawImage(image, 0, 0, width=180, height=125)
