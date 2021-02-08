@@ -10,6 +10,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 pathlib.Path(__file__).parent.absolute()
 
+
 class GenererFacture:
 
     @staticmethod
@@ -17,7 +18,9 @@ class GenererFacture:
         image = 'modele/image/atala_logo.png'
         compt = 425
         tab_adh = facture.get_adherents()
+        taille = len(tab_adh)
         now = datetime.datetime.now()
+        separateur = 0
 
         c = canvas.Canvas(path, pagesize=A4, bottomup=0)
         c.translate(15, 150)
@@ -47,18 +50,43 @@ class GenererFacture:
         c.drawString(250, 350, "DOIT :    " + facture.get_ville_organisation())
         c.setFont("Helvetica-Bold", 13)
         c.drawString(10, 400, "La somme de " + facture.get_montant() + " €, cotisation à l'ATALA pour l'année " + now.strftime("%Y") + " de " + str(facture.get_nbAdh()) + " adhérent : ")
-        for adh in tab_adh:
-            c.drawString(10, compt, "- " + adh[0] + " - " + adh[1] + " - " + adh[3] + " - " + adh[2] + " - ")
-            compt += 20
+
+        if taille <= 10:
+            c.setFont("Helvetica-Bold", 15)
+            for adh in tab_adh:
+                c.drawString(10, compt, "- " + adh[0] + " - " + adh[1] + " - " + adh[2] + " - ")
+                compt += 20
+
+        if taille > 10 and taille <= 20:
+            c.setFont("Helvetica-Bold", 12)
+            for adh in tab_adh:
+                if separateur % 2 == 0:
+                    c.drawString(10, compt, "- " + adh[0] + " - " + adh[1] + " - " + adh[2] + " - ")
+                if separateur % 2 == 1:
+                    c.drawString(300, compt, "- " + adh[0] + " - " + adh[1] + " - " + adh[2] + " - ")
+                    compt += 20
+
+        if taille > 20 and taille <= 40:
+            c.setFont("Helvetica-Bold", 9)
+            for adh in tab_adh:
+                if separateur % 3 == 0:
+                    c.drawString(10, compt, "- " + adh[0] + " - " + adh[1] + " - " + adh[2] + " - ")
+                if separateur % 3 == 1:
+                    c.drawString(210, compt, "- " + adh[0] + " - " + adh[1] + " - " + adh[2] + " - ")
+                if separateur % 3 == 2:
+                    c.drawString(410, compt, "- " + adh[0] + " - " + adh[1] + " - " + adh[2] + " - ")
+                    compt += 20
+                separateur = separateur + 1
+
         c.setFont("Helvetica-Bold", 19)
         c.drawCentredString(300, compt + 20, "correspondant au bon de commande : " + facture.get_refBdc())
         c.setFont("Helvetica-Bold", 14)
-        c.drawRightString(550, compt + 90, "À Nantes, le " + now.strftime("%d/%m/%Y"))
-        c.drawRightString(550, compt + 110, "Pour l'ATALA, ")
-        c.drawRightString(550, compt + 130, "La trésorière, ")
-        c.drawRightString(550, compt + 150, "Solen QUINIOU ")
+        c.drawRightString(550, compt + 50, "À Nantes, le " + now.strftime("%d/%m/%Y"))
+        c.drawRightString(550, compt + 70, "Pour l'ATALA, ")
+        c.drawRightString(550, compt + 90, "La trésorière, ")
+        c.drawRightString(550, compt + 110, "Solen QUINIOU ")
 
-        c.line(10, compt + 170, 580, compt + 170)
+        c.line(10, compt + 120, 580, compt + 120)
 
         # End the Page and Start with new
         c.showPage()
