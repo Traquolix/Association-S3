@@ -14,6 +14,7 @@ class ControleurAdherents:
         self.vue_adherents = None
         self.vue_organisations = None
         self.vue_bon_commande = None
+        self.vue_facture = None
 
     def set_vue_adherents(self, vue_adherents):
         self.vue_adherents = vue_adherents
@@ -23,6 +24,9 @@ class ControleurAdherents:
 
     def set_vue_bon_commande(self, vue_bon_commande):
         self.vue_bon_commande = vue_bon_commande
+
+    def set_vue_facture(self, vue_facture):
+        self.vue_facture = vue_facture
 
     def actualiser_liste_adherents(self):
         return sorted(self.adherents_csv.lire_fichier_complets())
@@ -113,6 +117,7 @@ class ControleurAdherents:
                 self.vue_organisations.actualiser_liste_organisations()
                 self.vue_adherents.actualiser_liste_organisations()
                 self.vue_bon_commande.actualiser_liste_organisations()
+                self.vue_facture.actualiser_liste_organisations()
                 self.vue_organisations.viderChamps()
             else:
                 self.vue_organisations.message_erreur_ajout()
@@ -128,6 +133,8 @@ class ControleurAdherents:
             self.vue_adherents.actualiser_liste_organisations()
             self.vue_organisations.actualiser_liste_organisations()
             self.vue_bon_commande.actualiser_liste_organisations()
+            self.vue_facture.actualiser_liste_organisations()
+
         else:
             self.vue_organisations.message_erreur_suppression()
 

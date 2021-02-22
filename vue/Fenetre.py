@@ -49,6 +49,7 @@ class Fenetre:
         self.ctrl_Adherents.set_vue_adherents(self.get_frame_VueAdherents())
         self.ctrl_Adherents.set_vue_organisations(self.get_frame_VueOrganisations())
         self.ctrl_Adherents.set_vue_bon_commande(self.get_frame_VueBonDeCommande())
+        self.ctrl_Adherents.set_vue_facture(self.get_frame_VueFacture())
 
         self.ctrl_Fenetre.set_vue_bon_de_commande(self.get_frame_VueBonDeCommande())
         self.ctrl_Fenetre.set_vue_facture(self.get_frame_VueFacture())
