@@ -69,13 +69,12 @@ class ControleurFacture:
             prenom = designation[0]
             nom = designation[1]
             type = self.vue_facture.get_type_tarif()
-            statut = self.vue_facture.get_statut()
             if self.facture.get_nom_organisation() == "indépendants":
                 self.facture.set_nom_organisation(str(prenom + " " + nom))
                 self.facture.set_ville_organisation(self.adherents_csv.get_ville_independant(designation))
                 self.facture.set_adresse_organisation(self.adherents_csv.get_adresse_independant(designation))
-            self.facture.ajouter_adherent(prenom, nom, type, statut)
-            self.vue_facture.actualiser_liste_adherents_ajoutes(prenom, nom, type, statut)
+            self.facture.ajouter_adherent(prenom, nom, type)
+            self.vue_facture.actualiser_liste_adherents_ajoutes(prenom, nom, type)
             self.vue_facture.vider_champs_partie2()
 
     def generer(self):

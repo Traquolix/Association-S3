@@ -59,7 +59,7 @@ class Facture:
     def get_adherents(self):
         return self.adherents
 
-    def ajouter_adherent(self, prenom, nom, type_tarif, statut):
-        adherent = [prenom, nom, type_tarif, statut]
+    def ajouter_adherent(self, prenom, nom, type_tarif):
+        adherent = [prenom, nom, type_tarif]
         self.adherents.append(adherent)
         self.ajoute += 1

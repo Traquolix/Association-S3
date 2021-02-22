@@ -743,7 +743,7 @@ class VueFacture(tk.Frame):
         conteneur_organisations.rowconfigure(0, weight=1)
         conteneur_organisations.columnconfigure(0, weight=1)
         conteneur_organisations.columnconfigure(1, weight=1)
-        conteneur_organisations.columnconfigure(2, weight=1)
+        conteneur_organisations.columnconfigure(2, weight=2)
         conteneur_organisations.grid(row=0, columnspan=3, column=0, pady=(0, 15), sticky='w')
 
         lorganisations = Label(conteneur_organisations, text="destinataire :")
@@ -800,21 +800,6 @@ class VueFacture(tk.Frame):
         self.type_tarif.config(state="disabled")
         self.type_tarif.grid(row=0, column=1)
 
-        conteneur_statut = Frame(conteneur_informations)
-        conteneur_statut.config(bg='skyblue')
-        conteneur_statut.rowconfigure(0, weight=1)
-        conteneur_statut.columnconfigure(0, weight=1)
-        conteneur_statut.columnconfigure(1, weight=1)
-        conteneur_statut.grid(row=1, column=0, pady=(20, 20), sticky="e")
-        label_statut = Label(conteneur_statut, text="statut : ")
-        label_statut.config(bg='skyblue')
-        label_statut.grid(row=0, column=0, padx=(0, 15))
-        self.str_statut = tk.StringVar()
-        self.str_statut.set("")
-        self.statut = Entry(conteneur_statut, textvariable=self.str_statut, width=20)
-        self.statut.config(state="disabled")
-        self.statut.grid(row=0, column=1)
-
         conteneur_adherents = Frame(conteneur_formulaire_bas)
         conteneur_adherents.config(bg='skyblue')
         conteneur_adherents.rowconfigure(0, weight=1)
@@ -842,11 +827,10 @@ class VueFacture(tk.Frame):
         ligne_bas.columnconfigure(3, weight=1)
         ligne_bas.grid(row=2, column=0, columnspan=3, sticky="nsew")
 
-        self.adherents_ajoutes = ttk.Treeview(ligne_bas, columns=('prenom', 'nom', 'tarif', 'statut'))
+        self.adherents_ajoutes = ttk.Treeview(ligne_bas, columns=('prenom', 'nom', 'tarif'))
         self.adherents_ajoutes.heading('prenom', text='Prénom')
         self.adherents_ajoutes.heading('nom', text='Nom')
         self.adherents_ajoutes.heading('tarif', text='type de Tarif')
-        self.adherents_ajoutes.heading('statut', text='Statut')
         self.adherents_ajoutes['show'] = 'headings'
         self.adherents_ajoutes.grid(row=0, column=1)
 
@@ -890,8 +874,6 @@ class VueFacture(tk.Frame):
         est_vide = False
         if self.get_type_tarif() == "":
             est_vide = True
-        if self.get_statut() == "":
-            est_vide = True
         return est_vide
 
     def listbox_est_vide(self):
@@ -915,7 +897,6 @@ class VueFacture(tk.Frame):
 
     def activer_champs_partie2(self):
         self.type_tarif.config(state="normal")
-        self.statut.config(state="normal")
         self.adherents.config(state="normal")
         self.ajouter.config(state="normal")
 
@@ -927,13 +908,11 @@ class VueFacture(tk.Frame):
 
     def desactiver_champs_partie2(self):
         self.type_tarif.config(state="disabled")
-        self.statut.config(state="disabled")
         self.adherents.config(state="disabled")
         self.ajouter.config(state="disabled")
 
     def vider_champs_partie2(self):
         self.str_type_tarif.set("")
-        self.str_statut.set("")
         self.adherents.select_set(0)
 
     def get_numero_bon(self):
@@ -954,20 +933,16 @@ class VueFacture(tk.Frame):
     def get_type_tarif(self):
         return self.type_tarif.get()
 
-    def get_statut(self):
-        return self.statut.get()
-
     def get_adherent_selectionne(self):
         adherent = self.adherents.get(ANCHOR)
         self.adherents.delete(ANCHOR)
         return adherent
 
-    def actualiser_liste_adherents_ajoutes(self, prenom, nom, type, statut):
+    def actualiser_liste_adherents_ajoutes(self, prenom, nom, type):
         self.adherents_ajoutes.insert('', 'end', prenom, text=prenom)
         self.adherents_ajoutes.set(prenom, 'prenom', prenom)
         self.adherents_ajoutes.set(prenom, 'nom', nom)
         self.adherents_ajoutes.set(prenom, 'tarif', type)
-        self.adherents_ajoutes.set(prenom, 'statut', statut)
 
     def effacer_informations(self):
         self.ctrl_facture.nouvelle_facture()
@@ -976,7 +951,6 @@ class VueFacture(tk.Frame):
         self.str_montant_total.set("")
         self.nombre_adherents.selection_to(0)
         self.str_type_tarif.set("")
-        self.str_statut.set("")
         for i in self.adherents_ajoutes.get_children():
             self.adherents_ajoutes.delete(i)
 
