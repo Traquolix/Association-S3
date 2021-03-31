@@ -1,36 +1,62 @@
-﻿DÉPENSES;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;
-Revue TAL. ;;;Bourses ATALA. prix de thèse;;;
-10/01/2019;1 000.00 ;;31/07/2019;1 736.52 ;remboursements frais TALN 2019 (5 bourses);
-30/01/2019;100.00 ;;31/07/2019;155.90 ;prix de thèse à TALN 2019;
-29/03/2019;800.00 ;;TOTAL;1 892.42 ;;
-21/06/2019;600.00 ;;;;;
-01/07/2019;100.00 ;;Journées ATALA et colloques;;;
-31/07/2019;162.10 ;réunion CR TAL;19/04/2019;1 150.80 ;buffet inauguration pré-GDR TAL;
-20/09/2019;100.00 ;;29/11/2019;983.40 ;déjeuner journée pré-GDR TAL;
-29/11/2019;300.00 ;;5/12/2019;900.00 ;subvention colloque Arménien et numérique (INALCO);
-12/12/2019;100.00 ;;TOTAL;3 034.20 ;;
-16/12/2019;600.00 ;;;;;
-TOTAL;3 862.10 ;;Organisation TALN;;;
-;;;07/02/2019;216.00 ;licence Easychair;
-Site ATALA;;;31/07/2019;364.70 ;cadeau organisateurs TALN 2019;
-15/04/2019;158.26 ;abonnement OVH;29/11/2019;2 538.00 ;participation ATALA pour adhérents inscrits à PFIA;;;;;;;;;;;;;;;;;;;;
-31/07/2019;18.79 ;renouvellement nom domaine;TOTAL;3 118.70 ;;
-18/12/2019;1 550.00 ;remise en ligne site web;;;;
-31/12/2019;242.82 ;abonnement Scellius (CB);Frais gestion comptes bancaires. commissions CB;;;
-;;;31/12/2019;286.00 ;abonnement LBP Net Entreprise;;;;;;;;;;;;;;;;;;;;
-TOTAL;1 969.87 ;;31/12/2019;45.00 ;frais de gestion de compte;Subventions;;;;;;;;;;;;;;;;;;;
-;;;31/12/2019;34.50 ;commissions paiements CB;
-Missions. représentation;;;31/12/2019;47.53 ;assurance MAIF;
-08/04/2019;141.67 ;mission trésorière (Paris);TOTAL;413.03 ;;
-09/12/2019;176.00 ;mission trésorière (Paris);;;;;;;;;;;;;;;;;;;;;;;
-;;;Provisions;;;
-TOTAL;317.67 ;;;;;
-;;;TOTAL;0.00 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;
-TOTAL DEPENSES
-14 607.99
+﻿DÉPENSES
+Revue TAL : secrétariat/CR
+10/01/2019;1 000.00; ""
+30/01/2019;100.00; ""
+29/03/2019;800.00; ""
+21/06/2019;600.00; ""
+01/07/2019;100.00; ""
+31/07/2019;162.10;réunion CR TAL;
+20/09/2019;100.00; ""
+29/11/2019;300.00; ""
+12/12/2019;100.00; ""
+16/12/2019;600.00; ""
+TOTAL;3 862.10;total
 
+Site ATALA
+date;montant;description
+15/04/2019;158.26 ;abonnement OVH
+31/07/2019;18.79 ;renouvellement nom domaine
+18/12/2019;1 550.00 ;remise en ligne site web
+31/12/2019;242.82 ;abonnement Scellius (CB)
+TOTAL;1 969.87;total
+
+Missions. représentation
+date;montant;description
+08/04/2019;141.67 ;mission trésorière (Paris)
+09/12/2019;176.00 ;mission trésorière (Paris)
+TOTAL;317.67;total
+
+Bourses ATALA. prix de thèse
+date;montant;description
+31/07/2019;1 736.52 ;remboursements frais TALN 2019 (5 bourses)
+31/07/2019;155.90 ;prix de thèse à TALN 2019
+TOTAL;1 892.42;total
+
+
+Journées ATALA et colloques
+date;montant;description
+19/04/2019;1 150.80 ;buffet inauguration pré-GDR TAL
+29/11/2019;983.40 ;déjeuner journée pré-GDR TAL
+5/12/2019;900.00 ;subvention colloque Arménien et numérique (INALCO)
+TOTAL;3 034.20 ; total
+
+Organisation TALN
+date;montant;description
+07/02/2019;216.00 ;licence Easychair;
+31/07/2019;364.70 ;cadeau organisateurs TALN 2019
+29/11/2019;2 538.00 ;participation ATALA pour adhérents inscrits à PFIA
+TOTAL;3 118.70 ;total
+
+
+Frais gestion comptes bancaires. commissions CB
+date;montant;description
+31/12/2019;286.00 ;abonnement LBP Net Entreprise
+31/12/2019;45.00 ;frais de gestion de compte
+31/12/2019;34.50 ;commissions paiements CB
+31/12/2019;47.53 ;assurance MAIF
+TOTAL;413.03:total
+
+TOTAL DEPENSES;14 607.99
 
 RECETTES
 Adhésions
