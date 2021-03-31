@@ -1,5 +1,5 @@
 ﻿DÉPENSES
-Revue TAL : secrétariat/CR
+Revue TAL
 10/01/2019;1 000.00; ""
 30/01/2019;100.00; ""
 29/03/2019;800.00; ""
@@ -13,43 +13,37 @@ Revue TAL : secrétariat/CR
 TOTAL;3 862.10;total
 
 Site ATALA
-date;montant;description
 15/04/2019;158.26 ;abonnement OVH
 31/07/2019;18.79 ;renouvellement nom domaine
 18/12/2019;1 550.00 ;remise en ligne site web
 31/12/2019;242.82 ;abonnement Scellius (CB)
 TOTAL;1 969.87;total
 
-Missions. représentation
-date;montant;description
+Missions
 08/04/2019;141.67 ;mission trésorière (Paris)
 09/12/2019;176.00 ;mission trésorière (Paris)
 TOTAL;317.67;total
 
-Bourses ATALA. prix de thèse
-date;montant;description
+Bourses ATALA
 31/07/2019;1 736.52 ;remboursements frais TALN 2019 (5 bourses)
 31/07/2019;155.90 ;prix de thèse à TALN 2019
 TOTAL;1 892.42;total
 
 
-Journées ATALA et colloques
-date;montant;description
+Journées ATALA
 19/04/2019;1 150.80 ;buffet inauguration pré-GDR TAL
 29/11/2019;983.40 ;déjeuner journée pré-GDR TAL
 5/12/2019;900.00 ;subvention colloque Arménien et numérique (INALCO)
 TOTAL;3 034.20 ; total
 
 Organisation TALN
-date;montant;description
 07/02/2019;216.00 ;licence Easychair;
 31/07/2019;364.70 ;cadeau organisateurs TALN 2019
 29/11/2019;2 538.00 ;participation ATALA pour adhérents inscrits à PFIA
 TOTAL;3 118.70 ;total
 
 
-Frais gestion comptes bancaires. commissions CB
-date;montant;description
+Frais gestion
 31/12/2019;286.00 ;abonnement LBP Net Entreprise
 31/12/2019;45.00 ;frais de gestion de compte
 31/12/2019;34.50 ;commissions paiements CB
@@ -60,7 +54,6 @@ TOTAL DEPENSES;14 607.99
 
 RECETTES
 Adhésions
-date;montant;description
 11/12/2018;90.00 ;adhésions 2018 CEA (retard)
 31/12/2018;990.00 ;adhésions 2019 LIMSI
 31/03/2019;120.00 ; ""
@@ -76,25 +69,21 @@ date;montant;description
 TOTAL;4 560.00 ; ""
 
 Bénéfice TALN;
-date;montant;description
 14/03/2019;4 500.00 ;bénéfices TALN 2018
 TOTAL;4 500.00 ; total
 
 Subventions;
-date;montant;description
 31/12/2019;0.00 ;DGLFLF --> aucune car PFIA 2019
 31/12/2019;1 000.00 ;CNRS
 TOTAL;1 000.00 ; total
 
 Intérêts;
-date;montant;description
 31/12/2019;190.97 ;Livret A
 TOTAL;190.97 ;total
 
 TOTAL RECETTES; 10 060.00;
 
-Commissions paiements CB
-montant;nombre
+Commissions CB
 0.15; 0
 0.38; 2
 0.57; 2
@@ -109,4 +98,4 @@ montant;nombre
 2.84; 0
 3.02; 0
 5.67; 0
-37
+
