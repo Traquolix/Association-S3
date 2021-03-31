@@ -208,6 +208,6 @@ class StockageBilanFinancier:
     def somme_operation(self,operation): #Realiser la somme d'une opération
         cpt = 0
         for row in operation :
-            row[cpt] = operation[cpt][1] #on prend le deuxieme element de la matrice operation
+            row[cpt] = operation[cpt][1] #on prend le deuxieme element de la matrice operation (correspond aux montants)
             cpt += 1
         return np.sum(row)
