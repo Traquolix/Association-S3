@@ -6,7 +6,7 @@ from modele.Operation import Operation
 class StockageBilanFinancier:
 
     def __init__(self):
-        self.fichier_bilan = "data/bilan.csv"
+        self.fichier_bilan = "data/Bilan_financier_2020/budget_2019.csv"
         self.bilan = BilanFinancier()
 
     def initialiser_fichier(self):

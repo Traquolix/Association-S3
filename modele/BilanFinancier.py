@@ -1,4 +1,4 @@
-import CategorieBilanFonc
+from modele.Operation import Operation
 
 class BilanFinancier:
 
