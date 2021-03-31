@@ -1,17 +1,19 @@
+import CategorieBilanFonc
+
 class BilanFinancier:
 
     def __init__(self):
-        self.depenses = []
-        self.recettes = []
+        self.actif = []
+        self.passif = []
 
-    def ajouter_depenses(self, operation):
-        self.depenses.append(operation)
+    def ajouter_actif(self, categorie):
+        self.actif.append(categorie)
 
-    def supprimer_depenses(self, operation):
-        self.depenses.remove(operation)
+    def supprimer_actif(self, categorie):
+        self.actif.remove(categorie)
 
-    def ajouter_recettes(self, operation):
-        self.recettes.append(operation)
+    def ajouter_passif(self, categorie):
+        self.passif.append(categorie)
 
-    def supprimer_recettes(self, operation):
-        self.recettes.remove(operation)
+    def supprimer_passif(self, categorie):
+        self.passif.remove(categorie)
