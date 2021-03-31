@@ -1,5 +1,6 @@
 import csv
 import pandas as ps
+import numpy as np
 
 from modele.BilanFinancier import BilanFinancier
 from modele.Operation import Operation
@@ -203,3 +204,10 @@ class StockageBilanFinancier:
         bilan.insert(operation2, operation1)
         bilan.remove(ligne)
         self.initialiser_fichier()
+
+    def somme_operation(self,operation): #Realiser la somme d'une opération
+        cpt = 0
+        for row in operation :
+            row[cpt] = operation[cpt][1] #on prend le deuxieme element de la matrice operation
+            cpt += 1
+        return np.sum(row)
