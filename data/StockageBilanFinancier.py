@@ -22,7 +22,7 @@ class StockageBilanFinancier:
         with open(self.fichier_bilan, newline='') as csvfile:
             cpt = 0
             if nom_categorie == "Revue TAl":
-                csvreader = ps.read_csv(csvfile, skiprows=2, nrows=11)
+                csvreader = ps.read_csv(csvfile, skiprows=2, nrows=10)
                 for row in csvreader:
                     categorie = Operation();
                     categorie.set_date(row[0])
@@ -204,10 +204,3 @@ class StockageBilanFinancier:
         bilan.insert(operation2, operation1)
         bilan.remove(ligne)
         self.initialiser_fichier()
-
-    def somme_operation(self,operation): #Realiser la somme d'une opération
-        cpt = 0
-        for row in operation :
-            row[cpt] = operation[cpt][1] #on prend le deuxieme element de la matrice operation (correspond aux montants)
-            cpt += 1
-        return np.sum(row)
