@@ -3,17 +3,17 @@ from modele.Operation import Operation
 class BilanFinancier:
 
     def __init__(self):
-        self.actif = []
-        self.passif = []
+        self.depenses = []
+        self.recettes = []
 
-    def ajouter_actif(self, categorie):
-        self.actif.append(categorie)
+    def ajouter_depenses(self, operation):
+        self.depenses.append(operation)
 
-    def supprimer_actif(self, categorie):
-        self.actif.remove(categorie)
+    def supprimer_depenses(self, operation):
+        self.depenses.remove(operation)
 
-    def ajouter_passif(self, categorie):
-        self.passif.append(categorie)
+    def ajouter_recettes(self, operation):
+        self.recettes.append(operation)
 
-    def supprimer_passif(self, categorie):
-        self.passif.remove(categorie)
+    def supprimer_recettes(self, operation):
+        self.recettes.remove(operation)

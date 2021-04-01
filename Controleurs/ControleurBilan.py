@@ -18,8 +18,11 @@ class ControleurBilan:
     def set_vue_bilan_modification(self, vue_bilan_modification):
         self.vue_bilan_modification = vue_bilan_modification
 
-    #def actualiser_liste(self):
-        #return sorted(self.stockagebilan.lire_fichier(),key=lambda operationBilanFinancier: operationBilanFinancier.type)
+    def actualiser_liste_recettes(self):
+        return self.stockagebilan.lire_fichier("recette")
+
+    def actualiser_liste_depenses(self):
+        return self.stockagebilan.lire_fichier("depenses")
 
     def ajouter_operation(self):
 

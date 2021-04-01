@@ -1539,7 +1539,7 @@ class VueBilan(tk.Frame):
         conteneur_depenses.columnconfigure(1, weight=1)
         conteneur_depenses.grid(row=0, column=0, sticky="nsew")
         self.depenses = tk.Listbox(conteneur_depenses, width=60)
-        #self.actualiser_liste_operations()
+        self.actualiser_liste_depenses()
         self.depenses.grid(row=0, column=0, sticky="ens")
 
         scrollbar = ttk.Scrollbar(conteneur_depenses)
@@ -1554,8 +1554,8 @@ class VueBilan(tk.Frame):
         conteneur_supprimer.columnconfigure(1, weight=1)
         conteneur_supprimer.grid(row=1, column=0)
 
-        supprimer = ttk.Button(conteneur_supprimer, text="supprimer opération", style='my.TButton',
-                               command=lambda: ctrl_bilan.supprimer_operation())
+        supprimer = ttk.Button(conteneur_supprimer, text="supprimer depense", style='my.TButton',
+                               command=lambda: ctrl_bilan.supprimer_depense())
         supprimer.grid(row=0, column=0, padx=(0, 15))
 
         conteneur_droite = Frame(self)
@@ -1572,7 +1572,7 @@ class VueBilan(tk.Frame):
         conteneur_recettes.columnconfigure(1, weight=1)
         conteneur_recettes.grid(row=0, column=0, sticky="nsew")
         self.recettes = tk.Listbox(conteneur_recettes, width=60)
-        # self.actualiser_liste_operations()
+        self.actualiser_liste_recettes()
         self.recettes.grid(row=0, column=0, sticky="ens")
 
         scrollbar = ttk.Scrollbar(conteneur_recettes)
@@ -1587,8 +1587,8 @@ class VueBilan(tk.Frame):
         conteneur_supprimer.columnconfigure(1, weight=1)
         conteneur_supprimer.grid(row=1, column=0)
 
-        supprimer = ttk.Button(conteneur_supprimer, text="supprimer opération", style='my.TButton',
-                               command=lambda: ctrl_bilan.supprimer_operation())
+        supprimer = ttk.Button(conteneur_supprimer, text="supprimer recette", style='my.TButton',
+                               command=lambda: ctrl_bilan.supprimer_recette())
         supprimer.grid(row=0, column=0, padx=(0, 15))
 
         conteneur_bas_milieu = Frame(self)
@@ -1609,14 +1609,23 @@ class VueBilan(tk.Frame):
                                command=lambda: ctrl_fenetre.show_frame(VueBilan_modification))
         modifier.grid(row=0, column=0, padx=(0, 15))
 
-    #def actualiser_liste_operations(self):
-    #    self.operations.delete(0, END)
-    #    liste = self.ctrlBilan.actualiser_liste()
-    #    cpt = 1
-    #    for operation in liste:
-    #        self.operations.insert(cpt, operation)
-    #        cpt += 1
-    #    self.operations.select_set(0)
+    def actualiser_liste_recettes(self):
+        self.recettes.delete(0, END)
+        liste = self.ctrlBilan.actualiser_liste_recettes()
+        cpt = 1
+        for operation in liste:
+            self.recettes.insert(cpt, operation)
+            cpt += 1
+        self.recettes.select_set(0)
+
+    def actualiser_liste_depenses(self):
+        self.depenses.delete(0, END)
+        liste = self.ctrlBilan.actualiser_liste_depenses()
+        cpt = 1
+        for operation in liste:
+            self.depenses.insert(cpt, operation)
+            cpt += 1
+        self.depenses.select_set(0)
 
 
     def get_categorie(self):

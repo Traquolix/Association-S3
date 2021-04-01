@@ -18,9 +18,44 @@ class StockageBilanFinancier:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
 
-    def lire_fichier(self, nom_categorie):
+    def lire_fichier(self, type):
+        depensesCat = []
+        recettesCat = []
+        with open(self.fichier_bilan, newline='') as csvfile:
+            csvreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+            boolean = False
+            for row in csvreader:
+                if len(row) == 1:
+                    if row[0] == 'ï»¿DÃ‰PENSES':
+                        boolean = False
+                    elif row[0] == 'RECETTES':
+                        boolean = True
+                    elif boolean == False:
+                        depensesCat.append(row[0])
+                    elif boolean == True:
+                        recettesCat.append(row[0])
+                elif len(row) == 3:
+                    operation = Operation()
+                    operation.set_date(row[0])
+                    operation.set_montant(row[1])
+                    operation.set_description(row[2])
+                    if boolean == True:
+                        operation.set_type('Recettes')
+                        operation.set_categorie(recettesCat[len(recettesCat)-1])
+                        self.bilan.ajouter_recettes(operation)
+                    else:
+                        operation.set_type('Dépense')
+                        operation.set_categorie(depensesCat[len(depensesCat) - 1])
+                        self.bilan.ajouter_depenses(operation)
+        if type == 'recette':
+            return self.bilan.recettes
+        else:
+            return self.bilan.depenses
+
+        """
         with open(self.fichier_bilan, newline='') as csvfile:
             cpt = 0
+
             if nom_categorie == "Revue TAl":
                 csvreader = ps.read_csv(csvfile, skiprows=2, nrows=11)
                 for row in csvreader:
@@ -174,6 +209,7 @@ class StockageBilanFinancier:
                     self.bilan.ajouter_depenses(categorie)
                     cpt += 1
         return self.bilan  # retourne le bilan
+        """
 
     def ajouter_operation(self, operation):
 
@@ -204,10 +240,3 @@ class StockageBilanFinancier:
         bilan.insert(operation2, operation1)
         bilan.remove(ligne)
         self.initialiser_fichier()
-
-    def somme_operation(self,operation): #Realiser la somme d'une opération
-        cpt = 0
-        for row in operation :
-            row[cpt] = operation[cpt][1] #on prend le deuxieme element de la matrice operation (correspond aux montants)
-            cpt += 1
-        return np.sum(row)
