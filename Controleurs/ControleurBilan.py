@@ -35,7 +35,11 @@ class ControleurBilan:
             operation.set_date(self.vue_bilan().get_date())
             operation.set_montant(self.vue_bilan().get_montant())
             operation.set_description(self.vue_bilan().get_description())
-            self.bilan.ajouter_operation(operation)
+            if operation.get_type() == 'depense':
+                self.bilan.ajouter_depenses(operation.toString())
+                self.stockagebilan.ajouter_operation(operation)
+            else:
+                self.bilan.ajouter_recettes(operation.toString())
 
     def supprimer_operation(self):
         if not self.vue_bilan().listbox_bilan_est_vide():
@@ -46,9 +50,11 @@ class ControleurBilan:
             operation.set_date(ligne[2])
             operation.set_montant(ligne[3])
             operation.set_description(ligne[4])
-            self.bilan_csv.supprimer_operation()
-            self.vue_bilan().actualiser_liste_depenses()
-            self.vue_bilan().acutaliser_liste_recette()
+            if operation.get_type() == 'recette':
+                self.bilan_csv.supprimer_operation()
+                self.vue_bilan().actualiser_liste_recettes()
+            else:
+                self.vue_bilan().acutaliser_liste_depenses()
         else:
             self.vue_bilan().message_erreur_suppression()
 

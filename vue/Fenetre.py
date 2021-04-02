@@ -1554,8 +1554,8 @@ class VueBilan(tk.Frame):
         conteneur_supprimer.columnconfigure(1, weight=1)
         conteneur_supprimer.grid(row=1, column=0)
 
-        supprimer = ttk.Button(conteneur_supprimer, text="supprimer depense", style='my.TButton',
-                               command=lambda: ctrl_bilan.supprimer_depense())
+        supprimer = ttk.Button(conteneur_supprimer, text="supprimer opération", style='my.TButton',
+                               command=lambda: ctrl_bilan.supprimer_operation())
         supprimer.grid(row=0, column=0, padx=(0, 15))
 
         conteneur_droite = Frame(self)
@@ -1587,8 +1587,8 @@ class VueBilan(tk.Frame):
         conteneur_supprimer.columnconfigure(1, weight=1)
         conteneur_supprimer.grid(row=1, column=0)
 
-        supprimer = ttk.Button(conteneur_supprimer, text="supprimer recette", style='my.TButton',
-                               command=lambda: ctrl_bilan.supprimer_recette())
+        supprimer = ttk.Button(conteneur_supprimer, text="modifier opération", style='my.TButton',
+                               command=lambda: ctrl_bilan.modifier_operation())
         supprimer.grid(row=0, column=0, padx=(0, 15))
 
         conteneur_bas_milieu = Frame(self)
@@ -1661,6 +1661,9 @@ class VueBilan(tk.Frame):
         if self.get_montant() == "":
             est_vide = True
         return est_vide
+
+    def listbox_bilan_est_vide(self):
+        return self.organisations.size() == 0
 
     @staticmethod
     def message_erreur_suppression():
