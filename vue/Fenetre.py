@@ -62,7 +62,7 @@ class Fenetre:
 
         self.ctrl_Facture.set_vue_facture(self.get_frame_VueFacture())
 
-        self.ctrl_Bilan.set_vue_bilan(self.get_frame_VueBilan)
+        self.ctrl_Bilan.set_vue_bilan(self.get_frame_VueBilan())
         self.ctrl_Bilan.set_vue_bilan_modification(self.get_frame_VueBilan_modification())
 
     def show_frame(self, cont):
@@ -1474,6 +1474,21 @@ class VueBilan(tk.Frame):
         self.categorie = Entry(conteneur_categorie, textvariable=self.str_categorie, width=20)
         self.categorie.grid(row=0, column=1)
 
+        conteneur_date = Frame(formulaire)
+        conteneur_date.config(bg='skyblue')
+        conteneur_date.columnconfigure(0, weight=1)
+        conteneur_date.columnconfigure(1, weight=1)
+        conteneur_date.rowconfigure(0, weight=1)
+        conteneur_date.grid(row=2, column=0, sticky="nsew")
+
+        ldate = Label(conteneur_date, text="date :")
+        ldate.config(bg='skyblue')
+        ldate.grid(row=0, column=0, padx=(0, 15))
+        self.str_date = tk.StringVar()
+        self.str_date.set("")
+        self.date = Entry(conteneur_date, textvariable=self.str_date, width=20)
+        self.date.grid(row=0, column=1)
+
         conteneur_montant = Frame(formulaire)
         conteneur_montant.config(bg='skyblue')
         conteneur_montant.columnconfigure(0, weight=1)
@@ -1489,22 +1504,6 @@ class VueBilan(tk.Frame):
         self.montant = Entry(conteneur_montant, textvariable=self.str_montant, width=20)
         self.montant.grid(row=0, column=1)
 
-
-
-        conteneur_date = Frame(formulaire)
-        conteneur_date.config(bg='skyblue')
-        conteneur_date.columnconfigure(0, weight=1)
-        conteneur_date.columnconfigure(1, weight=1)
-        conteneur_date.rowconfigure(0, weight=1)
-        conteneur_date.grid(row=2, column=0, sticky="nsew")
-
-        ldate = Label(conteneur_date, text="date :")
-        ldate.config(bg='skyblue')
-        ldate.grid(row=0, column=0, padx=(0, 15))
-        self.str_date = tk.StringVar()
-        self.str_date.set("")
-        self.date = Entry(conteneur_date, textvariable=self.str_date, width=20)
-        self.date.grid(row=0, column=1)
 
         conteneur_description = Frame(formulaire)
         conteneur_description.config(bg='skyblue')
@@ -1628,6 +1627,7 @@ class VueBilan(tk.Frame):
         self.depenses.select_set(0)
 
 
+
     def get_categorie(self):
         return self.categorie.get()
 
@@ -1643,12 +1643,17 @@ class VueBilan(tk.Frame):
     def get_description(self):
         return self.description.get()
 
+    def get_selected_operation(self):
+        if self.recettes.get(ANCHOR) is not None:
+            return self.recettes.get(ANCHOR)
+        else:
+            return self.depenses.get(ANCHOR)
+
     def viderChamps(self):
-        self.str_type.set("")
-        self.str_montant.set("")
+        self.str_categorie.set("")
         self.str_date.set("")
+        self.str_montant.set("")
         self.str_description.set("")
-        self.choix.select_set(0)
 
     def champ_vide(self):
         est_vide = False
@@ -1661,9 +1666,6 @@ class VueBilan(tk.Frame):
         if self.get_montant() == "":
             est_vide = True
         return est_vide
-
-    def listbox_bilan_est_vide(self):
-        return self.organisations.size() == 0
 
     @staticmethod
     def message_erreur_suppression():

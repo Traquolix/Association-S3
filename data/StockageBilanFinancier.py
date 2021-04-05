@@ -19,39 +19,24 @@ class StockageBilanFinancier:
             writer.writeheader()
 
     def lire_fichier(self, type):
-        depensesCat = []
-        recettesCat = []
         with open(self.fichier_bilan, newline='') as csvfile:
             csvreader = csv.reader(csvfile, delimiter=';', quotechar='|')
-            boolean = False
             for row in csvreader:
-                if len(row) == 1:
-                    if row[0] == 'ï»¿DÃ‰PENSES':
-                        boolean = False
-                    elif row[0] == 'RECETTES':
-                        boolean = True
-                    elif boolean == False:
-                        depensesCat.append(row[0])
-                    elif boolean == True:
-                        recettesCat.append(row[0])
-                elif len(row) == 3:
+                if len(row) == 5:
                     operation = Operation()
-                    operation.set_date(row[0])
-                    operation.set_montant(row[1])
-                    operation.set_description(row[2])
-                    if boolean == True:
-                        operation.set_type('Recette')
-                        operation.set_categorie(recettesCat[len(recettesCat)-1])
+                    operation.set_type(row[0])
+                    operation.set_categorie(row[1])
+                    operation.set_date(row[2])
+                    operation.set_montant(row[3])
+                    operation.set_description(row[4])
+                    if operation.get_type() == 'recette':
                         self.bilan.ajouter_recettes(operation.toString())
                     else:
-                        operation.set_type('Dépense')
-                        operation.set_categorie(depensesCat[len(depensesCat)-1])
                         self.bilan.ajouter_depenses(operation.toString())
         if type == 'recette':
             return self.bilan.recettes
         else:
             return self.bilan.depenses
-
 
     def ajouter_operation(self, operation):
 
@@ -60,39 +45,48 @@ class StockageBilanFinancier:
         date = operation.get_date()
         montant = operation.get_montant()
         description = operation.get_description()
-        boolean = False
 
         with open(self.fichier_bilan, 'a', newline='') as csvfile:
-            writer = csv.writer(csvfile, delimiter=';', quotechar='|')
-            writer.writerow(operation.toString())
-            if type == 'recette':
-                self.bilan.ajouter_recettes(operation.toString())
-            else:
-                self.bilan.ajouter_depenses(operation.toString())
-            self.initialiser_fichier()
-            """for row in csvreader:
-                if row[0] == categorie:
-                    boolean = True
-                if boolean == True and row[0] == None:
-                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-                    writer.writerow(
-                        {'date': date, 'montant': montant, 'description': description})
-                    if type == 'recette':
-                        self.bilan.ajouter_recettes(operation.toString())
-                    else:
-                        self.bilan.ajouter_depenses(operation.toString())"""
+            fieldnames = ['type','categorie','date', 'montant', 'description']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
+            writer.writerow({'type' : type,'categorie' : categorie,'date': date, 'montant' : montant, 'description' : description})
+
+    def contient_operation(self, operation):
+
+        contient = False
+        type = operation.get_type()
+        categorie = operation.get_categorie()
+        date = operation.get_date()
+        montant = operation.get_montant()
+        description = operation.get_description()
+
+        with open(self.fichier_bilan, newline='') as csvfile:
+            csvreader = csv.reader(csvfile, delimiter=';', quotechar='|')
+            for row in csvreader:
+                if len(row) == 5:
+                    if row[0] == type and row[1] == categorie and row[2] == date and row[3] == montant and row[4] == description:
+                        contient = True
+                        return contient
+        return contient
 
     def supprimer_operation(self, operation):
         bilan = self.lire_fichier(operation.get_type())
-        ligne = [operation.get_categorie(), operation.get_date(), operation.get_montant(),
-                 operation.get_description()]
-        bilan.remove(ligne)
         self.initialiser_fichier()
+        for row in bilan:
+            operation1 = Operation()
+            operation1.set_type(row[0])
+            operation1.set_categorie(row[1])
+            operation1.set_date(row[2])
+            operation1.set_montant(row[3])
+            operation1.set_description(row[4])
+            if operation != operation1:
+                if operation1.get_type() == 'recette':
+                    self.bilan.ajouter_recettes(operation1.toString())
+                else:
+                    self.bilan.ajouter_depenses(operation1.toString())
 
     def modifier_operation(self, operation1, operation2):  # categorie 1 a remplacer par categorie 2
         bilan = self.lire_fichier()
-        ligne = [operation1.get_type(), operation1.get_categorie(), operation1.get_date(), operation1.get_montant(),
-                 operation1.get_description()]
-        bilan.insert(operation2, operation1)
+        ligne = [operation1.toString()]
+        bilan.insert(operation2.toString(), operation1.toString())
         bilan.remove(ligne)
-        self.initialiser_fichier()
