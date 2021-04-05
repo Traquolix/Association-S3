@@ -1,89 +1,44 @@
-depense;Revue TAL;10/01/2019;1 000.00;
-depense;Revue TAL;30/01/2019;100.00;
-depense;Revue TAL;29/03/2019;800.00;
-depense;Revue TAL;21/06/2019;600.00;
-depense;Revue TAL;01/07/2019;100.00;
-depense;Revue TAL;31/07/2019;162.10;reunion CR TAL;
-depense;Revue TAL;20/09/2019;100.00;
-depense;Revue TAL;29/11/2019;300.00;
-depense;Revue TAL;12/12/2019;100.00;
-depense;Revue TAL;16/12/2019;600.00;
-depense;Revue TAL;TOTAL;3 862.10
-
-depense;Site ATALA;15/04/2019;158.26;abonnement OVH
-depense;Site ATALA;31/07/2019;18.79;renouvellement nom domaine
-depense;Site ATALA;18/12/2019;1 550.00;remise en ligne site web
-depense;Site ATALA;31/12/2019;242.82;abonnement Scellius (CB)
-depense;Site ATALA;TOTAL;1 969.87
-
-depense;Missions;08/04/2019;141.67;mission tresoriere (Paris)
-depense;Missions;09/12/2019;176.00;mission tresoriere (Paris)
-depense;Missions;TOTAL;317.67
-
-depense;Bourses ATALA;31/07/2019;1 736.52;remboursements frais TALN 2019 (5 bourses)
-depense;Bourses ATALA;31/07/2019;155.90;prix de these à TALN 2019
-depense;Bourses ATALA;TOTAL;1 892.42
-
-depense;Journees ATALA;19/04/2019;1 150.80;buffet inauguration pre-GDR TAL
-depense;Journees ATALA;29/11/2019;983.40;dejeuner journee pre-GDR TAL
-depense;Journees ATALA;5/12/2019;900.00;subvention colloque Armenien et numerique (INALCO)
-depense;Journees ATALA;TOTAL;3 034.20
-
-depense;Organisation TALN;07/02/2019;216.00;licence Easychair;
-depense;Organisation TALN;31/07/2019;364.70;cadeau organisateurs TALN 2019
-depense;Organisation TALN;29/11/2019;2 538.00;participation ATALA pour adherents inscrits à PFIA
-depense;Organisation TALN;TOTAL;3 118.70
-
-
-depense;Frais gestion;31/12/2019;286.00;abonnement LBP Net Entreprise
-depense;Frais gestion;31/12/2019;45.00;frais de gestion de compte
-depense;Frais gestion;31/12/2019;34.50;commissions paiements CB
-depense;Frais gestion;31/12/2019;47.53;assurance MAIF
-depense;Frais gestion;TOTAL;413.03
-
-depense;TOTAL DEPENSES;14 607.99
-
-recette;Adhesions;11/12/2018;90.00;adhesions 2018 CEA (retard)
-recette;Adhesions;31/12/2018;990.00;adhesions 2019 LIMSI
-recette;Adhesions;31/03/2019;120.00;
-recette;Adhesions;31/01/2019;80.00;
-recette;Adhesions;30/04/2019;230.00;
-recette;Adhesions;31/05/2019;580.00;
-recette;Adhesions;30/06/2019;660.00;
-recette;Adhesions;31/07/2019;800.00;
-recette;Adhesions;31/08/2019;640.00;
-recette;Adhesions;31/10/2019;30.00;
-recette;Adhesions;30/11/2019;120.00;
-recette;Adhesions;31/12/2019;220.00;
-recette;Adhesions;TOTAL;4 560.00
-
-recette;Benefice TALN;14/03/2019;4 500.00;benefices TALN 2018
-recette;Benefice TALN;TOTAL;4 500.00
-
-recette;Subventions;31/12/2019;0.00;DGLFLF --> aucune car PFIA 2019
-recette;Subventions;31/12/2019;1 000.00;CNRS
-recette;Subventions;TOTAL;1 000.00
-
-recette;Interets;31/12/2019;190.97;Livret A
-recette;Interets;TOTAL;190.97
-
-recette;TOTAL RECETTES; 10 060.00
-
-Commissions CB;0.15; 0
-Commissions CB;0.38; 2
-Commissions CB;0.57; 2
-Commissions CB;0.76; 25
-Commissions CB;1.13; 3
-Commissions CB;1.32; 0
-Commissions CB;1.51; 1
-Commissions CB;1.89; 2
-Commissions CB;2.27; 1
-Commissions CB;2.46; 0
-Commissions CB;2.65; 1
-Commissions CB;2.84; 0
-Commissions CB;3.02; 0
-Commissions CB;5.67; 0
-
-depense;AAA;01/01/2020;50.50;1er test
-depense;AAB;01/01/2020;50.50;2er test
-depense;ABB;01/02/2020;50.51;3eme test
+type,categorie,date,montant,description
+depense,Revue TAL,30/01/2019,100.00,
+depense,Revue TAL,29/03/2019,800.00,
+depense,Revue TAL,21/06/2019,600.00,
+depense,Revue TAL,01/07/2019,100.00,
+depense,Revue TAL,20/09/2019,100.00,
+depense,Revue TAL,29/11/2019,300.00,
+depense,Revue TAL,12/12/2019,100.00,
+depense,Revue TAL,16/12/2019,600.00,
+depense,Site ATALA,15/04/2019,158.26,abonnement OVH
+depense,Site ATALA,31/07/2019,18.79,renouvellement nom domaine
+depense,Site ATALA,18/12/2019,1 550.00,remise en ligne site web
+depense,Site ATALA,31/12/2019,242.82,abonnement Scellius (CB)
+depense,Missions,08/04/2019,141.67,mission tresoriere (Paris)
+depense,Missions,09/12/2019,176.00,mission tresoriere (Paris)
+depense,Bourses ATALA,31/07/2019,1 736.52,remboursements frais TALN 2019 (5 bourses)
+depense,Bourses ATALA,31/07/2019,155.90,prix de these à TALN 2019
+depense,Journees ATALA,19/04/2019,1 150.80,buffet inauguration pre-GDR TAL
+depense,Journees ATALA,29/11/2019,983.40,dejeuner journee pre-GDR TAL
+depense,Journees ATALA,5/12/2019,900.00,subvention colloque Armenien et numerique (INALCO)
+depense,Organisation TALN,31/07/2019,364.70,cadeau organisateurs TALN 2019
+depense,Organisation TALN,29/11/2019,2 538.00,participation ATALA pour adherents inscrits à PFIA
+depense,Frais gestion,31/12/2019,286.00,abonnement LBP Net Entreprise
+depense,Frais gestion,31/12/2019,45.00,frais de gestion de compte
+depense,Frais gestion,31/12/2019,34.50,commissions paiements CB
+depense,Frais gestion,31/12/2019,47.53,assurance MAIF
+recette,Adhesions,11/12/2018,90.00,adhesions 2018 CEA (retard)
+recette,Adhesions,31/12/2018,990.00,adhesions 2019 LIMSI
+recette,Adhesions,31/03/2019,120.00,
+recette,Adhesions,31/01/2019,80.00,
+recette,Adhesions,30/04/2019,230.00,
+recette,Adhesions,31/05/2019,580.00,
+recette,Adhesions,30/06/2019,660.00,
+recette,Adhesions,31/07/2019,800.00,
+recette,Adhesions,31/08/2019,640.00,
+recette,Adhesions,31/10/2019,30.00,
+recette,Adhesions,30/11/2019,120.00,
+recette,Adhesions,31/12/2019,220.00,
+recette,Benefice TALN,14/03/2019,4 500.00,benefices TALN 2018
+recette,Subventions,31/12/2019,0.00,DGLFLF --> aucune car PFIA 2019
+recette,Subventions,31/12/2019,1 000.00,CNRS
+recette,Interets,31/12/2019,190.97,Livret A
+depense,AAB,01/01/2020,50.50,2er test
+depense,AAD,01/01/2020,50.50,4eme test

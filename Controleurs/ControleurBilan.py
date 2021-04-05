@@ -19,10 +19,10 @@ class ControleurBilan:
         self.vue_bilan_modification = vue_bilan_modification
 
     def actualiser_liste_recettes(self):
-        return sorted(self.stockagebilan.lire_fichier("recette"))
+        return sorted(self.stockagebilan.lire_fichier_recettes())
 
     def actualiser_liste_depenses(self):
-        return sorted(self.stockagebilan.lire_fichier("depenses"))
+        return sorted(self.stockagebilan.lire_fichier_depenses())
 
     def ajouter_operation(self):
 
@@ -41,15 +41,15 @@ class ControleurBilan:
                     self.vue_bilan.actualiser_liste_depenses()
                     self.vue_bilan.viderChamps()
                 else:
-                    self.bilan.ajouter_recettes(operation.toString())
+                    self.stockagebilan.ajouter_operation(operation)
                     self.vue_bilan.actualiser_liste_recettes()
                     self.vue_bilan.viderChamps()
             else:
                 self.vue_bilan.message_erreur_ajout()
 
-    def supprimer_operation(self):
-        if self.vue_bilan.get_selected_operation() is not None:
-            ligne = self.vue_bilan.get_selected_operation()
+    def supprimer_operation(self, type):
+        if self.vue_bilan.get_selected_operation(type) is not None:
+            ligne = self.vue_bilan.get_selected_operation(type)
             operation = Operation()
             operation.set_type(ligne[0])
             operation.set_categorie(ligne[1])

@@ -3,9 +3,12 @@ class Operation:
     def __init__(self):
         self.type = ""
         self.categorie = ""
-        self.montant = ""
         self.date = ""
+        self.montant = ""
         self.description = ""
+
+    def set_type(self, nv_type):
+        self.type = nv_type
 
     def set_categorie(self, nv_categorie):
         self.categorie = nv_categorie
@@ -18,9 +21,6 @@ class Operation:
 
     def set_description(self, nv_description):
         self.description = nv_description
-
-    def set_type(self, nv_type):
-        self.type = nv_type
 
     def get_categorie(self):
         return self.categorie

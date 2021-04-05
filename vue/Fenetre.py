@@ -1534,15 +1534,20 @@ class VueBilan(tk.Frame):
         conteneur_depenses = Frame(conteneur_milieu)
         conteneur_depenses.config(bg='skyblue')
         conteneur_depenses.rowconfigure(0, weight=1)
+        conteneur_depenses.rowconfigure(1, weight=1)
         conteneur_depenses.columnconfigure(0, weight=1)
         conteneur_depenses.columnconfigure(1, weight=1)
         conteneur_depenses.grid(row=0, column=0, sticky="nsew")
+
+        ldepenses = Label(conteneur_depenses, text="Dépenses")
+        ldepenses.config(bg='skyblue')
+        ldepenses.grid(row=0, column=0, columnspan=2, padx=(0, 15))
         self.depenses = tk.Listbox(conteneur_depenses, width=60)
         self.actualiser_liste_depenses()
-        self.depenses.grid(row=0, column=0, sticky="ens")
+        self.depenses.grid(row=1, column=0, sticky="ens")
 
         scrollbar = ttk.Scrollbar(conteneur_depenses)
-        scrollbar.grid(row=0, column=1, sticky="wns")
+        scrollbar.grid(row=1, column=1, sticky="wns")
         self.depenses.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.depenses.yview)
 
@@ -1553,8 +1558,8 @@ class VueBilan(tk.Frame):
         conteneur_supprimer.columnconfigure(1, weight=1)
         conteneur_supprimer.grid(row=1, column=0)
 
-        supprimer = ttk.Button(conteneur_supprimer, text="supprimer opération", style='my.TButton',
-                               command=lambda: ctrl_bilan.supprimer_operation())
+        supprimer = ttk.Button(conteneur_supprimer, text="supprimer dépense", style='my.TButton',
+                               command=lambda: ctrl_bilan.supprimer_operation('depense'))
         supprimer.grid(row=0, column=0, padx=(0, 15))
 
         conteneur_droite = Frame(self)
@@ -1567,15 +1572,20 @@ class VueBilan(tk.Frame):
         conteneur_recettes = Frame(conteneur_droite)
         conteneur_recettes.config(bg='skyblue')
         conteneur_recettes.rowconfigure(0, weight=1)
+        conteneur_recettes.rowconfigure(1, weight=1)
         conteneur_recettes.columnconfigure(0, weight=1)
         conteneur_recettes.columnconfigure(1, weight=1)
         conteneur_recettes.grid(row=0, column=0, sticky="nsew")
+
+        lrecettes = Label(conteneur_recettes, text="Recettes")
+        lrecettes.config(bg='skyblue')
+        lrecettes.grid(row=0, column=0, columnspan=2, padx=(0, 15))
         self.recettes = tk.Listbox(conteneur_recettes, width=60)
         self.actualiser_liste_recettes()
-        self.recettes.grid(row=0, column=0, sticky="ens")
+        self.recettes.grid(row=1, column=0, sticky="ens")
 
         scrollbar = ttk.Scrollbar(conteneur_recettes)
-        scrollbar.grid(row=0, column=1, sticky="wns")
+        scrollbar.grid(row=1, column=1, sticky="wns")
         self.recettes.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.recettes.yview)
 
@@ -1586,8 +1596,8 @@ class VueBilan(tk.Frame):
         conteneur_supprimer.columnconfigure(1, weight=1)
         conteneur_supprimer.grid(row=1, column=0)
 
-        supprimer = ttk.Button(conteneur_supprimer, text="modifier opération", style='my.TButton',
-                               command=lambda: ctrl_bilan.modifier_operation())
+        supprimer = ttk.Button(conteneur_supprimer, text="supprimer recette", style='my.TButton',
+                               command=lambda: ctrl_bilan.supprimer_operation('recette'))
         supprimer.grid(row=0, column=0, padx=(0, 15))
 
         conteneur_bas_milieu = Frame(self)
@@ -1626,8 +1636,6 @@ class VueBilan(tk.Frame):
             cpt += 1
         self.depenses.select_set(0)
 
-
-
     def get_categorie(self):
         return self.categorie.get()
 
@@ -1643,11 +1651,13 @@ class VueBilan(tk.Frame):
     def get_description(self):
         return self.description.get()
 
-    def get_selected_operation(self):
-        if self.recettes.get(ANCHOR) is not None:
+    def get_selected_operation(self, type):
+        if type == 'recette' and self.recettes.get(ANCHOR) is not None:
             return self.recettes.get(ANCHOR)
-        else:
+        elif type == 'depense' and self.depenses.get(ANCHOR) is not None:
             return self.depenses.get(ANCHOR)
+        else:
+            self.message_erreur_suppression()
 
     def viderChamps(self):
         self.str_categorie.set("")
@@ -1673,7 +1683,7 @@ class VueBilan(tk.Frame):
 
     @staticmethod
     def message_erreur_champs_vide():
-        messagebox.showwarning(title="erreur de saisie", message="veuillez remplir tout les champs")
+        messagebox.showwarning(title="erreur de saisie", message="veuillez remplir tous les champs")
 
     @staticmethod
     def message_erreur_choix_vide():
