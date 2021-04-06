@@ -71,6 +71,25 @@ class StockageBilanFinancier:
                 cpt = cpt + 1
         return bilan2
 
+    def lire_fichier_categories(self):
+        bilan2 = []
+        categorie = ""
+        montant_total = 0.0
+        with open(self.fichier_bilan, newline='') as csvfile:
+            csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            cpt = 0
+            for row in csvreader:
+                categorie1 = row[1]
+                if cpt != 0:
+                    if categorie != categorie1:
+                        ligne = [categorie, "TOTAL", montant_total]
+                        bilan2.append(ligne)
+                        categorie = categorie1
+                        montant_total = 0.0
+                    montant_total = montant_total + float(row[3])
+                cpt = cpt + 1
+        return bilan2
+
     def ajouter_operation(self, operation):
 
         type = operation.get_type()
@@ -123,9 +142,3 @@ class StockageBilanFinancier:
                 operation1.set_montant(nv_ligne[3])
                 operation1.set_description(nv_ligne[4])
                 self.ajouter_operation(operation1)
-
-    def modifier_operation(self, operation1, operation2):  # categorie 1 a remplacer par categorie 2
-        bilan = self.lire_fichier()
-        ligne = [operation1.toString()]
-        bilan.insert(operation2.toString(), operation1.toString())
-        bilan.remove(ligne)

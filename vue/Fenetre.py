@@ -31,7 +31,7 @@ class Fenetre:
         self.ctrl_Facture = ControleurFacture(self)
         self.ctrl_Bilan = ControleurBilan(self)
 
-        for F in (Accueil, VueAdherents, VueOrganisations, VueFacture, VueBonDeCommande, VueBilan, VueBilan_modification):
+        for F in (Accueil, VueAdherents, VueOrganisations, VueFacture, VueBonDeCommande, VueBilan, VueBilan_categories):
 
             if F == VueAdherents or F == VueOrganisations:
                 frame = F(self.container, ctrl_fenetre=self.ctrl_Fenetre, ctrl_adherent=self.ctrl_Adherents)
@@ -39,7 +39,9 @@ class Fenetre:
                 frame = F(self.container, ctrl_fenetre=self.ctrl_Fenetre, ctrl_bon_commande=self.ctrl_Bon_de_commande)
             elif F == VueFacture:
                 frame = F(self.container, ctrl_fenetre=self.ctrl_Fenetre, ctrl_facture=self.ctrl_Facture)
-            elif F == VueBilan or F == VueBilan_modification:
+            elif F == VueBilan:
+                frame = F(self.container, ctrl_fenetre=self.ctrl_Fenetre, ctrl_bilan=self.ctrl_Bilan)
+            elif F == VueBilan_categories:
                 frame = F(self.container, ctrl_fenetre=self.ctrl_Fenetre, ctrl_bilan=self.ctrl_Bilan)
             else:
                 frame = F(self.container, self)
@@ -63,7 +65,7 @@ class Fenetre:
         self.ctrl_Facture.set_vue_facture(self.get_frame_VueFacture())
 
         self.ctrl_Bilan.set_vue_bilan(self.get_frame_VueBilan())
-        self.ctrl_Bilan.set_vue_bilan_modification(self.get_frame_VueBilan_modification())
+        self.ctrl_Bilan.set_vue_bilan_modification(self.get_frame_VueBilan_categories())
 
     def show_frame(self, cont):
         frame = self.frames[cont]
@@ -87,8 +89,8 @@ class Fenetre:
     def get_frame_VueBilan(self):
         return self.frames[VueBilan]
 
-    def get_frame_VueBilan_modification(self):
-        return self.frames[VueBilan_modification]
+    def get_frame_VueBilan_categories(self):
+        return self.frames[VueBilan_categories]
 
     def demarrer_application(self):
         self.container.mainloop()
@@ -1390,6 +1392,7 @@ class VueBilan(tk.Frame):
     def __init__(self, parent, ctrl_fenetre, ctrl_bilan):
 
         self.ctrlBilan = ctrl_bilan
+        self.ctrlFenetre = ctrl_fenetre
 
         tk.Frame.__init__(self, parent)
         self.config(bg="skyblue")
@@ -1562,6 +1565,10 @@ class VueBilan(tk.Frame):
                                command=lambda: ctrl_bilan.supprimer_operation('depense'))
         supprimer.grid(row=0, column=0, padx=(0, 15))
 
+        modifier = ttk.Button(conteneur_supprimer, text="modifier depense", style='my.TButton',
+                              command=lambda: ctrl_bilan.modifier_operation('depense'))
+        modifier.grid(row=0, column=1, padx=(0, 15))
+
         conteneur_droite = Frame(self)
         conteneur_droite.config(bg='skyblue')
         conteneur_droite.rowconfigure(0, weight=1)
@@ -1600,6 +1607,10 @@ class VueBilan(tk.Frame):
                                command=lambda: ctrl_bilan.supprimer_operation('recette'))
         supprimer.grid(row=0, column=0, padx=(0, 15))
 
+        modifier = ttk.Button(conteneur_supprimer, text="modifier recette", style='my.TButton',
+                              command=lambda: ctrl_bilan.modifier_operation('recette'))
+        modifier.grid(row=0, column=1, padx=(0, 15))
+
         conteneur_bas_milieu = Frame(self)
         conteneur_bas_milieu.config(bg='skyblue')
         conteneur_bas_milieu.rowconfigure(0, weight=1)
@@ -1607,16 +1618,16 @@ class VueBilan(tk.Frame):
         conteneur_bas_milieu.columnconfigure(0, weight=1)
         conteneur_bas_milieu.grid(row=2, column=1, sticky="nsew")
 
-        conteneur_modifier = tk.Frame(conteneur_bas_milieu)
-        conteneur_modifier.config(bg='skyblue')
-        conteneur_modifier.rowconfigure(0, weight=1)
-        conteneur_modifier.columnconfigure(0, weight=1)
-        conteneur_modifier.columnconfigure(1, weight=1)
-        conteneur_modifier.grid(row=1, column=0)
+        conteneur_categories = tk.Frame(conteneur_bas_milieu)
+        conteneur_categories.config(bg='skyblue')
+        conteneur_categories.rowconfigure(0, weight=1)
+        conteneur_categories.columnconfigure(0, weight=1)
+        conteneur_categories.columnconfigure(1, weight=1)
+        conteneur_categories.grid(row=0, column=0)
 
-        modifier = ttk.Button(conteneur_modifier, text="modifier opération", style='my.TButton',
-                               command=lambda: ctrl_fenetre.show_frame(VueBilan_modification))
-        modifier.grid(row=0, column=0, padx=(0, 15))
+        categories = ttk.Button(conteneur_categories, text="Résumé catégories", style='my.TButton',
+                               command=lambda: ctrl_fenetre.show_frame(VueBilan_categories))
+        categories.grid(row=0, column=0, padx=(0, 15))
 
     def actualiser_liste_recettes(self):
         self.recettes.delete(0, END)
@@ -1693,7 +1704,7 @@ class VueBilan(tk.Frame):
     def message_erreur_ajout():
         messagebox.showerror(title="erreur d'ajout", message="l'opération n'a pas pu être créée")
 
-class VueBilan_modification(tk.Frame):
+class VueBilan_categories(tk.Frame):
 
     def __init__(self, parent, ctrl_fenetre, ctrl_bilan):
 
@@ -1728,162 +1739,25 @@ class VueBilan_modification(tk.Frame):
         conteneur_milieu.columnconfigure(0, weight=1)
         conteneur_milieu.rowconfigure(0, weight=1)
         conteneur_milieu.rowconfigure(1, weight=1)
-        conteneur_milieu.rowconfigure(2, weight=1)
         conteneur_milieu.grid(row=1, column=1, sticky="nsew")
 
-        formulaire = Frame(conteneur_milieu)
-        formulaire.config(bg='skyblue')
-        formulaire.columnconfigure(0, weight=1)
-        formulaire.rowconfigure(0, weight=1)
-        formulaire.rowconfigure(1, weight=1)
-        formulaire.rowconfigure(2, weight=1)
-        formulaire.rowconfigure(3, weight=1)
-        formulaire.rowconfigure(4, weight=1)
-        formulaire.rowconfigure(5, weight=1)
-        formulaire.grid(row=2, column=1, sticky="nsew")
-
-        conteneur_radio = Frame(formulaire)
-        conteneur_radio.config(bg='skyblue')
-        conteneur_radio.columnconfigure(0, weight=1)
-        conteneur_radio.columnconfigure(1, weight=1)
-        conteneur_radio.rowconfigure(0, weight=1)
-        conteneur_radio.grid(row=0, column=0, sticky="nsew")
-
-        self.choix = StringVar()
-        self.choix.set("type")
-
-        self.radio1 = Radiobutton(conteneur_radio, takefocus=0, variable=self.choix, text="dépense",
-                                  value="depense", tristatevalue=0, highlightthickness=0)
-        self.radio1.config(bg='skyblue', activebackground='skyblue')
-        self.radio1.grid(row=0, column=0, sticky="nsew")
-
-        self.radio2 = Radiobutton(conteneur_radio, variable=self.choix, takefocus=0, text="recette",
-                                  value="recette", tristatevalue=0, highlightthickness=0)
-        self.radio2.config(bg='skyblue', activebackground='skyblue')
-        self.radio2.grid(row=0, column=1, sticky="nsew")
-
-        conteneur_categorie = Frame(formulaire)
-        conteneur_categorie.config(bg='skyblue')
-        conteneur_categorie.columnconfigure(0, weight=1)
-        conteneur_categorie.columnconfigure(1, weight=1)
-        conteneur_categorie.rowconfigure(0, weight=1)
-        conteneur_categorie.grid(row=1, column=0, sticky="nsew")
-
-        lcategorie = Label(conteneur_categorie, text="categorie :")
+        lcategorie = Label(conteneur_milieu, text="Catégories")
         lcategorie.config(bg='skyblue')
-        lcategorie.grid(row=0, column=0, padx=(0, 15))
-        self.str_categorie = tk.StringVar()
-        self.str_categorie.set("")
-        self.categorie = Entry(conteneur_categorie, textvariable=self.str_categorie, width=20)
-        self.categorie.grid(row=0, column=1)
+        lcategorie.grid(row=0, column=0, columnspan=2, padx=(0, 15))
+        self.categories = tk.Listbox(conteneur_milieu, width=60)
+        self.actualiser_liste_categories()
+        self.categories.grid(row=1, column=0, sticky="ens")
 
-        conteneur_montant = Frame(formulaire)
-        conteneur_montant.config(bg='skyblue')
-        conteneur_montant.columnconfigure(0, weight=1)
-        conteneur_montant.columnconfigure(1, weight=1)
-        conteneur_montant.rowconfigure(0, weight=1)
-        conteneur_montant.grid(row=3, column=0, sticky="nsew")
+        scrollbar = ttk.Scrollbar(conteneur_milieu)
+        scrollbar.grid(row=1, column=1, sticky="wns")
+        self.categories.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=self.categories.yview)
 
-        lmontant = Label(conteneur_montant, text="montant :")
-        lmontant.config(bg='skyblue')
-        lmontant.grid(row=0, column=0, padx=(0, 15))
-        self.str_montant = tk.StringVar()
-        self.str_montant.set("")
-        self.montant = Entry(conteneur_montant, textvariable=self.str_montant, width=20)
-        self.montant.grid(row=0, column=1)
-
-        conteneur_date = Frame(formulaire)
-        conteneur_date.config(bg='skyblue')
-        conteneur_date.columnconfigure(0, weight=1)
-        conteneur_date.columnconfigure(1, weight=1)
-        conteneur_date.rowconfigure(0, weight=1)
-        conteneur_date.grid(row=2, column=0, sticky="nsew")
-
-        ldate = Label(conteneur_date, text="date :")
-        ldate.config(bg='skyblue')
-        ldate.grid(row=0, column=0, padx=(0, 15))
-        self.str_date = tk.StringVar()
-        self.str_date.set("")
-        self.date = Entry(conteneur_date, textvariable=self.str_date, width=20)
-        self.date.grid(row=0, column=1)
-
-        conteneur_description = Frame(formulaire)
-        conteneur_description.config(bg='skyblue')
-        conteneur_description.columnconfigure(0, weight=1)
-        conteneur_description.columnconfigure(1, weight=1)
-        conteneur_description.rowconfigure(0, weight=1)
-        conteneur_description.grid(row=4, column=0, sticky="nsew")
-
-        ldescription = Label(conteneur_description, text="description :")
-        ldescription.config(bg='skyblue')
-        ldescription.grid(row=0, column=0, padx=(0, 15))
-        self.str_description = tk.StringVar()
-        self.str_description.set("")
-        self.description = Entry(conteneur_description, textvariable=self.str_description, width=20)
-        self.description.grid(row=0, column=1)
-
-        conteneur_bas_milieu = Frame(self)
-        conteneur_bas_milieu.config(bg='skyblue')
-        conteneur_bas_milieu.rowconfigure(0, weight=1)
-        conteneur_bas_milieu.rowconfigure(1, weight=1)
-        conteneur_bas_milieu.columnconfigure(0, weight=1)
-        conteneur_bas_milieu.grid(row=2, column=1, sticky="nsew")
-
-        conteneur_modifier = tk.Frame(conteneur_bas_milieu)
-        conteneur_modifier.config(bg='skyblue')
-        conteneur_modifier.rowconfigure(0, weight=1)
-        conteneur_modifier.columnconfigure(0, weight=1)
-        conteneur_modifier.columnconfigure(1, weight=1)
-        conteneur_modifier.grid(row=1, column=0)
-
-
-        # Changer la command do modifier pour lui faire modifier l'opération
-        modifier = ttk.Button(conteneur_modifier, text="modifier opération", style='my.TButton',
-                              command=lambda: ctrl_fenetre.show_frame(VueBilan))
-        modifier.grid(row=0, column=0, padx=(0, 15))
-
-        def get_categorie(self):
-            return self.categorie.get()
-
-        def get_montant(self):
-            return self.montant.get()
-
-        def get_choix_selectionne(self):
-            return self.choix.get()
-
-        def get_date(self):
-            return self.date.get()
-
-        def get_description(self):
-            return self.description.get()
-
-        def viderChamps(self):
-            self.str_type.set("")
-            self.str_montant.set("")
-            self.str_date.set("")
-            self.str_description.set("")
-            self.choix.select_set(0)
-
-        def champ_vide(self):
-            est_vide = False
-            if self.get_categorie() == "":
-                est_vide = True
-            if self.get_choix_selectionne() == "":
-                est_vide = True
-            if self.get_date() == "":
-                est_vide = True
-            if self.get_montant() == "":
-                est_vide = True
-            return est_vide
-
-        @staticmethod
-        def message_erreur_champs_vide():
-            messagebox.showwarning(title="erreur de saisie", message="veuillez remplir tout les champs")
-
-        @staticmethod
-        def message_erreur_choix_vide():
-            messagebox.showwarning(title="erreur de saisie", message="veuillez selectionner un type d'opération")
-
-        @staticmethod
-        def message_erreur_ajout():
-            messagebox.showerror(title="erreur d'ajout", message="l'opération n'a pas pu être créée")
+    def actualiser_liste_categories(self):
+        self.categories.delete(0, END)
+        liste = self.ctrlBilan.actualiser_liste_categories()
+        cpt = 1
+        for categorie in liste:
+            self.categories.insert(cpt, categorie)
+            cpt += 1
+        self.categories.select_set(0)
