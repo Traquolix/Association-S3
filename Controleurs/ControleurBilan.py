@@ -69,8 +69,11 @@ class ControleurBilan:
             self.vue_bilan.message_erreur_suppression()
 
     def modifier_operation(self, type):
-        if self.vue_bilan.get_selected_operation(type) is not None:
-
+        if self.vue_bilan.get_selected_operation(type) is None :
+            self.vue_bilan.message_erreur_suppression()
+        elif self.vue_bilan.champ_vide():
+            self.vue_bilan.message_erreur_champs_vide()
+        else:
             ligne = self.vue_bilan.get_selected_operation(type)
             operation1 = Operation()
             operation1.set_type(ligne[0])
@@ -96,5 +99,4 @@ class ControleurBilan:
                 self.stockagebilan.ajouter_operation(operation2)
                 self.vue_bilan.actualiser_liste_depenses()
                 self.vue_bilan.viderChamps()
-        else:
-            self.vue_bilan.message_erreur_suppression()
+
