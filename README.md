@@ -1,1 +1,46 @@
-Association-S3
+Application légère pour la gestion de la trésorerie d’une association :
+
+Sommaire :
+    1) Import et versions
+    2) Gérer adhérents
+    3) Générer facture
+    4) Générer bon de commande
+    5) Générer bilan
+
+1) Import et versions :
+    - Pillow : 8.1.0
+    - pip : 20.3.3
+    - reportlab : 3.5.59
+    - setuptools : 51.3.3
+    
+2) Gérer adhérents :
+/!\ ne pas suprimer tous les adhérents et quitter l'aplication car lors de la réouverture l'aplication va lire des csv vide, ce qui va créer une erreur /!\
+   
+    Ajouter un adhérent ou une organisation :
+        - Ajout d'un adhérent appartenant à une organisation : Rentrez le nom, prénom, selectionner l'organisation (si Il y a des organisations, sinon voir ligne 24), puis cliquez sur ajouter adhérent.
+        - Ajout d'un adhérent indépendant : Rentrez le nom, prénom, selectionner indépendant, puis ajoutez l'adresse et la ville de l'adhérent, puis cliquez sur ajouter adhérent.
+    
+    Le bouton "gérer organisation" permet d'ajouter ou de suprimer une organisation :
+        -  Ajout d'une organisation : Rentrez le nom, l'adresse et la ville de l'organisation puis cliquez sur ajouter organisation.
+   
+    Suprimer un adhérent ou une organisation :
+        Il suffit de selectionner l'adhérent ou l'organisation (dans la liste de droite) et cliquer sur le bouton suprimer adhérent ou suprimer organisation.
+        Il y a aussi un boutton "tout suprimer" qui permet de suprimer tous les adhérent ou toutes les organisations (/!\ il n'y a pas de confirmation /!\).
+    
+3) Générer facture
+   
+    Rentrez le numéro de facture, le bon de commande référent, le montant total, le destinataire et le nombre de personne concernées puis cliquez sur le boutton valider.
+    Selectionnez un adhérent, rentrer un type de tarif, puis ajouté le à l'aide du boutton "ajouter".
+    Une fois tous les adhérents voulus ajoutés, cliquez sur "générer facture". Choisissez le chemin et le nom de la facture puis enregister.
+   
+4) Générer bon de commande :
+   
+    Rentrez le numéro de bon de commande, le destinataire, le montant total, et le nombre de personne concernées puis cliquez sur le boutton valider.
+    Selectionnez un adhérent, rentrez le prix unitaire, la quantité, le montant HT, et une remarque (facultatif) puis cliquez sur le boutton ajouter.
+    Une fois tous les adhérents voulus ajoutés, cliquez sur "générer bon de commande". Choisissez le chemin et le nom du bon de commande puis enregister.
+   
+5) Générer bilan :
+
+
+
+   
