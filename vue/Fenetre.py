@@ -1781,7 +1781,7 @@ class VueBilan_categories(tk.Frame):
                             compound="left", command=lambda: ctrl_fenetre.show_frame(VueBilan))
         retour.place(relx=0.5, rely=0.5, anchor=CENTER)
 
-        titre = tk.Label(self, text="Modification de l'opération")
+        titre = tk.Label(self, text="Gestion des catégories")
         titre.config(font=("Courier", 20), bg="skyblue")
         titre.grid(row=0, column=1, columnspan=2, sticky='nsew')
 
