@@ -176,7 +176,10 @@ class StockageBilanFinancier:
         description = operation.get_description()
 
         ligne = [type, categorie, date, montant, description]
+        ligne2 = [type, categorie,'','','']
         bilan2.remove(ligne)
+        if not bilan2.__contains__(ligne2):
+            bilan2.append(ligne2)
         self.initialiser_fichier()
         for nv_ligne in bilan2:
             if len(nv_ligne) == 5:
