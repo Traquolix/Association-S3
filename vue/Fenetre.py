@@ -793,8 +793,8 @@ class VueFacture(tk.Frame):
         label_nombre_adherents.grid(row=1, column=0, padx=(0, 15), pady=(0, 15))
         self.int_nombre = tk.IntVar()
         self.int_nombre.set(0)
-        self.nombre_adherents = Spinbox(conteneur_formulaire_haut_droite, from_=1, to=3, textvariable=self.int_nombre)
-        self.nombre_adherents.grid(row=1, column=1, padx=(0, 30), pady=(0, 15))
+        self.nombre_adherents = Spinbox(conteneur_formulaire_haut_droite, from_=1, to=30, textvariable=self.int_nombre)
+        self.nombre_adherents.grid(row=1, column=1, padx=(0, 30), pady=(0, 15)) # modifier le 30 pour modifier le nombre max d'adhérent (/!\ le code peut faire jusqu'a un maximum de 40)
 
         self.valider = ttk.Button(conteneur_formulaire_haut_droite, text="valider", style='my.TButton',
                                   compound="left",
@@ -866,7 +866,7 @@ class VueFacture(tk.Frame):
         self.adherents_ajoutes['show'] = 'headings'
         self.adherents_ajoutes.grid(row=0, column=1)
 
-        self.generer = ttk.Button(ligne_bas, text="générer bon de commande", style='my.TButton',
+        self.generer = ttk.Button(ligne_bas, text="générer Facture", style='my.TButton',
                                   command=lambda: ctrl_facture.generer())
         self.generer.config(state='disabled')
         self.generer.grid(row=1, column=1)
@@ -1113,7 +1113,7 @@ class VueBonDeCommande(tk.Frame):
         label_nombre_adherents.grid(row=0, column=0, padx=(0, 15))
         self.int_nombre = tk.IntVar()
         self.int_nombre.set(0)
-        self.nombre_adherents = Spinbox(conteneur_nombre_adherents, from_=1, to=3, textvariable=self.int_nombre)
+        self.nombre_adherents = Spinbox(conteneur_nombre_adherents, from_=1, to=10, textvariable=self.int_nombre)
         self.nombre_adherents.grid(row=0, column=1, padx=(0, 30))
         self.valider = ttk.Button(conteneur_nombre_adherents, text="valider", style='my.TButton',
                                   command=lambda: ctrl_bon_commande.valider_informations_generales_bon())
@@ -1159,7 +1159,7 @@ class VueBonDeCommande(tk.Frame):
         label_quantite = Label(conteneur_quantite, text="quantité : ")
         label_quantite.config(bg='skyblue')
         label_quantite.grid(row=0, column=0, padx=(0, 15))
-        self.quantite = Spinbox(conteneur_quantite, from_=1, to=3)
+        self.quantite = Spinbox(conteneur_quantite, from_=1, to=10)
         self.quantite.config(state="disabled")
         self.quantite.grid(row=0, column=1)
 
