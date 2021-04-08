@@ -6,6 +6,7 @@ Sommaire :
     3) Générer facture
     4) Générer bon de commande
     5) Gérer bilan
+    6) Information CSV
 
 1) Import et versions :
     - Pillow : 8.1.0
@@ -42,6 +43,8 @@ Sommaire :
 5) Gérer bilan :
 
     Dans cette fenêtre plusieurs actions sur des opérations sont possibles:
+    Toutes les commandes influent sur le fichier bilan_2019.csv qui se situe dans /data/Bilan_financier_2020/
+    Les 2 autres fichiers dans ce dossiers sont d'autres fichiers qui pourront être utiliser plus tard pour gérer les prévisions
 
         Les opérations sont définis par:
             un type (dépense ou recette)
@@ -70,6 +73,21 @@ Sommaire :
             Entrer sur le formulaire a gauche la date, le montant ainsi que la description si nécessaire
             Cliquer sur l'opération a modifié dans les listes
             Cliquer sur le bouton 'modifier' correspondant au type de l'opération à modifier
-            
 
-   
+   Bouton Gestion & Résumé Catégories:
+            
+        Ce bouton permet d'accéder à la page de gestion de catégorie
+
+   Gestion de catégorie:
+        
+        Pour créer une catégorie, il suffit de choisir un type (dépense ou recette), d'entrer le nom de la catégorie voulu 
+        puis d'appuyer sur le bouton 'Ajouter Catégorie'
+
+        Pour supprimer une catégorie, il faut cliquer sur la catégorie souhaitée dans la liste puis d'appuyer sur 'supprimer catégorie'
+        /!\ Supprimer une catégorie supprime toutes ses opérations
+
+6) Information CSV :
+    - adherents.csv : Contient tout les adhérent liés à une organisation
+    - adherents_independants.csv : Contient tout les adhérent indépendant (ceux qui ne sont pas liés à une organisation)
+    - organisations.csv : contient toutes les organisations
+    - budget_2019.csv : Contient toutes les opérations ainsi que les catégories
