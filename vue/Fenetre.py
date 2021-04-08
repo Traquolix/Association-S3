@@ -173,7 +173,7 @@ class Accueil(tk.Frame):
         conteneur_bas_centre.grid(row=2, column=1, sticky="nsew")
 
         image_bouton_bilan = tk.PhotoImage(file='vue/images/facture.png')
-        bouton_bilan = ttk.Button(conteneur_bas_centre, text="générer bilan",
+        bouton_bilan = ttk.Button(conteneur_bas_centre, text="gérer bilan",
                                   image=image_bouton_bilan,
                                   style='my.TButton',
                                   compound="left",
@@ -1473,7 +1473,7 @@ class VueBilan(tk.Frame):
         conteneur_categorie.columnconfigure(1, weight=1)
         conteneur_categorie.columnconfigure(2, weight=1)
         conteneur_categorie.rowconfigure(0, weight=1)
-        conteneur_categorie.grid(row=1, column=0, sticky="nsew")
+        conteneur_categorie.grid(row=4, column=0, sticky="nsew")
 
         lcategorie = Label(conteneur_categorie, text="categorie :")
         lcategorie.config(bg='skyblue')
@@ -1491,7 +1491,7 @@ class VueBilan(tk.Frame):
         conteneur_date.columnconfigure(0, weight=1)
         conteneur_date.columnconfigure(1, weight=1)
         conteneur_date.rowconfigure(0, weight=1)
-        conteneur_date.grid(row=2, column=0, sticky="nsew")
+        conteneur_date.grid(row=1, column=0, sticky="nsew")
 
         ldate = Label(conteneur_date, text="date :")
         ldate.config(bg='skyblue')
@@ -1506,7 +1506,7 @@ class VueBilan(tk.Frame):
         conteneur_montant.columnconfigure(0, weight=1)
         conteneur_montant.columnconfigure(1, weight=1)
         conteneur_montant.rowconfigure(0, weight=1)
-        conteneur_montant.grid(row=3, column=0, sticky="nsew")
+        conteneur_montant.grid(row=2, column=0, sticky="nsew")
 
         lmontant = Label(conteneur_montant, text="montant :")
         lmontant.config(bg='skyblue')
@@ -1522,7 +1522,7 @@ class VueBilan(tk.Frame):
         conteneur_description.columnconfigure(0, weight=1)
         conteneur_description.columnconfigure(1, weight=1)
         conteneur_description.rowconfigure(0, weight=1)
-        conteneur_description.grid(row=4, column=0, sticky="nsew")
+        conteneur_description.grid(row=3, column=0, sticky="nsew")
 
         ldescription = Label(conteneur_description, text="description :")
         ldescription.config(bg='skyblue')

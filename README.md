@@ -39,8 +39,36 @@ Sommaire :
     Selectionnez un adhérent, rentrez le prix unitaire, la quantité, le montant HT, et une remarque (facultatif) puis cliquez sur le boutton ajouter.
     Une fois tous les adhérents voulus ajoutés, cliquez sur "générer bon de commande". Choisissez le chemin et le nom du bon de commande puis enregister.
    
-5) Générer bilan :
+5) Gérer bilan :
 
+    Dans cette fenêtre plusieurs actions sur des opérations sont possibles:
 
+    Les opérations sont définis par:
+        Des types (dépense ou recette)
+        Des Catégories que l'on peut créer 
+        Des dates
+        Des montants
+        Des descriptions (facultativement)
+
+        Ajouter une opération (formulaire gauche):
+            Une opération ne doit pas être identique à une opération déja inscrite
+
+            Choisir un des deux type d'opération (dépense ou recette), cela sélectionne la liste de catégorie correspondante au type
+            Entrer une date sous le format JJ/MM/AAAA, /!\ tous les mois sont paramétré pour faire 31 jours
+            Enter un montant, /!\ le montant doit avoir un point comme séparateur entre la partie entières et la partie décimale et doit contenir 2 chiffres après la virgule
+            Entrer une description, cette étape n'est pas obligatoire
+            Choisir une catégorie parmis laquelle ajouter cette opération
+
+        Supprimer une opération (liste recette + bouton 'supprimer recette' OU liste depense + bouton 'supprimer depense'):
+
+            Cliquer sur une opération dans une liste et cliquer sur le bouton 'supprimer' correspondant
+            /!\ Si vous cliquez sur le mauvais bouton 'supprimer' c'est l'opération en tête de l'autre liste qui sera supprimé
+
+        Modifier une opération (liste recette + bouton 'modifier recette' OU liste depense + bouton 'modifier depense'):
+
+            Entrer sur le formulaire a gauche la date, le montant ainsi que la description si nécessaire
+            Cliquer sur l'opération a modifié dans les listes
+            Cliquer sur le bouton 'modifier' correspondant au type de l'opération à modifier
+            
 
    
