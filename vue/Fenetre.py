@@ -65,7 +65,7 @@ class Fenetre:
         self.ctrl_Facture.set_vue_facture(self.get_frame_VueFacture())
 
         self.ctrl_Bilan.set_vue_bilan(self.get_frame_VueBilan())
-        self.ctrl_Bilan.set_vue_bilan_modification(self.get_frame_VueBilan_categories())
+        self.ctrl_Bilan.set_vue_bilan_categorie(self.get_frame_VueBilan_categories())
 
     def show_frame(self, cont):
         frame = self.frames[cont]
@@ -172,12 +172,13 @@ class Accueil(tk.Frame):
         conteneur_bas_centre.config(bg='skyblue')
         conteneur_bas_centre.grid(row=2, column=1, sticky="nsew")
 
-        image_bouton_bilan = tk.PhotoImage(file='vue/images/boncommande.png')
+        image_bouton_bilan = tk.PhotoImage(file='vue/images/facture.png')
         bouton_bilan = ttk.Button(conteneur_bas_centre, text="générer bilan",
                                   image=image_bouton_bilan,
                                   style='my.TButton',
+                                  compound="left",
                                   command=lambda: controleur_fenetre.show_frame(VueBilan))
-        bouton_bilan.photo = image_bouton_facture
+        bouton_bilan.photo = image_bouton_bilan
         bouton_bilan.place(relx=0.5, rely=0.5, anchor=CENTER)
 
 
@@ -1453,12 +1454,13 @@ class VueBilan(tk.Frame):
         self.choix.set("type")
 
         self.radio1 = Radiobutton(conteneur_radio, takefocus=0, variable=self.choix, text="dépense",
-                                  value="depense", tristatevalue=0, highlightthickness=0)
+                                  value="depense", tristatevalue=0, highlightthickness=0, command=lambda: self.actualiser_liste_categorie('depense'))
         self.radio1.config(bg='skyblue', activebackground='skyblue')
         self.radio1.grid(row=0, column=0, sticky="nsew")
+        self.radio1.invoke()
 
         self.radio2 = Radiobutton(conteneur_radio, variable=self.choix, takefocus=0, text="recette",
-                                  value="recette", tristatevalue=0, highlightthickness=0)
+                                  value="recette", tristatevalue=0, highlightthickness=0, command=lambda: self.actualiser_liste_categorie('recette'))
         self.radio2.config(bg='skyblue', activebackground='skyblue')
         self.radio2.grid(row=0, column=1, sticky="nsew")
 
@@ -1466,16 +1468,21 @@ class VueBilan(tk.Frame):
         conteneur_categorie.config(bg='skyblue')
         conteneur_categorie.columnconfigure(0, weight=1)
         conteneur_categorie.columnconfigure(1, weight=1)
+        conteneur_categorie.columnconfigure(2, weight=1)
         conteneur_categorie.rowconfigure(0, weight=1)
         conteneur_categorie.grid(row=1, column=0, sticky="nsew")
 
         lcategorie = Label(conteneur_categorie, text="categorie :")
         lcategorie.config(bg='skyblue')
         lcategorie.grid(row=0, column=0, padx=(0, 15))
-        self.str_categorie = tk.StringVar()
-        self.str_categorie.set("")
-        self.categorie = Entry(conteneur_categorie, textvariable=self.str_categorie, width=20)
+        self.categorie = tk.Listbox(conteneur_categorie, width=20, height=3)
+        self.actualiser_liste_categorie('depense')
         self.categorie.grid(row=0, column=1)
+
+        scrollbar = ttk.Scrollbar(conteneur_categorie)
+        scrollbar.grid(row=0, column=2)
+        self.categorie.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=self.categorie.yview)
 
         conteneur_date = Frame(formulaire)
         conteneur_date.config(bg='skyblue')
@@ -1625,7 +1632,7 @@ class VueBilan(tk.Frame):
         conteneur_categories.columnconfigure(1, weight=1)
         conteneur_categories.grid(row=0, column=0)
 
-        categories = ttk.Button(conteneur_categories, text="Résumé catégories", style='my.TButton',
+        categories = ttk.Button(conteneur_categories, text="Gestion & Résumé catégories", style='my.TButton',
                                command=lambda: ctrl_fenetre.show_frame(VueBilan_categories))
         categories.grid(row=0, column=0, padx=(0, 15))
 
@@ -1647,8 +1654,17 @@ class VueBilan(tk.Frame):
             cpt += 1
         self.depenses.select_set(0)
 
+    def actualiser_liste_categorie(self, type):
+        self.categorie.delete(0, END)
+        liste = self.ctrlBilan.actualiser_liste_categorie(type)
+        cpt = 1
+        for categorie1 in liste:
+            self.categorie.insert(cpt, categorie1)
+            cpt += 1
+        self.categorie.select_set(0)
+
     def get_categorie(self):
-        return self.categorie.get()
+        return self.categorie.get(ANCHOR)
 
     def get_montant(self):
         return self.montant.get()
@@ -1671,14 +1687,13 @@ class VueBilan(tk.Frame):
             self.message_erreur_suppression()
 
     def viderChamps(self):
-        self.str_categorie.set("")
         self.str_date.set("")
         self.str_montant.set("")
         self.str_description.set("")
 
     def champ_vide(self):
         est_vide = False
-        if self.get_categorie() == "":
+        if self.categorie.get(ANCHOR) is None:
             est_vide = True
         if self.get_choix_selectionne() == "":
             est_vide = True
@@ -1734,11 +1749,72 @@ class VueBilan_categories(tk.Frame):
         titre.config(font=("Courier", 20), bg="skyblue")
         titre.grid(row=0, column=1, columnspan=2, sticky='nsew')
 
+        conteneur_gauche = Frame(self)
+        conteneur_gauche.config(bg='skyblue')
+        conteneur_gauche.columnconfigure(0, weight=1)
+        conteneur_gauche.rowconfigure(0, weight=1)
+        conteneur_gauche.grid(row=1, column=0, sticky="nsew")
+
+        formulaire = Frame(conteneur_gauche)
+        formulaire.config(bg='skyblue')
+        formulaire.columnconfigure(0, weight=1)
+        formulaire.rowconfigure(0, weight=1)
+        formulaire.rowconfigure(1, weight=1)
+        formulaire.rowconfigure(2, weight=1)
+        formulaire.grid(row=0, column=0, sticky="nsew")
+
+        conteneur_radio = Frame(formulaire)
+        conteneur_radio.config(bg='skyblue')
+        conteneur_radio.columnconfigure(0, weight=1)
+        conteneur_radio.columnconfigure(1, weight=1)
+        conteneur_radio.rowconfigure(0, weight=1)
+        conteneur_radio.grid(row=0, column=0, sticky="nsew")
+
+        self.choix = StringVar()
+        self.choix.set("type")
+
+        self.radio1 = Radiobutton(conteneur_radio, takefocus=0, variable=self.choix, text="dépense",
+                                  value="depense", tristatevalue=0, highlightthickness=0)
+        self.radio1.config(bg='skyblue', activebackground='skyblue')
+        self.radio1.grid(row=0, column=0, sticky="nsew")
+
+        self.radio2 = Radiobutton(conteneur_radio, variable=self.choix, takefocus=0, text="recette",
+                                  value="recette", tristatevalue=0, highlightthickness=0)
+        self.radio2.config(bg='skyblue', activebackground='skyblue')
+        self.radio2.grid(row=0, column=1, sticky="nsew")
+
+        conteneur_categorie = Frame(formulaire)
+        conteneur_categorie.config(bg='skyblue')
+        conteneur_categorie.columnconfigure(0, weight=1)
+        conteneur_categorie.columnconfigure(1, weight=1)
+        conteneur_categorie.rowconfigure(0, weight=1)
+        conteneur_categorie.grid(row=1, column=0, sticky="nsew")
+
+        lcategorie = Label(conteneur_categorie, text="nom de categorie :")
+        lcategorie.config(bg='skyblue')
+        lcategorie.grid(row=0, column=0, padx=(0, 15))
+        self.str_categorie = tk.StringVar()
+        self.str_categorie.set("")
+        self.categorie = Entry(conteneur_categorie, textvariable=self.str_categorie, width=20)
+        self.categorie.grid(row=0, column=1)
+
+        conteneur_ajouter = tk.Frame(formulaire)
+        conteneur_ajouter.config(bg='skyblue')
+        conteneur_ajouter.rowconfigure(0, weight=1)
+        conteneur_ajouter.columnconfigure(0, weight=1)
+        conteneur_ajouter.columnconfigure(1, weight=1)
+        conteneur_ajouter.grid(row=2, column=0)
+
+        ajouter = ttk.Button(conteneur_ajouter, text="Ajouter catégorie", style='my.TButton',
+                               command=lambda: ctrl_bilan.ajouter_categorie())
+        ajouter.grid(row=0, column=0, padx=(0, 15))
+
         conteneur_milieu = Frame(self)
         conteneur_milieu.config(bg='skyblue')
         conteneur_milieu.columnconfigure(0, weight=1)
         conteneur_milieu.rowconfigure(0, weight=1)
         conteneur_milieu.rowconfigure(1, weight=1)
+        conteneur_milieu.rowconfigure(2, weight=1)
         conteneur_milieu.grid(row=1, column=1, sticky="nsew")
 
         lcategorie = Label(conteneur_milieu, text="Catégories")
@@ -1753,6 +1829,17 @@ class VueBilan_categories(tk.Frame):
         self.categories.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.categories.yview)
 
+        conteneur_supprimer = tk.Frame(conteneur_milieu)
+        conteneur_supprimer.config(bg='skyblue')
+        conteneur_supprimer.rowconfigure(0, weight=1)
+        conteneur_supprimer.columnconfigure(0, weight=1)
+        conteneur_supprimer.columnconfigure(1, weight=1)
+        conteneur_supprimer.grid(row=2, column=0)
+
+        supprimer = ttk.Button(conteneur_supprimer, text="Supprimer catégorie", style='my.TButton',
+                             command=lambda: ctrl_bilan.supprimer_categorie())
+        supprimer.grid(row=0, column=0, padx=(0, 15))
+
     def actualiser_liste_categories(self):
         self.categories.delete(0, END)
         liste = self.ctrlBilan.actualiser_liste_categories()
@@ -1761,3 +1848,41 @@ class VueBilan_categories(tk.Frame):
             self.categories.insert(cpt, categorie)
             cpt += 1
         self.categories.select_set(0)
+
+    def get_type(self):
+        return self.choix.get()
+
+    def get_categorie(self):
+        return self.categorie.get()
+
+    def get_categorie_selectionner(self):
+        categorie1 = self.categories.get(ANCHOR)
+
+        return categorie1
+
+    def champ_vide(self):
+        if self.categorie.get() == "":
+            return True
+        elif self.choix.get() == "":
+            return True
+        else:
+            return False
+
+    def viderChamps(self):
+        self.str_categorie.set("")
+
+    @staticmethod
+    def message_erreur_suppression():
+        messagebox.showerror(title="erreur de suppression", message="Il n'y a plus de catégorie")
+
+    @staticmethod
+    def message_erreur_champs_vide():
+        messagebox.showwarning(title="erreur de saisie", message="veuillez remplir tous les champs")
+
+    @staticmethod
+    def message_erreur_choix_vide():
+        messagebox.showwarning(title="erreur de saisie", message="veuillez selectionner une catégorie")
+
+    @staticmethod
+    def message_erreur_ajout():
+        messagebox.showerror(title="erreur d'ajout", message="la catégorie n'a pas pu être créée")

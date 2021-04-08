@@ -43,8 +43,9 @@ class StockageBilanFinancier:
             cpt = 0
             for row in csvreader:
                 if cpt != 0:
-                    if len(row) == 5 and row[0] == 'recette':
-                        bilan2.append(row)
+                    if len(row) == 5 and row[0] == 'recette' and row[3] != "":
+                        row2 = [row[1], row[2], row[3], row[4]]
+                        bilan2.append(row2)
                 cpt = cpt + 1
         return bilan2
 
@@ -55,8 +56,9 @@ class StockageBilanFinancier:
             cpt = 0
             for row in csvreader:
                 if cpt != 0:
-                    if len(row) == 5 and row[0] == 'depense':
-                        bilan2.append(row)
+                    if len(row) == 5 and row[0] == 'depense' and row[2] != "":
+                        row2 = [row[1], row[2], row[3], row[4]]
+                        bilan2.append(row2)
                 cpt = cpt + 1
         return bilan2
 
@@ -67,28 +69,47 @@ class StockageBilanFinancier:
             cpt = 0
             for row in csvreader:
                 if cpt != 0:
-                    bilan2.append(row)
+                    if row[2] != '':
+                        bilan2.append(row)
                 cpt = cpt + 1
         return bilan2
 
     def lire_fichier_categories(self):
         bilan2 = []
-        categorie = ""
-        montant_total = 0.0
+        type = []
+        categories = []
+        montant_total = []
         with open(self.fichier_bilan, newline='') as csvfile:
             csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
             cpt = 0
             for row in csvreader:
-                categorie1 = row[1]
                 if cpt != 0:
-                    if categorie != categorie1:
-                        ligne = [categorie, "TOTAL", montant_total]
-                        bilan2.append(ligne)
-                        categorie = categorie1
-                        montant_total = 0.0
-                    montant_total = montant_total + float(row[3])
+                    if not categories.__contains__(row[1]):
+                        type.append(row[0])
+                        categories.append(row[1])
+                        montant_total.append(0.0)
+                    if row[3] != '':
+                        indice = categories.index(row[1])
+                        montant_total[indice] = montant_total[indice] + float(row[3])
                 cpt = cpt + 1
+        i = 0
+        for categorie in categories:
+            ligne = [type[i], categorie, str(montant_total[i])]
+            bilan2.append(ligne)
+            i = i + 1
         return bilan2
+
+    def lire_fichier_categorie(self,type):
+        categories = []
+        with open(self.fichier_bilan, newline='') as csvfile:
+            csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            cpt = 0
+            for row in csvreader:
+                if cpt != 0:
+                    if not categories.__contains__(row[1]) and type == row[0]:
+                        categories.append(row[1])
+                cpt = cpt + 1
+        return categories
 
     def ajouter_operation(self, operation):
 
@@ -121,6 +142,19 @@ class StockageBilanFinancier:
                         return contient
         return contient
 
+    def contient_categorie(self, categorie):
+        contient = False
+
+        with open(self.fichier_bilan, newline='') as csvfile:
+            csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            for row in csvreader:
+                if len(row) == 5:
+                    if row[1] == categorie:
+                        contient = True
+                        return contient
+        return contient
+
+
     def supprimer_operation(self, operation):
 
         bilan2 = self.lire_fichier_complets()
@@ -132,6 +166,24 @@ class StockageBilanFinancier:
 
         ligne = [type, categorie, date, montant, description]
         bilan2.remove(ligne)
+        self.initialiser_fichier()
+        for nv_ligne in bilan2:
+            if len(nv_ligne) == 5:
+                operation1 = Operation()
+                operation1.set_type(nv_ligne[0])
+                operation1.set_categorie(nv_ligne[1])
+                operation1.set_date(nv_ligne[2])
+                operation1.set_montant(nv_ligne[3])
+                operation1.set_description(nv_ligne[4])
+                self.ajouter_operation(operation1)
+
+    def supprimer_categorie(self, categorie):
+
+        bilan2 = self.lire_fichier_complets()
+        for ligne in bilan2:
+            if ligne[1] == categorie:
+                bilan2.remove(ligne)
+
         self.initialiser_fichier()
         for nv_ligne in bilan2:
             if len(nv_ligne) == 5:
