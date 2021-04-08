@@ -180,10 +180,6 @@ class StockageBilanFinancier:
     def supprimer_categorie(self, categorie):
 
         bilan2 = self.lire_fichier_complets()
-        for ligne in bilan2:
-            if ligne[1] == categorie:
-                bilan2.remove(ligne)
-
         self.initialiser_fichier()
         for nv_ligne in bilan2:
             if len(nv_ligne) == 5:
@@ -193,4 +189,5 @@ class StockageBilanFinancier:
                 operation1.set_date(nv_ligne[2])
                 operation1.set_montant(nv_ligne[3])
                 operation1.set_description(nv_ligne[4])
-                self.ajouter_operation(operation1)
+                if nv_ligne[1] != categorie[1]:
+                    self.ajouter_operation(operation1)
