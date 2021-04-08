@@ -5,7 +5,7 @@ Sommaire :
     2) Gérer adhérents
     3) Générer facture
     4) Générer bon de commande
-    5) Générer bilan
+    5) Gérer bilan
 
 1) Import et versions :
     - Pillow : 8.1.0
@@ -43,12 +43,12 @@ Sommaire :
 
     Dans cette fenêtre plusieurs actions sur des opérations sont possibles:
 
-    Les opérations sont définis par:
-        Des types (dépense ou recette)
-        Des Catégories que l'on peut créer 
-        Des dates
-        Des montants
-        Des descriptions (facultativement)
+        Les opérations sont définis par:
+            un type (dépense ou recette)
+            une catégorie (que l'on peut créer)
+            une date
+            un montant
+            une description (facultativement)
 
         Ajouter une opération (formulaire gauche):
             Une opération ne doit pas être identique à une opération déja inscrite
@@ -65,6 +65,7 @@ Sommaire :
             /!\ Si vous cliquez sur le mauvais bouton 'supprimer' c'est l'opération en tête de l'autre liste qui sera supprimé
 
         Modifier une opération (liste recette + bouton 'modifier recette' OU liste depense + bouton 'modifier depense'):
+            /!\ Il n'est pas possible de modifier le type et la catégorie d'une opération
 
             Entrer sur le formulaire a gauche la date, le montant ainsi que la description si nécessaire
             Cliquer sur l'opération a modifié dans les listes
