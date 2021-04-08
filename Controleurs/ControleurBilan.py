@@ -49,6 +49,10 @@ class ControleurBilan:
 
         if self.vue_bilan.champ_vide():
             self.vue_bilan.message_erreur_champs_vide()
+        elif not self.vue_bilan.validation_date(self.vue_bilan.get_date()):
+            self.vue_bilan.message_erreur_validation()
+        elif not self.vue_bilan.validation_montant(self.vue_bilan.get_montant()):
+            self.vue_bilan.message_erreur_validation()
         else:
             operation = Operation()
             operation.set_type(self.vue_bilan.get_choix_selectionne())
@@ -69,19 +73,22 @@ class ControleurBilan:
                 self.vue_bilan.message_erreur_ajout()
 
     def supprimer_categorie(self):
-        if self.vue_bilan_categorie.get_categorie_selectionner() is not None:
+        ligne = self.vue_bilan_categorie.get_categorie_selectionner()
+        if ligne == '':
+            self.vue_bilan_categorie.message_erreur_suppression()
+        else:
             self.stockagebilan.supprimer_categorie(self.vue_bilan_categorie.get_categorie_selectionner())
             self.vue_bilan_categorie.actualiser_liste_categories()
             self.vue_bilan.actualiser_liste_recettes()
             self.vue_bilan.actualiser_liste_depenses()
             self.vue_bilan.actualiser_liste_categorie('recette')
             self.vue_bilan.actualiser_liste_categorie('depense')
-        else:
-            self.vue_bilan_categorie.message_erreur_suppression()
 
     def supprimer_operation(self, type):
-        if self.vue_bilan.get_selected_operation(type) is not None:
-            ligne = self.vue_bilan.get_selected_operation(type)
+        ligne = self.vue_bilan.get_selected_operation(type)
+        if ligne == '':
+            self.vue_bilan.message_erreur_suppression()
+        else:
             operation = Operation()
             operation.set_type(type)
             operation.set_categorie(ligne[0])
@@ -94,8 +101,6 @@ class ControleurBilan:
             else:
                 self.stockagebilan.supprimer_operation(operation)
                 self.vue_bilan.actualiser_liste_depenses()
-        else:
-            self.vue_bilan.message_erreur_suppression()
 
     def modifier_operation(self, type):
         if self.vue_bilan.get_selected_operation(type) is None:

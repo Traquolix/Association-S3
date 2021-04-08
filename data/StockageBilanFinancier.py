@@ -74,6 +74,17 @@ class StockageBilanFinancier:
                 cpt = cpt + 1
         return bilan2
 
+    def lire_fichier_complets_avec_categorie_vide(self):
+        bilan2 = []
+        with open(self.fichier_bilan, newline='') as csvfile:
+            csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            cpt = 0
+            for row in csvreader:
+                if cpt != 0:
+                    bilan2.append(row)
+                cpt = cpt + 1
+        return bilan2
+
     def lire_fichier_categories(self):
         bilan2 = []
         type = []
@@ -179,7 +190,7 @@ class StockageBilanFinancier:
 
     def supprimer_categorie(self, categorie):
 
-        bilan2 = self.lire_fichier_complets()
+        bilan2 = self.lire_fichier_complets_avec_categorie_vide()
         self.initialiser_fichier()
         for nv_ligne in bilan2:
             if len(nv_ligne) == 5:

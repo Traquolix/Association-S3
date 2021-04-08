@@ -1453,6 +1453,9 @@ class VueBilan(tk.Frame):
         self.choix = StringVar()
         self.choix.set("type")
 
+        conteneur_categorie = Frame(formulaire)
+        self.categorie = tk.Listbox(conteneur_categorie, width=20, height=3)
+
         self.radio1 = Radiobutton(conteneur_radio, takefocus=0, variable=self.choix, text="dépense",
                                   value="depense", tristatevalue=0, highlightthickness=0, command=lambda: self.actualiser_liste_categorie('depense'))
         self.radio1.config(bg='skyblue', activebackground='skyblue')
@@ -1464,7 +1467,7 @@ class VueBilan(tk.Frame):
         self.radio2.config(bg='skyblue', activebackground='skyblue')
         self.radio2.grid(row=0, column=1, sticky="nsew")
 
-        conteneur_categorie = Frame(formulaire)
+
         conteneur_categorie.config(bg='skyblue')
         conteneur_categorie.columnconfigure(0, weight=1)
         conteneur_categorie.columnconfigure(1, weight=1)
@@ -1475,7 +1478,6 @@ class VueBilan(tk.Frame):
         lcategorie = Label(conteneur_categorie, text="categorie :")
         lcategorie.config(bg='skyblue')
         lcategorie.grid(row=0, column=0, padx=(0, 15))
-        self.categorie = tk.Listbox(conteneur_categorie, width=20, height=3)
         self.actualiser_liste_categorie('depense')
         self.categorie.grid(row=0, column=1)
 
@@ -1703,6 +1705,36 @@ class VueBilan(tk.Frame):
             est_vide = True
         return est_vide
 
+    def validation_date(self, date):
+        chiffres = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+        if len(date) == 10:
+            for i in range(9):
+                if i == 2 or i == 5:
+                    if date[i] != '/':
+                        return False
+                elif not chiffres.__contains__(date[i]):
+                    return False
+            if date[0] == '0' and date[1] == '0':
+                return False
+            elif date[0] == '3' and date[1] > '1':
+                return False
+            if date[3] == '0' and date[4] == '0':
+                return False
+            elif date[3] == '1' and date[4] > '2':
+                return False
+        else:
+            return False
+        return True
+
+    def validation_montant(self, montant):
+        if montant[-3] != '.':
+            return False
+        try:
+            float(montant)
+        except ValueError:
+            return False
+        return True
+
     @staticmethod
     def message_erreur_suppression():
         messagebox.showerror(title="erreur de suppression", message="Il n'y a plus d'opération")
@@ -1714,6 +1746,10 @@ class VueBilan(tk.Frame):
     @staticmethod
     def message_erreur_choix_vide():
         messagebox.showwarning(title="erreur de saisie", message="veuillez selectionner une catégorie")
+
+    @staticmethod
+    def message_erreur_validation():
+        messagebox.showerror(title="erreur de validité", message="le format de l'opération n'est pas conforme")
 
     @staticmethod
     def message_erreur_ajout():
